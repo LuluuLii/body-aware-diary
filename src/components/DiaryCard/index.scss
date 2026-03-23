@@ -1,48 +1,25 @@
 .diary-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 24px;
   margin-bottom: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-  }
-
-  &__type-badge {
-    font-size: 22px;
-    color: #4F46E5;
-    background: #EEF2FF;
-    padding: 4px 12px;
-    border-radius: 6px;
-    font-weight: 500;
-  }
-
-  &__time {
-    font-size: 22px;
-    color: #9CA3AF;
-  }
+  padding: 24px 28px;
+  cursor: pointer;
 
   &__title {
-    font-size: 30px;
-    font-weight: 600;
-    color: #111827;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--text-primary);
     display: block;
     margin-bottom: 8px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    line-height: 1.4;
+    letter-spacing: 1px;
   }
 
   &__content {
     font-size: 26px;
-    color: #6B7280;
+    color: var(--text-secondary);
     display: block;
-    margin-bottom: 12px;
-    line-height: 1.5;
+    margin-bottom: 16px;
+    line-height: 1.7;
+    letter-spacing: 0.5px;
   }
 
   &__annotations {
@@ -52,54 +29,41 @@
     margin-bottom: 12px;
   }
 
-  &__body-dot {
-    padding: 4px 12px;
-    border-radius: 20px;
-    &-text {
-      font-size: 20px;
-      color: #fff;
-    }
-    &--more {
-      background: #E5E7EB;
-      .diary-card__body-dot-text {
-        color: #6B7280;
-      }
-    }
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
   }
 
   &__footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--divider);
   }
 
-  &__stats {
+  &__meta {
     display: flex;
     gap: 16px;
+    align-items: center;
   }
 
-  &__stat {
-    font-size: 24px;
-    color: #9CA3AF;
-  }
-
-  &__fav {
-    font-size: 32px;
-    color: #D1D5DB;
-    padding: 4px;
-    &--active {
-      color: #EF4444;
-    }
-  }
-
-  &__tags {
-    display: flex;
-    gap: 12px;
-    margin-top: 8px;
-  }
-
-  &__tag {
+  &__type {
     font-size: 22px;
-    color: #6366F1;
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+
+  &__stat, &__time {
+    font-size: 22px;
+    color: var(--text-caption);
+    font-family: 'SF Mono', 'Menlo', monospace;
+    letter-spacing: 0.5px;
+  }
+
+  &__feeling {
+    font-size: 28px;
   }
 }

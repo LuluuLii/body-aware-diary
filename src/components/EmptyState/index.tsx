@@ -11,12 +11,12 @@ interface Props {
 export default function EmptyState({ title, description, action, onAction }: Props) {
   return (
     <View className='empty-state'>
-      <Text className='empty-state__icon'>📝</Text>
+      <View className='empty-state__circle' />
       <Text className='empty-state__title'>{title}</Text>
       {description && <Text className='empty-state__desc'>{description}</Text>}
       {action && onAction && (
-        <View className='empty-state__btn' onClick={onAction}>
-          <Text className='empty-state__btn-text'>{action}</Text>
+        <View className='zen-btn' onClick={onAction} style={{ width: '280px' }}>
+          <Text className='zen-btn__text'>{action}</Text>
         </View>
       )}
     </View>

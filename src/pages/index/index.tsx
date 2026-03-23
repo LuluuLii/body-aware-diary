@@ -1,14 +1,13 @@
 import { useEffect, useCallback } from 'react'
 import { View, Text, ScrollView } from '@tarojs/components'
 import Taro, { useDidShow, usePullDownRefresh } from '@tarojs/taro'
-import { useDiaryStore, useAuthStore } from '@/store'
+import { useDiaryStore, useAuthStore, useSettingsStore } from '@/store'
 import DiaryCard from '@/components/DiaryCard'
 import EmptyState from '@/components/EmptyState'
 import { formatDate } from '@/utils/date'
 import type { DiaryEntry } from '@/types'
 import './index.scss'
 
-// 按日期分组
 function groupByDate(entries: DiaryEntry[]): { date: string; entries: DiaryEntry[] }[] {
   const groups: Record<string, DiaryEntry[]> = {}
   for (const entry of entries) {
@@ -19,30 +18,31 @@ function groupByDate(entries: DiaryEntry[]): { date: string; entries: DiaryEntry
   return Object.entries(groups).map(([date, entries]) => ({ date, entries }))
 }
 
+function getGreeting(): string {
+  const h = new Date().getHours()
+  if (h < 6) return '深夜了，\n感受此刻的宁静。'
+  if (h < 10) return '早安，\n感受当下的流动。'
+  if (h < 14) return '午间时光，\n让身体告诉你故事。'
+  if (h < 18) return '下午好，\n觉察每一次呼吸。'
+  return '晚安，\n回顾今天的身体记忆。'
+}
+
 export default function Index() {
   const { entries, isLoading, hasMore, fetchEntries, fetchMore, toggleFavorite } = useDiaryStore()
   const { loadProfile } = useAuthStore()
+  const { theme } = useSettingsStore()
 
   useEffect(() => {
     loadProfile()
     fetchEntries()
   }, [])
 
-  useDidShow(() => {
-    fetchEntries()
-  })
-
-  usePullDownRefresh(() => {
-    fetchEntries().then(() => Taro.stopPullDownRefresh())
-  })
+  useDidShow(() => { fetchEntries() })
+  usePullDownRefresh(() => { fetchEntries().then(() => Taro.stopPullDownRefresh()) })
 
   const handleTap = useCallback((id: string) => {
     Taro.navigateTo({ url: `/pages/entry-detail/index?id=${id}` })
   }, [])
-
-  const handleFavorite = useCallback((id: string) => {
-    toggleFavorite(id)
-  }, [toggleFavorite])
 
   const handleCreate = useCallback(() => {
     Taro.navigateTo({ url: '/pages/record/index' })
@@ -51,11 +51,21 @@ export default function Index() {
   const groups = groupByDate(entries)
 
   return (
-    <View className='index-page'>
+    <View className={`index-page theme-${theme}`}>
+      {/* Greeting */}
+      <View className='index-page__greeting'>
+        <View className='section-header'>
+          <Text className='section-header__en'>CURRENT STATE</Text>
+          <Text className='section-header__divider'>/</Text>
+          <Text className='section-header__zh'>此刻</Text>
+        </View>
+        <Text className='index-page__greeting-text'>{getGreeting()}</Text>
+      </View>
+
       {entries.length === 0 && !isLoading ? (
         <EmptyState
-          title='还没有日记'
-          description='记录你的第一篇身体感知日记吧'
+          title='静待第一次觉察'
+          description='运动后，记录身体传递给你的信息'
           action='开始记录'
           onAction={handleCreate}
         />
@@ -65,6 +75,13 @@ export default function Index() {
           className='index-page__scroll'
           onScrollToLower={() => hasMore && fetchMore()}
         >
+          {/* Archive section */}
+          <View className='section-header' style={{ padding: '0 8px' }}>
+            <Text className='section-header__en'>ARCHIVE</Text>
+            <Text className='section-header__divider'>/</Text>
+            <Text className='section-header__zh'>觉察记录</Text>
+          </View>
+
           {groups.map((group) => (
             <View key={group.date} className='index-page__group'>
               <Text className='index-page__date'>{group.date}</Text>
@@ -73,25 +90,23 @@ export default function Index() {
                   key={entry.id}
                   entry={entry}
                   onTap={handleTap}
-                  onFavorite={handleFavorite}
+                  onFavorite={(id) => toggleFavorite(id)}
                 />
               ))}
             </View>
           ))}
+
           {isLoading && (
-            <View className='index-page__loading'>
-              <Text>加载中...</Text>
-            </View>
+            <View className='index-page__loading'><Text>...</Text></View>
           )}
           {!hasMore && entries.length > 0 && (
             <View className='index-page__end'>
-              <Text className='index-page__end-text'>没有更多了</Text>
+              <Text className='index-page__end-text'>· 已至尽头 ·</Text>
             </View>
           )}
         </ScrollView>
       )}
 
-      {/* FAB 按钮 */}
       <View className='index-page__fab' onClick={handleCreate}>
         <Text className='index-page__fab-text'>+</Text>
       </View>

@@ -1,16 +1,16 @@
 .sensation-picker {
   &__label {
-    font-size: 26px;
-    font-weight: 500;
-    color: #374151;
+    font-size: 24px;
+    color: var(--text-secondary);
     margin-bottom: 12px;
     display: block;
+    letter-spacing: 1px;
   }
 
   &__grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
     margin-bottom: 24px;
   }
 
@@ -20,29 +20,23 @@
     gap: 8px;
     padding: 8px 16px;
     border-radius: 20px;
-    border: 1px solid #E5E7EB;
-    background: #fff;
+    border: 1px solid var(--border-light);
+    background: var(--bg-card);
 
-    &--active {
-      border-width: 2px;
-    }
+    &--active { border-width: 2px; }
   }
 
   &__dot {
-    width: 16px;
-    height: 16px;
+    width: 14px; height: 14px;
     border-radius: 50%;
   }
 
   &__item-text {
-    font-size: 24px;
-    color: #374151;
-    &--active {
-      font-weight: 600;
-    }
+    font-size: 22px;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+    &--active { font-weight: 500; color: var(--text-primary); }
   }
 
-  &__slider {
-    margin: 16px 0;
-  }
+  &__slider { margin: 16px 0; }
 }

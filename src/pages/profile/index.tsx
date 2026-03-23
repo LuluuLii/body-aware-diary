@@ -1,16 +1,22 @@
 import { useState, useEffect } from 'react'
 import { View, Text, Input, Picker } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import { useAuthStore } from '@/store'
+import { useAuthStore, useSettingsStore } from '@/store'
 import { llmService } from '@/services/llm'
 import { LLM_PROVIDER_LABELS, DEFAULT_MODELS } from '@/types/llm'
+import { THEME_LABELS, type ThemeMode } from '@/utils/theme'
 import type { LLMProvider } from '@/types'
 import './index.scss'
 
 const PROVIDERS = Object.entries(LLM_PROVIDER_LABELS) as [LLMProvider, string][]
+const THEMES: { key: ThemeMode; label: string; colors: string[] }[] = [
+  { key: 'fresh', label: '森林晨光（默认）', colors: ['#5C6B4F', '#C4A86B', '#F7F5F0'] },
+  { key: 'classic', label: '大地深处', colors: ['#A0B08A', '#C4A86B', '#2A2A26'] },
+]
 
 export default function Profile() {
   const { profile, isLoggedIn, login, updateProfile, logout } = useAuthStore()
+  const { theme, setThemeMode } = useSettingsStore()
 
   const [provider, setProvider] = useState<LLMProvider>('openai')
   const [apiKey, setApiKey] = useState('')
@@ -46,17 +52,9 @@ export default function Profile() {
     setTesting(true)
     try {
       const result = await llmService.testConnection()
-      Taro.showModal({
-        title: result.success ? '连接成功' : '连接失败',
-        content: result.message,
-        showCancel: false,
-      })
+      Taro.showModal({ title: result.success ? '连接成功' : '连接失败', content: result.message, showCancel: false })
     } catch (err: any) {
-      Taro.showModal({
-        title: '连接失败',
-        content: err.message,
-        showCancel: false,
-      })
+      Taro.showModal({ title: '连接失败', content: err.message, showCancel: false })
     } finally {
       setTesting(false)
     }
@@ -66,9 +64,9 @@ export default function Profile() {
   const providerLabels = PROVIDERS.map(([, label]) => label)
 
   return (
-    <View className='profile-page'>
+    <View className={`profile-page theme-${theme}`}>
       {/* User Info */}
-      <View className='profile-page__user'>
+      <View className='profile-page__user zen-card'>
         <View className='profile-page__avatar'>
           <Text className='profile-page__avatar-text'>
             {profile?.nickname?.charAt(0) || '?'}
@@ -76,7 +74,7 @@ export default function Profile() {
         </View>
         <View className='profile-page__user-info'>
           <Text className='profile-page__nickname'>
-            {profile?.nickname || '未登录'}
+            {profile?.nickname || '旅行者'}
           </Text>
           {!isLoggedIn && (
             <View className='profile-page__login-btn' onClick={login}>
@@ -86,11 +84,42 @@ export default function Profile() {
         </View>
       </View>
 
+      {/* Visual Theme */}
+      <View className='profile-page__section zen-card'>
+        <View className='section-header'>
+          <Text className='section-header__en'>VISUAL</Text>
+          <Text className='section-header__divider'>/</Text>
+          <Text className='section-header__zh'>视觉风格</Text>
+        </View>
+
+        {THEMES.map((t) => (
+          <View
+            key={t.key}
+            className={`profile-page__theme-item ${theme === t.key ? 'profile-page__theme-item--active' : ''}`}
+            onClick={() => setThemeMode(t.key)}
+          >
+            <View className='profile-page__theme-info'>
+              <Text className='profile-page__theme-name'>{t.label}</Text>
+              <View className='profile-page__theme-colors'>
+                {t.colors.map((c) => (
+                  <View key={c} className='profile-page__color-dot' style={{ backgroundColor: c }} />
+                ))}
+              </View>
+            </View>
+            <View className={`profile-page__theme-radio ${theme === t.key ? 'profile-page__theme-radio--active' : ''}`} />
+          </View>
+        ))}
+      </View>
+
       {/* LLM Config */}
-      <View className='profile-page__section'>
-        <Text className='profile-page__section-title'>LLM 配置</Text>
-        <Text className='profile-page__section-desc'>
-          配置你自己的 AI 服务 API Key，用于知识问答功能
+      <View className='profile-page__section zen-card'>
+        <View className='section-header'>
+          <Text className='section-header__en'>SYSTEM</Text>
+          <Text className='section-header__divider'>/</Text>
+          <Text className='section-header__zh'>AI 配置</Text>
+        </View>
+        <Text className='profile-page__desc'>
+          配置你的 AI 服务，用于知识问答
         </Text>
 
         <Text className='profile-page__label'>服务商</Text>
@@ -114,7 +143,7 @@ export default function Profile() {
         <Text className='profile-page__label'>API Key</Text>
         <View className='profile-page__key-row'>
           <Input
-            className='profile-page__input'
+            className='zen-input'
             type={showKey ? 'text' : 'safe-password'}
             placeholder='输入 API Key'
             value={apiKey}
@@ -139,44 +168,32 @@ export default function Profile() {
             </View>
           </Picker>
         ) : (
-          <Input
-            className='profile-page__input'
-            placeholder='输入模型名称'
-            value={model}
-            onInput={(e) => setModel(e.detail.value)}
-          />
+          <Input className='zen-input' placeholder='输入模型名称' value={model} onInput={(e) => setModel(e.detail.value)} />
         )}
 
         {provider === 'custom' && (
           <>
             <Text className='profile-page__label'>Base URL</Text>
-            <Input
-              className='profile-page__input'
-              placeholder='https://api.example.com'
-              value={baseUrl}
-              onInput={(e) => setBaseUrl(e.detail.value)}
-            />
+            <Input className='zen-input' placeholder='https://api.example.com' value={baseUrl} onInput={(e) => setBaseUrl(e.detail.value)} />
           </>
         )}
 
         <View className='profile-page__actions'>
-          <View className='profile-page__btn profile-page__btn--primary' onClick={handleSaveConfig}>
-            <Text className='profile-page__btn-text'>保存配置</Text>
+          <View className='zen-btn' style={{ flex: 1 }} onClick={handleSaveConfig}>
+            <Text className='zen-btn__text'>保存配置</Text>
           </View>
           <View
-            className={`profile-page__btn profile-page__btn--outline ${testing ? 'profile-page__btn--disabled' : ''}`}
+            className={`zen-btn zen-btn--outline ${testing ? 'zen-btn--disabled' : ''}`}
+            style={{ flex: 1 }}
             onClick={testing ? undefined : handleTest}
           >
-            <Text className='profile-page__btn-text profile-page__btn-text--outline'>
-              {testing ? '测试中...' : '测试连接'}
-            </Text>
+            <Text className='zen-btn__text'>{testing ? '测试中...' : '测试连接'}</Text>
           </View>
         </View>
       </View>
 
-      {/* About */}
       {isLoggedIn && (
-        <View className='profile-page__section'>
+        <View className='profile-page__section zen-card'>
           <View className='profile-page__logout' onClick={logout}>
             <Text className='profile-page__logout-text'>退出登录</Text>
           </View>
