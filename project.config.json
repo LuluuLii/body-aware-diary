@@ -1,0 +1,16 @@
+{
+  "miniprogramRoot": "dist/weapp/",
+  "projectname": "body-aware-diary",
+  "description": "身体感知日记",
+  "appid": "touristappid",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "enhance": false,
+    "compileHotReLoad": false,
+    "postcss": false,
+    "minified": false,
+    "nodeModules": false
+  },
+  "compileType": "miniprogram"
+}

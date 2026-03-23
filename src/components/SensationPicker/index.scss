@@ -1,0 +1,48 @@
+.sensation-picker {
+  &__label {
+    font-size: 26px;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid #E5E7EB;
+    background: #fff;
+
+    &--active {
+      border-width: 2px;
+    }
+  }
+
+  &__dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+  }
+
+  &__item-text {
+    font-size: 24px;
+    color: #374151;
+    &--active {
+      font-weight: 600;
+    }
+  }
+
+  &__slider {
+    margin: 16px 0;
+  }
+}

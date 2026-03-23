@@ -1,0 +1,56 @@
+.index-page {
+  min-height: 100vh;
+  background: #F9FAFB;
+  position: relative;
+
+  &__scroll {
+    height: 100vh;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+
+  &__group {
+    margin-bottom: 8px;
+  }
+
+  &__date {
+    font-size: 26px;
+    font-weight: 600;
+    color: #6B7280;
+    padding: 8px 4px;
+    display: block;
+  }
+
+  &__loading, &__end {
+    text-align: center;
+    padding: 24px;
+    color: #9CA3AF;
+    font-size: 24px;
+  }
+
+  &__end-text {
+    color: #D1D5DB;
+  }
+
+  &__fab {
+    position: fixed;
+    right: 32px;
+    bottom: 180px;
+    width: 96px;
+    height: 96px;
+    background: #4F46E5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+    z-index: 100;
+  }
+
+  &__fab-text {
+    color: #fff;
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 1;
+  }
+}

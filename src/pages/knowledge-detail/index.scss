@@ -1,0 +1,37 @@
+.kd-page {
+  min-height: 100vh;
+  background: #F9FAFB;
+
+  &__scroll { padding: 24px; }
+  &__loading { display: flex; align-items: center; justify-content: center; height: 50vh; color: #9CA3AF; }
+
+  &__header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  &__cat { font-size: 24px; color: #4F46E5; background: #EEF2FF; padding: 6px 16px; border-radius: 8px; }
+  &__diff { font-size: 24px; color: #F59E0B; }
+
+  &__title { font-size: 36px; font-weight: 700; color: #111827; display: block; margin-bottom: 12px; }
+  &__summary { font-size: 28px; color: #6B7280; display: block; margin-bottom: 24px; line-height: 1.5; }
+
+  &__content {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+
+  &__content-text { font-size: 28px; color: #374151; line-height: 1.8; white-space: pre-wrap; }
+
+  &__parts {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  &__parts-label { font-size: 24px; color: #6B7280; }
+  &__part { font-size: 22px; color: #4F46E5; background: #EEF2FF; padding: 4px 12px; border-radius: 12px; }
+
+  &__tags { display: flex; flex-wrap: wrap; gap: 12px; }
+  &__tag { font-size: 24px; color: #6366F1; }
+}
