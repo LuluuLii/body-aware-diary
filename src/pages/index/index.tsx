@@ -89,9 +89,6 @@ export default function Index() {
 
       {entries.length === 0 && !isLoading ? (
         <View className='index-page__empty-hero'>
-          <View className='index-page__empty-bg-circle index-page__empty-bg-circle--1' />
-          <View className='index-page__empty-bg-circle index-page__empty-bg-circle--2' />
-          <View className='index-page__empty-bg-circle index-page__empty-bg-circle--3' />
           <View className='index-page__empty-content'>
             <Text className='index-page__empty-eyebrow'>BODY AWARENESS</Text>
             <Text className='index-page__empty-headline'>你的身体{'\n'}比你更早知道</Text>

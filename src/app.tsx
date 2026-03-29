@@ -4,6 +4,15 @@ import Taro from '@tarojs/taro'
 import { useSettingsStore } from '@/store/useSettingsStore'
 import './app.scss'
 
+// Initialize px transform for H5 runtime (matches config/index.ts H5 postcss config)
+if (process.env.TARO_ENV === 'h5') {
+  Taro.initPxTransform({
+    designWidth: 750,
+    deviceRatio: { 640: 2.34 / 2, 750: 1, 375: 2, 828: 1.81 / 2 },
+    targetUnit: 'vw',
+  })
+}
+
 function App({ children }: PropsWithChildren) {
   const { theme } = useSettingsStore()
 

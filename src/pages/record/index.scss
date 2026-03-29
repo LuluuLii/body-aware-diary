@@ -72,7 +72,7 @@
   }
 
   &__block-badge {
-    font-size: 22px;
+    font-size: 24px;
     color: var(--color-accent);
     background: var(--color-accent-lighter);
     padding: 4px 14px;
@@ -173,7 +173,7 @@
   }
 
   &__stat-unit {
-    font-size: 22px;
+    font-size: 24px;
     color: var(--text-tertiary);
     letter-spacing: 1px;
     flex-shrink: 0;
@@ -246,7 +246,7 @@
   }
 
   &__part-hint {
-    font-size: 22px;
+    font-size: 24px;
     color: var(--text-caption);
     display: block;
     margin-top: 2px;
@@ -271,7 +271,7 @@
   }
 
   &__part-expand-text {
-    font-size: 22px;
+    font-size: 24px;
     color: var(--text-tertiary);
     letter-spacing: 0.5px;
   }
@@ -293,7 +293,7 @@
   }
 
   &__part-toggle-text {
-    font-size: 22px;
+    font-size: 24px;
     color: var(--text-tertiary);
     letter-spacing: 0.5px;
   }
@@ -305,7 +305,7 @@
   }
 
   &__detail-label {
-    font-size: 23px;
+    font-size: 24px;
     color: var(--text-secondary);
     display: block;
     margin: 16px 0 10px;
@@ -342,7 +342,7 @@
   }
 
   &__sensation-text {
-    font-size: 22px;
+    font-size: 24px;
     color: var(--text-secondary);
     letter-spacing: 0.5px;
   }
@@ -407,7 +407,7 @@
   }
 
   &__feeling-text {
-    font-size: 20px;
+    font-size: 24px;
     color: var(--text-tertiary);
     letter-spacing: 0.5px;
   }

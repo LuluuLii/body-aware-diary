@@ -66,14 +66,14 @@
 
   &__card-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
   &__card-cat {
-    font-size: 20px;
+    font-size: 24px;
     color: var(--color-accent);
     background: var(--color-accent-lighter);
     padding: 4px 14px;
     border-radius: 6px;
     letter-spacing: 1px;
   }
-  &__card-diff { font-size: 22px; color: var(--color-warm); }
+  &__card-diff { font-size: 24px; color: var(--color-warm); }
   &__card-title {
     font-size: 30px;
     font-weight: 500;
@@ -89,7 +89,7 @@
     line-height: 1.6;
   }
   &__card-tags { display: flex; gap: 8px; margin-top: 12px; }
-  &__card-tag { font-size: 22px; color: var(--color-warm); letter-spacing: 0.5px; }
+  &__card-tag { font-size: 24px; color: var(--color-warm); letter-spacing: 0.5px; }
 
   &__status { text-align: center; padding: 60px 0; }
   &__empty-text { font-size: 28px; color: var(--text-tertiary); display: block; letter-spacing: 2px; }

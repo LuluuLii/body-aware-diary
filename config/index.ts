@@ -50,6 +50,16 @@ export default defineConfig<'webpack5'>(async (merge) => {
       staticDirectory: 'static',
       postcss: {
         autoprefixer: { enable: true, config: {} },
+        // Enable px→vw transform for H5: 28px @ designWidth=750 → 3.73vw → ~14px at 375px viewport
+        // Uses vw to avoid dependency on html root font-size (rem approach requires initPxTransform)
+        pxtransform: {
+          enable: true,
+          config: {
+            platform: 'h5',
+            designWidth: 750,
+            targetUnit: 'vw',
+          },
+        },
         cssModules: {
           enable: false,
           config: {

@@ -26,14 +26,14 @@
   }
 
   &__type-badge {
-    font-size: 22px;
+    font-size: 24px;
     color: var(--color-accent);
     font-weight: 500;
     letter-spacing: 1px;
   }
 
   &__activity-name {
-    font-size: 22px;
+    font-size: 24px;
     color: var(--text-caption);
   }
 
@@ -49,7 +49,7 @@
 
   &__date {
     font-family: 'SF Mono', 'Menlo', monospace;
-    font-size: 22px;
+    font-size: 24px;
     color: var(--text-caption);
     display: block;
     margin-bottom: 28px;
@@ -81,7 +81,7 @@
   }
 
   &__stat-label {
-    font-size: 20px;
+    font-size: 24px;
     color: var(--text-caption);
     margin-top: 6px;
     letter-spacing: 1px;
@@ -98,7 +98,7 @@
 
   &__section-title {
     font-family: 'SF Mono', 'Menlo', monospace;
-    font-size: 20px;
+    font-size: 24px;
     color: var(--text-caption);
     margin-bottom: 16px;
     display: block;
@@ -142,7 +142,7 @@
   }
 
   &__tag {
-    font-size: 22px;
+    font-size: 24px;
     color: var(--color-warm);
     background: var(--color-warm-bg);
     padding: 6px 16px;

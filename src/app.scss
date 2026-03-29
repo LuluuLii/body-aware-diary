@@ -5,7 +5,7 @@
 // ============================================
 
 // ---------- 清新版: 森林晨光 (默认) ----------
-page, .theme-fresh {
+page, html, body, #app, .theme-fresh {
   // 底色：淡雅的暖白/米色
   --bg-primary: #F7F5F0;
   --bg-secondary: #EFEDE6;
@@ -120,13 +120,25 @@ page, .theme-fresh {
 }
 
 // ---------- 基础样式 ----------
-page {
+// `page` targets WeChat MiniProgram; html/body/#app targets H5
+page,
+html,
+body,
+#app {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: 'PingFang SC', -apple-system, 'Noto Serif SC', 'Source Han Serif CN', serif;
+  font-family: 'PingFang SC', -apple-system, BlinkMacSystemFont, 'Noto Serif SC', 'Source Han Serif CN', serif;
   font-size: 28px;
   line-height: 1.7;
   letter-spacing: 0.5px;
+}
+
+// Taro H5 page wrapper
+.taro_page {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: var(--bg-primary);
 }
 
 // ---------- 通用工具类 ----------
@@ -138,7 +150,7 @@ page {
 
   &__en {
     font-family: 'SF Mono', 'Menlo', monospace;
-    font-size: 20px;
+    font-size: 24px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--text-caption);
@@ -147,7 +159,7 @@ page {
 
   &__divider {
     color: var(--text-caption);
-    font-size: 20px;
+    font-size: 24px;
     margin: 0 2px;
   }
 
@@ -205,7 +217,7 @@ page {
   background: var(--color-accent-lighter);
 
   &__text {
-    font-size: 22px;
+    font-size: 24px;
     color: var(--color-accent);
     font-weight: 500;
   }

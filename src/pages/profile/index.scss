@@ -110,7 +110,7 @@
     color: var(--text-primary);
   }
 
-  &__picker-arrow { color: var(--text-caption); font-size: 22px; }
+  &__picker-arrow { color: var(--text-caption); font-size: 24px; }
 
   &__key-row { display: flex; gap: 12px; align-items: center; }
   &__key-row .zen-input { flex: 1; }
@@ -118,7 +118,7 @@
     padding: 10px 18px;
     border: 1px solid var(--border-light);
     border-radius: var(--radius-sm);
-    font-size: 22px;
+    font-size: 24px;
     color: var(--text-tertiary);
     white-space: nowrap;
   }
