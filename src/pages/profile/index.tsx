@@ -64,7 +64,7 @@ export default function Profile() {
   const providerLabels = PROVIDERS.map(([, label]) => label)
 
   return (
-    <View className={`profile-page theme-${theme}`}>
+    <View className='profile-page'>
       {/* User Info */}
       <View className='profile-page__user zen-card'>
         <View className='profile-page__avatar'>

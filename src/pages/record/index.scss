@@ -1,184 +1,387 @@
 .record-page {
   min-height: 100vh;
   background: var(--bg-primary);
-  padding: 20px;
-  padding-bottom: 140px;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 
-  &__steps {
+  // ---- 固定头部 ----
+  &__header {
     display: flex;
-    justify-content: center;
-    gap: 32px;
-    margin-bottom: 24px;
-    padding: 12px 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 28px 12px;
+    background: var(--bg-primary);
+    flex-shrink: 0;
   }
 
-  &__step {
-    padding: 10px 28px;
-    border-radius: var(--radius-xl);
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-lighter);
-    &--active {
-      background: var(--color-accent);
-      border-color: var(--color-accent);
-      .record-page__step-text { color: var(--text-inverse); }
-    }
-    &--done {
-      background: var(--color-accent-lighter);
-      border-color: var(--color-accent-light);
-      .record-page__step-text { color: var(--color-accent); }
-    }
+  &__back-btn {
+    padding: 8px 0;
+    min-width: 120px;
   }
 
-  &__step-text {
+  &__back-text {
     font-size: 26px;
     color: var(--text-tertiary);
-    font-weight: 400;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
   }
 
-  &__section {
-    background: var(--bg-card);
-    border-radius: var(--radius-lg);
-    padding: 28px;
-    box-shadow: var(--shadow-card);
-  }
-
-  &__label {
-    font-size: 24px;
+  &__header-title {
+    font-size: 28px;
     font-weight: 400;
     color: var(--text-secondary);
-    margin: 24px 0 12px;
+    letter-spacing: 3px;
+  }
+
+  // ---- 主滚动区域 ----
+  &__scroll {
+    flex: 1;
+    height: 0; // flex child needs explicit height for scrollY
+  }
+
+  // ---- 区块通用样式 ----
+  &__block {
+    margin: 0 20px 16px;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 24px 24px 20px;
+    box-shadow: var(--shadow-card);
+
+    &:first-child {
+      margin-top: 8px;
+    }
+  }
+
+  &__block-label {
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--text-primary);
     display: block;
+    margin-bottom: 16px;
     letter-spacing: 1px;
-    &:first-child { margin-top: 0; }
   }
 
-  &__input {
-    width: 100%;
-    height: 76px;
-    padding: 0 24px;
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-md);
-    font-size: 28px;
-    box-sizing: border-box;
-    background: var(--bg-input);
-    color: var(--text-primary);
+  &__block-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+
+    .record-page__block-label {
+      margin-bottom: 0;
+    }
   }
 
-  &__textarea {
-    width: 100%;
-    min-height: 240px;
-    padding: 20px 24px;
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-md);
-    font-size: 28px;
-    box-sizing: border-box;
-    background: var(--bg-input);
-    color: var(--text-primary);
-    line-height: 1.8;
+  &__block-badge {
+    font-size: 22px;
+    color: var(--color-accent);
+    background: var(--color-accent-lighter);
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
   }
 
+  &__block-hint {
+    font-size: 24px;
+    color: var(--text-tertiary);
+    display: block;
+    margin-bottom: 16px;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+  }
+
+  // ---- 运动类型 chip grid ----
   &__type-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
+    margin-bottom: 16px;
   }
 
-  &__type-item {
-    padding: 12px 22px;
+  &__type-chip {
+    padding: 10px 20px;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-light);
-    background: var(--bg-card);
+    background: var(--bg-card-alt);
+
     &--active {
       background: var(--color-accent);
       border-color: var(--color-accent);
-      .record-page__type-text { color: var(--text-inverse); }
+
+      .record-page__type-chip-text {
+        color: var(--text-inverse);
+      }
     }
   }
 
-  &__type-text {
+  &__type-chip-text {
     font-size: 24px;
     color: var(--text-secondary);
     letter-spacing: 1px;
   }
 
-  &__body-group { margin-bottom: 20px; }
-
-  &__group-label {
-    font-family: 'SF Mono', 'Menlo', monospace;
-    font-size: 20px;
-    color: var(--text-caption);
-    margin-bottom: 10px;
-    display: block;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
-  &__body-parts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  &__part-btn {
-    position: relative;
-    padding: 8px 18px;
-    border-radius: var(--radius-sm);
+  // ---- 通用输入框 ----
+  &__input {
+    width: 100%;
+    height: 76px;
+    padding: 0 20px;
     border: 1px solid var(--border-light);
-    background: var(--bg-card);
-    &--selected {
-      border-color: var(--color-accent);
-      background: var(--color-accent-lighter);
-    }
-    &--annotated {
-      border-color: var(--color-accent);
-      background: var(--color-accent-bg);
+    border-radius: var(--radius-md);
+    font-size: 26px;
+    box-sizing: border-box;
+    background: var(--bg-input);
+    color: var(--text-primary);
+
+    &--sm {
+      height: 64px;
+      font-size: 24px;
+      margin-top: 12px;
     }
   }
 
-  &__part-text { font-size: 22px; color: var(--text-secondary); letter-spacing: 0.5px; }
-  &__part-badge {
-    position: absolute;
-    top: -6px; right: -6px;
-    font-size: 16px;
-    color: var(--color-accent);
-    background: var(--bg-card);
-    border-radius: 50%;
-    width: 24px; height: 24px;
-    text-align: center; line-height: 24px;
-  }
-
-  &__annotation-form {
-    margin-top: 24px;
-    padding: 24px;
+  // ---- 时长 & 卡路里行 ----
+  &__row-stats {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 16px;
     background: var(--bg-card-alt);
     border-radius: var(--radius-md);
     border: 1px solid var(--border-lighter);
+    overflow: hidden;
   }
 
-  &__ann-actions { margin-top: 20px; }
+  &__stat-item {
+    flex: 1;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 6px;
+    padding: 20px 16px;
 
-  &__ann-list { margin-top: 24px; }
+    &--cal {
+      // calories side: input + unit inline
+      align-items: center;
+    }
+  }
 
-  &__ann-item {
+  &__stat-value {
+    font-size: 44px;
+    font-weight: 300;
+    color: var(--text-primary);
+    font-family: 'SF Mono', 'Menlo', monospace;
+    letter-spacing: -1px;
+  }
+
+  &__stat-unit {
+    font-size: 22px;
+    color: var(--text-tertiary);
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+
+  &__stat-divider {
+    width: 1px;
+    height: 48px;
+    background: var(--border-light);
+    flex-shrink: 0;
+  }
+
+  &__cal-input {
+    flex: 1;
+    height: 52px;
+    border: none;
+    background: transparent;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--text-primary);
+    font-family: 'SF Mono', 'Menlo', monospace;
+    text-align: center;
+    letter-spacing: -0.5px;
+    padding: 0 8px;
+    min-width: 80px;
+  }
+
+  // ---- 滑块 ----
+  &__slider {
+    margin: 4px 0 0;
+  }
+
+  // ---- 身体部位卡片 ----
+  &__part-card {
+    border: 1px solid var(--border-lighter);
+    border-radius: var(--radius-md);
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: var(--bg-card-alt);
+    transition: border-color 0.2s;
+
+    &--felt {
+      border-color: var(--color-accent-light);
+      background: var(--color-accent-bg);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__part-row {
     display: flex;
     align-items: center;
-    padding: 14px 18px;
-    background: var(--bg-card-alt);
-    border-radius: var(--radius-sm);
-    margin-bottom: 10px;
+    padding: 16px 20px;
     gap: 12px;
   }
 
-  &__ann-name { font-size: 26px; font-weight: 500; color: var(--text-primary); }
-  &__ann-detail { font-size: 22px; color: var(--text-tertiary); flex: 1; }
-  &__ann-remove { font-size: 28px; color: var(--text-caption); padding: 4px 8px; }
+  &__part-left {
+    flex: 1;
+    min-width: 0;
+  }
 
+  &__part-name {
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--text-primary);
+    display: block;
+    letter-spacing: 0.5px;
+  }
+
+  &__part-hint {
+    font-size: 22px;
+    color: var(--text-caption);
+    display: block;
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__part-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  &__part-expand-btn {
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-light);
+    background: var(--bg-card);
+  }
+
+  &__part-expand-text {
+    font-size: 22px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.5px;
+  }
+
+  &__part-toggle {
+    padding: 10px 18px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    background: var(--bg-card);
+
+    &--on {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+
+      .record-page__part-toggle-text {
+        color: var(--text-inverse);
+      }
+    }
+  }
+
+  &__part-toggle-text {
+    font-size: 22px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.5px;
+  }
+
+  // ---- 展开详情面板 ----
+  &__part-detail {
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--border-lighter);
+  }
+
+  &__detail-label {
+    font-size: 23px;
+    color: var(--text-secondary);
+    display: block;
+    margin: 16px 0 10px;
+    letter-spacing: 0.5px;
+  }
+
+  // ---- 感受类型 chip ----
+  &__sensation-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  &__sensation-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-light);
+    background: var(--bg-card);
+
+    &--active {
+      // dynamic colors applied inline via style prop
+    }
+  }
+
+  &__sensation-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &__sensation-text {
+    font-size: 22px;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+  }
+
+  // ---- 「如何找到感觉」chips ----
+  &__how-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__how-chip {
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-lighter);
+    background: var(--bg-card);
+
+    &--active {
+      border-color: var(--color-accent-light);
+      background: var(--color-accent-lighter);
+
+      .record-page__how-text {
+        color: var(--color-accent);
+      }
+    }
+  }
+
+  &__how-text {
+    font-size: 24px;
+    color: var(--text-tertiary);
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+  }
+
+  // ---- 整体感受行 ----
   &__feeling-row {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+    gap: 8px;
   }
 
   &__feeling-item {
@@ -186,24 +389,79 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 14px 0;
+    padding: 16px 0;
     border-radius: var(--radius-md);
     border: 2px solid transparent;
     background: var(--bg-card-alt);
+
     &--active {
       border-color: var(--color-accent);
       background: var(--color-accent-lighter);
     }
   }
 
-  &__feeling-emoji { font-size: 36px; margin-bottom: 4px; }
-  &__feeling-text { font-size: 20px; color: var(--text-tertiary); letter-spacing: 0.5px; }
+  &__feeling-emoji {
+    font-size: 36px;
+    margin-bottom: 4px;
+    display: block;
+  }
 
-  &__nav {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
+  &__feeling-text {
+    font-size: 20px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.5px;
+  }
+
+  // ---- 日记 textarea ----
+  &__textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 20px 20px;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    font-size: 26px;
+    box-sizing: border-box;
+    background: var(--bg-input);
+    color: var(--text-primary);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  // ---- 标签区 ----
+  &__tags {
     display: flex;
-    gap: 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  &__tag {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 1px solid var(--border-light);
+    background: var(--bg-card-alt);
+
+    &--active {
+      background: var(--color-accent-lighter);
+      border-color: var(--color-accent-light);
+
+      .record-page__tag-text {
+        color: var(--color-accent);
+      }
+    }
+  }
+
+  &__tag-text {
+    font-size: 24px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.5px;
+  }
+
+  // ---- 固定底部 ----
+  &__footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     padding: 16px 24px;
     padding-bottom: calc(16px + env(safe-area-inset-bottom));
     background: var(--bg-card);
@@ -211,23 +469,23 @@
     z-index: 50;
   }
 
-  &__btn {
-    flex: 1;
-    height: 84px;
+  &__save-btn {
+    height: 88px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: var(--radius-md);
-    &--primary { background: var(--color-accent); }
-    &--outline { border: 1px solid var(--border-light); background: var(--bg-card); }
-    &--disabled { opacity: 0.4; }
+    background: var(--color-accent);
+
+    &--disabled {
+      opacity: 0.5;
+    }
   }
 
-  &__btn-text {
-    font-size: 28px;
+  &__save-text {
+    font-size: 30px;
     font-weight: 500;
     color: var(--text-inverse);
-    letter-spacing: 1px;
-    &--outline { color: var(--text-secondary); }
+    letter-spacing: 2px;
   }
 }

@@ -14,6 +14,7 @@ interface DiaryState {
   getEntry: (id: string) => Promise<void>
   createEntry: (entry: CreateEntryInput, annotations: CreateAnnotationInput[]) => Promise<string>
   updateEntry: (id: string, updates: Partial<DiaryEntry>, annotations?: CreateAnnotationInput[]) => Promise<void>
+  appendSorenessAnnotations: (entryId: string, userId: string, annotations: CreateAnnotationInput[]) => Promise<void>
   deleteEntry: (id: string) => Promise<void>
   toggleFavorite: (id: string) => Promise<void>
   searchEntries: (filters: SearchFilters) => Promise<DiaryEntry[]>
@@ -88,6 +89,33 @@ export const useDiaryStore = create<DiaryState>((set, get) => ({
         ? { ...updated, annotations: state.currentEntry.annotations }
         : state.currentEntry,
     }))
+  },
+
+  appendSorenessAnnotations: async (entryId, userId, annotations) => {
+    await diaryService.appendAnnotations(entryId, userId, annotations)
+    // Refresh currentEntry annotations if it's the same entry
+    set((state) => {
+      if (state.currentEntry?.id !== entryId) return {}
+      return {
+        currentEntry: {
+          ...state.currentEntry,
+          annotations: [
+            ...state.currentEntry.annotations,
+            // optimistic: cast to BodyAnnotation shape (id/created_at will be filled on next load)
+            ...annotations.map((a, i) => ({
+              ...a,
+              id: `optimistic-${i}`,
+              entry_id: entryId,
+              user_id: userId,
+              side: a.side || 'front' as const,
+              note: a.note || null,
+              soreness_recorded_at: a.soreness_recorded_at || null,
+              created_at: new Date().toISOString(),
+            })),
+          ],
+        },
+      }
+    })
   },
 
   deleteEntry: async (id) => {

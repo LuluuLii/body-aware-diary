@@ -47,7 +47,7 @@ export async function updateProfile(updates: Record<string, any>) {
     .select()
     .single()
 
-  if (error) throw error
+  if (error) throw new Error(error.message || JSON.stringify(error))
   return data
 }
 

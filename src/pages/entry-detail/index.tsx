@@ -43,6 +43,11 @@ export default function EntryDetail() {
     toggleFavorite(id)
   }, [id, toggleFavorite])
 
+  const handleSorenessPatch = useCallback(() => {
+    if (!id) return
+    Taro.navigateTo({ url: `/pages/soreness-patch/index?entryId=${id}` })
+  }, [id])
+
   if (isLoading || !currentEntry) {
     return (
       <View className='detail-page'>
@@ -137,6 +142,9 @@ export default function EntryDetail() {
       <View className='detail-page__actions'>
         <View className='detail-page__action' onClick={handleEdit}>
           <Text className='detail-page__action-text'>编辑</Text>
+        </View>
+        <View className='detail-page__action' onClick={handleSorenessPatch}>
+          <Text className='detail-page__action-text detail-page__action-text--warm'>补录酸痛</Text>
         </View>
         <View className='detail-page__action' onClick={handleFav}>
           <Text className={`detail-page__action-text ${entry.is_favorite ? 'detail-page__action-text--danger' : ''}`}>

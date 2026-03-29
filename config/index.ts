@@ -1,6 +1,9 @@
 import { defineConfig, type UserConfigExport } from '@tarojs/cli'
-
+import { config as loadEnv } from 'dotenv'
 import path from 'path'
+
+// 加载 .env.local 环境变量（本地开发覆盖）
+loadEnv({ path: path.resolve(__dirname, '..', '.env.local') })
 
 export default defineConfig<'webpack5'>(async (merge) => {
   const baseConfig: UserConfigExport<'webpack5'> = {
@@ -16,7 +19,10 @@ export default defineConfig<'webpack5'>(async (merge) => {
     sourceRoot: 'src',
     outputRoot: `dist/${process.env.TARO_ENV}`,
     plugins: [],
-    defineConstants: {},
+    defineConstants: {
+      'process.env.SUPABASE_URL': JSON.stringify(process.env.SUPABASE_URL),
+      'process.env.SUPABASE_ANON_KEY': JSON.stringify(process.env.SUPABASE_ANON_KEY),
+    },
     copy: { patterns: [], options: {} },
     framework: 'react',
     compiler: 'webpack5',

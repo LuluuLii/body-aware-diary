@@ -41,6 +41,13 @@ export default function Search() {
 
   return (
     <View className='search-page'>
+      {/* Page title */}
+      <View className='search-page__title-row'>
+        <Text className='search-page__title-en'>REVIEW</Text>
+        <Text className='search-page__title-divider'>/</Text>
+        <Text className='search-page__title-zh'>回顾</Text>
+      </View>
+
       <View className='search-page__bar'>
         <Input
           className='search-page__input'
@@ -55,8 +62,8 @@ export default function Search() {
         </View>
       </View>
 
-      {/* Filters */}
-      <ScrollView scrollX className='search-page__filters'>
+      {/* Filters - 平铺换行 */}
+      <View className='search-page__filters'>
         <View
           className={`search-page__filter ${favOnly ? 'search-page__filter--active' : ''}`}
           onClick={() => { setFavOnly(!favOnly) }}
@@ -72,7 +79,7 @@ export default function Search() {
             <Text className='search-page__filter-text'>{label}</Text>
           </View>
         ))}
-      </ScrollView>
+      </View>
 
       {/* Results */}
       <ScrollView scrollY className='search-page__results'>

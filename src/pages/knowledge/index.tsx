@@ -107,7 +107,8 @@ export default function Knowledge() {
       {/* Browse mode */}
       {tab === 'browse' && (
         <View className='knowledge-page__browse'>
-          <ScrollView scrollX className='knowledge-page__categories'>
+          {/* Browse mode */}
+          <View className='knowledge-page__categories'>
             <View
               className={`knowledge-page__cat ${!category ? 'knowledge-page__cat--active' : ''}`}
               onClick={() => setCategory(null)}
@@ -123,7 +124,7 @@ export default function Knowledge() {
                 <Text className='knowledge-page__cat-text'>{label}</Text>
               </View>
             ))}
-          </ScrollView>
+          </View>
 
           <ScrollView scrollY className='knowledge-page__card-list'>
             {loadingCards && <View className='knowledge-page__status'><Text>加载中...</Text></View>}

@@ -4,8 +4,8 @@
 // 古朴版 (classic): 大地深处 - 沉稳的泥土与古木
 // ============================================
 
-// ---------- 清新版: 森林晨光 ----------
-page.theme-fresh {
+// ---------- 清新版: 森林晨光 (默认) ----------
+page, .theme-fresh {
   // 底色：淡雅的暖白/米色
   --bg-primary: #F7F5F0;
   --bg-secondary: #EFEDE6;
@@ -67,7 +67,7 @@ page.theme-fresh {
 }
 
 // ---------- 古朴版: 大地深处 ----------
-page.theme-classic {
+.theme-classic {
   --bg-primary: #2A2A26;
   --bg-secondary: #333330;
   --bg-card: #3A3A35;

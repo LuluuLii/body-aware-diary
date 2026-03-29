@@ -11,6 +11,8 @@
   "scripts": {
     "build:weapp": "taro build --type weapp",
     "dev:weapp": "taro build --type weapp --watch",
+    "build:h5": "taro build --type h5",
+    "dev:h5": "taro build --type h5 --watch",
     "build:rn": "taro build --type rn",
     "dev:rn": "taro build --type rn --watch"
   },
@@ -25,6 +27,7 @@
     "@tarojs/components": "4.1.11",
     "@tarojs/helper": "4.1.11",
     "@tarojs/plugin-framework-react": "^4.1.11",
+    "@tarojs/plugin-platform-h5": "^4.1.11",
     "@tarojs/plugin-platform-weapp": "4.1.11",
     "@tarojs/react": "^4.1.11",
     "@tarojs/runtime": "4.1.11",
@@ -37,11 +40,13 @@
   },
   "devDependencies": {
     "@babel/runtime": "^7.26.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.6.2",
     "@tarojs/cli": "4.1.11",
     "@tarojs/webpack5-runner": "4.1.11",
     "@types/react": "^18.3.12",
     "babel-preset-taro": "4.1.11",
     "postcss": "^8.4.49",
+    "react-refresh": "^0.18.0",
     "sass": "^1.81.0",
     "typescript": "^5.7.0",
     "webpack": "5.91.0"

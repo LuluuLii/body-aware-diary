@@ -29,7 +29,7 @@ export const knowledgeService = {
     }
 
     const { data, error } = await query
-    if (error) throw error
+    if (error) throw new Error(error.message || JSON.stringify(error))
     return data as KnowledgeCard[]
   },
 
@@ -40,7 +40,7 @@ export const knowledgeService = {
       .eq('id', id)
       .single()
 
-    if (error) throw error
+    if (error) throw new Error(error.message || JSON.stringify(error))
     return data as KnowledgeCard
   },
 
@@ -51,7 +51,7 @@ export const knowledgeService = {
       .select('*')
       .order('created_at', { ascending: false })
 
-    if (error) throw error
+    if (error) throw new Error(error.message || JSON.stringify(error))
     return data as UserMaterial[]
   },
 
@@ -62,7 +62,7 @@ export const knowledgeService = {
       .select()
       .single()
 
-    if (error) throw error
+    if (error) throw new Error(error.message || JSON.stringify(error))
 
     // 异步触发 embedding 生成
     supabase.functions.invoke('embed-content', {
@@ -80,7 +80,7 @@ export const knowledgeService = {
       .delete()
       .eq('id', id)
 
-    if (error) throw error
+    if (error) throw new Error(error.message || JSON.stringify(error))
   },
 
   // RAG 检索（通过 Edge Function）
@@ -95,7 +95,7 @@ export const knowledgeService = {
       },
     })
 
-    if (error) throw error
+    if (error) throw new Error(error.message || JSON.stringify(error))
     return data
   },
 }

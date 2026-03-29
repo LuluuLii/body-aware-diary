@@ -10,7 +10,7 @@ export const diaryService = {
       .select()
       .single()
 
-    if (error) throw error
+    if (error) throw new Error(error.message || JSON.stringify(error))
 
     if (annotations.length > 0) {
       const { error: annError } = await supabase
@@ -22,7 +22,7 @@ export const diaryService = {
             user_id: entry.user_id,
           }))
         )
-      if (annError) throw annError
+      if (annError) throw new Error(annError.message || JSON.stringify(annError))
     }
 
     return newEntry as DiaryEntry
@@ -35,7 +35,7 @@ export const diaryService = {
       .order('created_at', { ascending: false })
       .range(page * pageSize, (page + 1) * pageSize - 1)
 
-    if (error) throw error
+    if (error) throw new Error(error.message || JSON.stringify(error))
     return data as DiaryEntry[]
   },
 
@@ -46,7 +46,7 @@ export const diaryService = {
       .eq('id', id)
       .single()
 
-    if (error) throw error
+    if (error) throw new Error(error.message || JSON.stringify(error))
 
     const { data: annotations } = await supabase
       .from('body_annotations')
@@ -68,8 +68,16 @@ export const diaryService = {
       .select()
       .single()
 
-    if (error) throw error
+    if (error) throw new Error(error.message || JSON.stringify(error))
     return data as DiaryEntry
+  },
+
+  async appendAnnotations(entryId: string, userId: string, annotations: CreateAnnotationInput[]): Promise<void> {
+    if (annotations.length === 0) return
+    const { error } = await supabase
+      .from('body_annotations')
+      .insert(annotations.map((a) => ({ ...a, entry_id: entryId, user_id: userId })))
+    if (error) throw new Error(error.message || JSON.stringify(error))
   },
 
   async updateAnnotations(entryId: string, userId: string, annotations: CreateAnnotationInput[]): Promise<void> {
@@ -80,7 +88,7 @@ export const diaryService = {
       const { error } = await supabase
         .from('body_annotations')
         .insert(annotations.map((a) => ({ ...a, entry_id: entryId, user_id: userId })))
-      if (error) throw error
+      if (error) throw new Error(error.message || JSON.stringify(error))
     }
   },
 
@@ -90,7 +98,7 @@ export const diaryService = {
       .delete()
       .eq('id', id)
 
-    if (error) throw error
+    if (error) throw new Error(error.message || JSON.stringify(error))
   },
 
   async toggleFavorite(id: string, isFavorite: boolean): Promise<void> {
@@ -99,7 +107,7 @@ export const diaryService = {
       .update({ is_favorite: isFavorite })
       .eq('id', id)
 
-    if (error) throw error
+    if (error) throw new Error(error.message || JSON.stringify(error))
   },
 
   async search(filters: SearchFilters, page = 0): Promise<DiaryEntry[]> {
@@ -126,7 +134,7 @@ export const diaryService = {
     }
 
     const { data, error } = await query
-    if (error) throw error
+    if (error) throw new Error(error.message || JSON.stringify(error))
     return data as DiaryEntry[]
   },
 }

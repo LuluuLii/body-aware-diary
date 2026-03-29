@@ -9,6 +9,7 @@ export default defineAppConfig({
     'pages/import-material/index',
     'pages/profile/index',
     'pages/entry-detail/index',
+    'pages/soreness-patch/index',
   ],
   tabBar: {
     color: '#999999',
@@ -22,7 +23,7 @@ export default defineAppConfig({
       },
       {
         pagePath: 'pages/search/index',
-        text: '搜索',
+        text: '回顾',
       },
       {
         pagePath: 'pages/knowledge/index',
