@@ -138,7 +138,7 @@
 ### ✅ B1 URL error → done
 根因链：Taro 4.1.11 内建的 URL polyfill (`@tarojs/runtime/dist/bom/URL.js`) 里 `VALID_URL` 正则是 `/^(https?:)\/\//i`——**只认 `http://` / `https://`**。supabase-js 的 `RealtimeClient` 里 `httpEndpointURL(wsHref)` 拿 `wss://...` 再 `new URL(x)` 就抛 `Failed to construct 'URL': Invalid URL`。
 运行时 `globalThis.URL = shim` 无效，因为 Taro 是编译期 ProvidePlugin 绑定的（`URL` 引用被 inline 替换成 TaroURL）。
-修法：直接 patch node_modules 里三处（`bom/URL.js`, `runtime.esm.js`, `index.cjs.js`）的正则 → `/^(https?|wss?|ftp):\/\//i`。**TODO**：wire in `patch-package` 让补丁跟着 pnpm install 走。
+修法：把正则放宽到 `/^(https?|wss?|ftp):\/\//i`，通过 `pnpm patch` 固化成 `patches/@tarojs__runtime@4.1.11.patch`，`package.json` 里注册 `pnpm.patchedDependencies`，每次 install 自动应用（commit `d670149`）。
 副产物：weapp 端把 `signInWithWeChat`（阿里云扩展 API，standard supabase-js 没实现）换成 `signInAnonymously()`，等 wx.login 服务器换 code 联调好再切回。
 
 ### ✅ B2 FAB "+" 图标 → done
@@ -152,9 +152,22 @@
 修法：`if (!practiceId) { setLoading(false); return }`，让 `!practice` 分支渲染。同时改进 not-found 展示：区分「没找到这次练习」和「缺少练习 ID」两种文案 + 加「回首页」CTA 按钮。
 
 ### 未完成但相关的技术债
-- Taro URL polyfill patch 目前是直接改 node_modules，pnpm install 会覆盖 → 需要 patch-package
-- 深色主题下 weapp icon 颜色不会跟着切
-- `postcss-calc` warnings（`23.07692rpx` 小数点在 calc() 里不认识）—— pose-add / record 页有几处 calc()，不影响运行但值不生效，需要重构成整数 rpx
+
+**优先级 P1**（阻塞真机 QA）
+- **H1 · YearColorGrid 空数据可见度**：森林晨光深绿卡片上 `--year-empty:#EAE3D2` 米色格子对比度过弱，在 0 记录状态下几乎看不到方阵。要么改暗（比如 `#2F3C2A` 附近），要么加一层浅色 stroke。修完顺便在 dark 主题也扫一眼。
+
+**优先级 P2**（视觉打磨，POC 上线前值得做）
+- **M1 · FAB 压提示文字**：首页底部「下面这颗 +，是今天想留下的。」被 FAB 圆遮下半。提示上移 24rpx 或 FAB `bottom` offset 调整。
+- **M2 · pose 卡片顶部灰色占位**：`poses` 页每张卡片顶部是米色方块 + 灰色分类文字（后弯 / 平衡），handoff 里这块应该是 pose 缩略图（真人插图 / 线稿）。asset 缺失 or 路径错。
+- **M3 · FAB 与 tab bar 分层不清**：FAB 圆的下沿伸到 tab bar 白底之上但没 shadow/边框，视觉像粘在一起。要么补 shadow 做「悬浮感」，要么把下沿藏进 tab bar 里做「嵌入感」。
+- **weapp icon 主题联动**：`apps/weapp/src/lib/icons.tsx` 里 tab bar 的 `ACTIVE / INACTIVE / PLUS_COLOR` 是硬编码的 fresh 主题 hex。切 `theme-earth` 后 tab icon 颜色不跟。要么让 TabBar 从 `useAppStore().theme` 读，要么把 icon 换成 CSS mask (`background-image` + `mask`) 让 currentColor 可用（weapp 支持 mask-image）。
+
+**优先级 P3**（不阻塞，可以晚一点）
+- **`postcss-calc` warnings**：`pose-add:203 / record:1019,1614` 里的 calc() 拿到 `23.07692rpx` 这种小数被 postcss-calc 拒（parser 不认 `rpx` 单位）。功能不受影响（原样输出），但 log 里长期红字体验差。修法：要么在 SCSS 里把 calc 表达式改成 sass 编译期计算，要么用整数 rpx 值避开 calc。
+- **B3 subthread：practice-detail 手动 URL 无法测试完整流程**：目前无 ID 时正确显示「缺少练习 ID」+回首页 CTA，但要测**有 ID** 的完整渲染，需要真实数据。等 anonymous sign-in 联调后走完记录流程再回测。
+
+### 已完成的技术债 ✅
+- ~~Taro URL polyfill patch 直接改 node_modules 会被 pnpm install 覆盖~~ → 已固化为 `pnpm patch` (`d670149`)
 
 ---
 
