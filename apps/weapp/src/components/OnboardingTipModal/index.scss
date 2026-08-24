@@ -1,0 +1,85 @@
+.onboarding-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 32px;
+  animation: sxFadeUp 0.25s ease both;
+}
+
+.onboarding-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(30, 36, 28, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+.onboarding-card {
+  position: relative;
+  background: var(--color-card-bg);
+  border-radius: var(--radius-xl);
+  padding: 28px 24px 22px;
+  max-width: 320px;
+  width: 100%;
+  box-shadow: 0 24px 40px -20px rgba(30, 36, 28, 0.6);
+  animation: sxPop 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.onboarding-title {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--color-ink);
+  text-align: center;
+}
+
+.onboarding-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.onboarding-line {
+  display: block;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.75;
+}
+
+.onboarding-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+  justify-content: center;
+}
+
+.onboarding-btn {
+  flex: 1;
+  text-align: center;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+
+.onboarding-btn-skip {
+  background: var(--color-segment-bg);
+  color: var(--color-text-secondary);
+}
+
+.onboarding-btn-ok {
+  background: var(--color-green);
+  color: var(--color-green-text);
+  font-weight: 500;
+}
+
+// pop animation used for card entry
+@keyframes sxPop {
+  0%   { opacity: 0; transform: scale(0.9) translateY(8px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}

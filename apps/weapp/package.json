@@ -1,0 +1,58 @@
+{
+  "name": "@body-diary/weapp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Body Diary — WeChat Mini Program + H5 app",
+  "templateInfo": {
+    "name": "default",
+    "typescript": true,
+    "css": "sass"
+  },
+  "scripts": {
+    "build:weapp": "taro build --type weapp",
+    "dev:weapp": "taro build --type weapp --watch",
+    "build:h5": "taro build --type h5",
+    "dev:h5": "taro build --type h5 --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "browserslist": [
+    "last 3 versions",
+    "Android >= 4.1",
+    "ios >= 8"
+  ],
+  "dependencies": {
+    "@babel/preset-react": "^7.28.5",
+    "@body-diary/assets": "workspace:*",
+    "@body-diary/content": "workspace:*",
+    "@body-diary/core": "workspace:*",
+    "@body-diary/design-tokens": "workspace:*",
+    "@supabase/supabase-js": "^2.49.0",
+    "@tarojs/components": "4.1.11",
+    "@tarojs/helper": "4.1.11",
+    "@tarojs/plugin-framework-react": "4.1.11",
+    "@tarojs/plugin-platform-h5": "4.1.11",
+    "@tarojs/plugin-platform-weapp": "4.1.11",
+    "@tarojs/react": "4.1.11",
+    "@tarojs/runtime": "4.1.11",
+    "@tarojs/shared": "4.1.11",
+    "@tarojs/taro": "4.1.11",
+    "dayjs": "^1.11.13",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.26.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.6.2",
+    "@tarojs/cli": "4.1.11",
+    "@tarojs/webpack5-runner": "4.1.11",
+    "@types/react": "^18.3.12",
+    "babel-preset-taro": "4.1.11",
+    "dotenv": "^16.4.5",
+    "postcss": "^8.4.49",
+    "react-refresh": "^0.18.0",
+    "sass": "^1.81.0",
+    "typescript": "^5.7.0",
+    "webpack": "5.91.0"
+  }
+}

@@ -1,4 +1,5 @@
 dist/
+packages/*/dist/
 node_modules/
 .swc/
 .env.local
@@ -6,3 +7,11 @@ node_modules/
 .DS_Store
 *.log
 .gstack/
+docs/research/raw/
+docs/research/screenshots/
+# docs/*
+build/
+# QA screenshots (regenerable via `pnpm wx:shot`)
+tmp/
+# WeChat DevTools per-machine dev preferences
+apps/weapp/project.private.config.json

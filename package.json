@@ -1,54 +1,27 @@
 {
-  "name": "body-aware-diary",
+  "name": "body-diary",
   "version": "1.0.0",
   "private": true,
-  "description": "身体感知日记 - Body Awareness Diary",
-  "templateInfo": {
-    "name": "default",
-    "typescript": true,
-    "css": "sass"
-  },
+  "description": "身体感知日记 - Body Awareness Diary (monorepo root)",
   "scripts": {
-    "build:weapp": "taro build --type weapp",
-    "dev:weapp": "taro build --type weapp --watch",
-    "build:h5": "taro build --type h5",
-    "dev:h5": "taro build --type h5 --watch",
-    "build:rn": "taro build --type rn",
-    "dev:rn": "taro build --type rn --watch"
-  },
-  "browserslist": [
-    "last 3 versions",
-    "Android >= 4.1",
-    "ios >= 8"
-  ],
-  "dependencies": {
-    "@babel/preset-react": "^7.28.5",
-    "@supabase/supabase-js": "^2.49.0",
-    "@tarojs/components": "4.1.11",
-    "@tarojs/helper": "4.1.11",
-    "@tarojs/plugin-framework-react": "^4.1.11",
-    "@tarojs/plugin-platform-h5": "^4.1.11",
-    "@tarojs/plugin-platform-weapp": "4.1.11",
-    "@tarojs/react": "^4.1.11",
-    "@tarojs/runtime": "4.1.11",
-    "@tarojs/shared": "4.1.11",
-    "@tarojs/taro": "4.1.11",
-    "dayjs": "^1.11.13",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "zustand": "^4.5.5"
+    "build:packages": "pnpm --filter \"./packages/*\" build",
+    "clean:packages": "pnpm --filter \"./packages/*\" clean",
+    "dev:h5": "pnpm build:packages && pnpm --filter @body-diary/weapp dev:h5",
+    "dev:weapp": "pnpm build:packages && pnpm --filter @body-diary/weapp dev:weapp",
+    "build:h5": "pnpm build:packages && pnpm --filter @body-diary/weapp build:h5",
+    "build:weapp": "pnpm build:packages && pnpm --filter @body-diary/weapp build:weapp",
+    "typecheck": "pnpm -r typecheck",
+    "wx:shot": "node scripts/wx-inspect.mjs screenshot",
+    "wx:nav": "node scripts/wx-inspect.mjs navigate",
+    "wx:eval": "node scripts/wx-inspect.mjs eval"
   },
   "devDependencies": {
-    "@babel/runtime": "^7.26.0",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.6.2",
-    "@tarojs/cli": "4.1.11",
-    "@tarojs/webpack5-runner": "4.1.11",
-    "@types/react": "^18.3.12",
-    "babel-preset-taro": "4.1.11",
-    "postcss": "^8.4.49",
-    "react-refresh": "^0.18.0",
-    "sass": "^1.81.0",
-    "typescript": "^5.7.0",
-    "webpack": "5.91.0"
+    "miniprogram-automator": "^0.12.1",
+    "typescript": "^5.7.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "webpack-virtual-modules": "0.5.0"
+    }
   }
 }

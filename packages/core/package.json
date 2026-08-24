@@ -1,0 +1,21 @@
+{
+  "name": "@body-diary/core",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Body Diary core — data models, business logic, Supabase client",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist", "src"],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "gen:types": "supabase gen types typescript --local > src/database.types.ts"
+  },
+  "dependencies": {
+    "@body-diary/content": "workspace:*",
+    "@supabase/supabase-js": "^2.49.0",
+    "zod": "^3.23.8"
+  }
+}
+

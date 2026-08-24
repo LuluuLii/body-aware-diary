@@ -1,0 +1,96 @@
+/* ============================================
+ * @body-diary/design-tokens · tokens.css
+ * Source of truth: ./tokens.ts (handoff 森林晨光 spec)
+ * Import in web apps: @import '@body-diary/design-tokens/tokens.css';
+ * Kept in sync with tokens.scss manually. Auto-gen from tokens.ts is a future TODO.
+ * ============================================ */
+
+/* ---------- Fresh theme (森林晨光) · default ---------- */
+:root,
+.theme-fresh {
+  --color-ink: #33382E;
+  --color-green: #4C5D46;
+  --color-green-deep: #41503C;
+  --color-green-text: #F3EEDF;
+  --color-green-text-sub: #B9C0A2;
+  --color-paper-bg: #F4EFE3;
+  --color-paper-grid: #E7DFCB;
+  --color-card-bg: #FBF8EF;
+  --color-card-border: #E4DBC4;
+  --color-text-secondary: #8A8770;
+  --color-text-tertiary: #9A9578;
+  --color-text-tag: #A59A78;
+  --color-chip-bg: #EFEADB;
+  --color-segment-bg: #E7E0CD;
+  --color-handwritten: #9A8C6A;
+
+  --sensation-sour:  #CE8F82;
+  --sensation-tight: #B98A5C;
+  --sensation-warm:  #D3B072;
+  --sensation-swell: #93A57C;
+  --sensation-loose: #8FA07B;
+  --sensation-none:  #B4B0A2;
+
+  --quadrant-over: #E1C6B4;
+  --quadrant-full: #C7D3AE;
+  --quadrant-un:   #D9D3C3;
+  --quadrant-ease: #DCE4CE;
+
+  --year-pos-1: #EAE3D2;
+  --year-pos-2: #CBD4B0;
+  --year-pos-3: #A9BA88;
+  --year-pos-4: #7C935E;
+  --year-pos-5: #4C5D44;
+
+  --year-neg-1: #EAE3D2;
+  --year-neg-2: #E4C6B4;
+  --year-neg-3: #D6AC97;
+  --year-neg-4: #C9987F;
+  --year-neg-5: #BE8A70;
+
+  --year-empty: #EAE3D2;
+
+  --font-serif: "Noto Serif SC", "PingFang SC", serif;
+  --font-sans: "Noto Sans SC", -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+  --font-handwritten: "Caveat", cursive;
+
+  --radius-xl:    22px;
+  --radius-lg:    20px;
+  --radius-md:    18px;
+  --radius-chip:  16px;
+  --radius-sm:    14px;
+  --radius-xs:     8px;
+  --radius-micro:  2px;
+
+  --shadow-card:       0 12px 24px -20px rgba(60, 66, 45, 0.5);
+  --shadow-card-deep:  0 16px 30px -22px rgba(50, 60, 40, 0.85);
+  --shadow-tab-bar:    0 14px 30px -18px rgba(50, 56, 40, 0.5);
+  --shadow-floating:   0 12px 24px -8px  rgba(50, 70, 40, 0.7);
+
+  --space-page-x:              22px;
+  --space-page-x-wide:         24px;
+  --space-top-safe:            60px;
+  --space-tab-bottom:         118px;
+  --space-card-gap:            16px;
+  --space-card-padding:        20px;
+  --space-card-padding-compact:16px;
+}
+
+/* ---------- Earth theme (大地深处) · provisional dark ---------- */
+.theme-earth {
+  --color-ink: #EDE7D6;
+  --color-green: #A9BA88;
+  --color-green-deep: #2F3C2A;
+  --color-green-text: #EDE7D6;
+  --color-green-text-sub: #9BAA80;
+  --color-paper-bg: #232420;
+  --color-paper-grid: #2F2D28;
+  --color-card-bg: #2F2E29;
+  --color-card-border: #3D3B34;
+  --color-text-secondary: #B4AF98;
+  --color-text-tertiary: #928D77;
+  --color-text-tag: #847E68;
+  --color-chip-bg: #333029;
+  --color-segment-bg: #3A3830;
+  --color-handwritten: #C7B58C;
+}

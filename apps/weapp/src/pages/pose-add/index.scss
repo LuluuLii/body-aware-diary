@@ -1,0 +1,202 @@
+.pose-add-page {
+  min-height: 100vh;
+  background: var(--color-paper-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.pa-scroll {
+  flex: 1;
+  padding: 60px 22px 24px;
+  padding-bottom: 120px;
+}
+
+.top-bar {
+  height: 34px;
+  display: flex;
+  align-items: center;
+}
+
+.back-btn {
+  padding: 4px;
+  margin-left: -4px;
+  cursor: pointer;
+}
+
+.page-title {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--color-ink);
+  margin-top: 12px;
+}
+
+.page-sub {
+  display: block;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-top: 6px;
+}
+
+// ─── Field blocks ────────────────────────────────────
+
+.field-block {
+  margin-top: 22px;
+}
+
+.field-label {
+  display: block;
+  font-size: 13.5px;
+  color: var(--color-ink);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.field-hint {
+  font-size: 11.5px;
+  color: var(--color-text-tertiary);
+  font-weight: normal;
+  margin-left: 4px;
+}
+
+.required {
+  color: var(--sensation-sour);
+  margin-left: 2px;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 6px 14px;
+  border-radius: 14px;
+  background: var(--color-chip-bg);
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  border: 1px solid var(--color-card-border);
+  cursor: pointer;
+
+  &.active {
+    background: var(--color-green);
+    color: var(--color-green-text);
+    border-color: var(--color-green);
+    font-weight: 500;
+  }
+}
+
+// 肌肉 chip 稍小 · 多个可选
+.muscle-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.muscle-chip {
+  padding: 5px 11px;
+  border-radius: 12px;
+  background: var(--color-chip-bg);
+  color: var(--color-text-secondary);
+  font-size: 12.5px;
+  border: 1px solid var(--color-card-border);
+  cursor: pointer;
+
+  &.active {
+    background: var(--color-green);
+    color: var(--color-green-text);
+    border-color: var(--color-green);
+  }
+}
+
+.text-input {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  color: var(--color-ink);
+  box-sizing: border-box;
+}
+
+.text-area {
+  width: 100%;
+  min-height: 66px;
+  padding: 10px 14px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  box-sizing: border-box;
+  resize: none;
+  outline: none;
+  white-space: pre-wrap;
+  word-break: break-word;
+  display: block;
+
+  &::placeholder {
+    color: var(--color-text-tag);
+  }
+}
+
+.photo-slot-disabled {
+  padding: 24px 18px;
+  background: var(--color-chip-bg);
+  border: 1px dashed var(--color-card-border);
+  border-radius: var(--radius-md);
+  text-align: center;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.photo-slot-hint {
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+}
+
+// ─── Fixed bottom submit ────────────────────────────
+
+.submit-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  padding: 12px 22px calc(12px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, rgba(245, 241, 231, 0) 0%, var(--color-paper-bg) 30%);
+  pointer-events: none;
+
+  & > .submit-cta {
+    pointer-events: auto;
+  }
+}
+
+.submit-cta {
+  text-align: center;
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  background: var(--color-segment-bg);
+  color: var(--color-text-tertiary);
+  font-size: 16px;
+  font-weight: 600;
+  font-family: var(--font-serif);
+  transition: background 0.25s, color 0.25s;
+
+  &.active {
+    background: var(--color-green);
+    color: var(--color-green-text);
+    box-shadow: var(--shadow-card);
+    cursor: pointer;
+  }
+}
+
+.submit-label {
+  display: block;
+}

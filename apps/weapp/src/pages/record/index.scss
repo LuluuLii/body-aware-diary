@@ -1,0 +1,500 @@
+// v2.6 record 页 · fixed bottom button + 中段可滚 + 合卡布局
+
+.record-page {
+  min-height: 100vh;
+  background: var(--color-paper-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+// 中段可滚区域 · 底部预留出 submit-bar 的高度
+.record-scroll {
+  flex: 1;
+  padding: 60px 22px 24px;
+  // 底部要给 fixed submit-bar 让出空间（bar 内容 ~44px + 上下 padding + safe-area）
+  padding-bottom: 120px;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 34px;
+}
+
+.back-btn {
+  cursor: pointer;
+  padding: 4px;
+  margin-left: -4px;
+}
+
+.date-hand {
+  font-family: var(--font-handwritten);
+  font-size: 19px;
+  color: var(--color-handwritten);
+  font-weight: 600;
+}
+
+// ─── Title + inline count ───────────────────────────────
+
+.page-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.page-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 26px;
+  color: var(--color-ink);
+  line-height: 1.25;
+}
+
+.page-count {
+  font-size: 12.5px;
+  color: var(--color-text-tag);
+  letter-spacing: 0.5px;
+  font-family: var(--font-hand);
+}
+
+// ─── 品类 chip row ─────────────────────────────────────
+
+.activity-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 2px 8px;
+  margin-top: 14px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar { display: none; }
+}
+
+.activity-chip {
+  flex: none;
+  padding: 6px 14px;
+  border-radius: 14px;
+  background: var(--color-chip-bg);
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  border: 1px solid var(--color-card-border);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+
+  &.active {
+    background: var(--color-green);
+    color: var(--color-green-text);
+    border-color: var(--color-green);
+    font-weight: 500;
+  }
+}
+
+// ─── 发力感 · 课堂笔记 (提到首位) ───────────────────────
+
+.activation-card {
+  margin-top: 16px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+}
+
+.activation-title-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14.5px;
+  color: var(--color-ink);
+}
+
+.activation-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sensation-tight);
+}
+
+.activation-title { color: var(--color-ink); }
+
+// v2.7 · 原生 <textarea> · rows 控制高度，按 \n 数量动态调
+.activation-textarea {
+  width: 100%;
+  min-height: 78px;
+  margin-top: 10px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  padding: 0;
+  resize: none;
+  box-sizing: border-box;
+  outline: none;
+  white-space: pre-wrap;
+  word-break: break-word;
+  display: block;
+
+  &::placeholder {
+    color: var(--color-text-tag);
+    font-family: var(--font-sans);
+  }
+}
+
+// ─── Pose picker · 品类联动 ─────────────────────────────
+
+.pose-card {
+  margin-top: 16px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+}
+
+// Collapsed summary · 常态只占 1 行
+.pose-summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  min-height: 24px;
+}
+
+.pose-summary-label {
+  font-size: 14.5px;
+  color: var(--color-ink);
+  font-weight: 500;
+}
+
+.pose-summary-value {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pose-summary-name {
+  font-size: 14px;
+  color: var(--color-green);
+  font-family: var(--font-serif);
+
+  &.muted {
+    color: var(--color-text-tertiary);
+    font-family: var(--font-sans);
+  }
+}
+
+.pose-summary-caret {
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+}
+
+// Expanded body
+.pose-picker-body {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--color-card-border);
+  animation: sxFadeUp 0.2s ease both;
+}
+
+.pose-picker-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 12px;
+  padding-top: 8px;
+}
+
+.pose-picker-done {
+  font-size: 13px;
+  color: var(--color-green);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.pose-clear {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+}
+
+.pose-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pose-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pose-family-label {
+  font-size: 11.5px;
+  letter-spacing: 1px;
+  color: var(--color-text-tag);
+}
+
+.pose-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pose-chip {
+  padding: 5px 11px;
+  font-size: 12.5px;
+  background: var(--color-chip-bg);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-card-border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+
+  &.active {
+    background: var(--color-green);
+    color: var(--color-green-text);
+    border-color: var(--color-green);
+  }
+}
+
+.pose-custom-input {
+  margin-top: 12px;
+  padding: 8px 10px;
+  border: 1px dashed var(--color-card-border);
+  border-radius: var(--radius-md);
+  font-size: 13.5px;
+  color: var(--color-ink);
+  background: var(--color-chip-bg);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.pose-empty-hint {
+  display: block;
+  font-size: 12.5px;
+  color: var(--color-text-tertiary);
+  padding: 4px 0;
+}
+
+.pose-selected-hint {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: var(--color-chip-bg);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.pose-selected-name {
+  font-size: 14px;
+  color: var(--color-green);
+  font-weight: 500;
+}
+
+.pose-selected-en {
+  font-size: 11.5px;
+  color: var(--color-text-tertiary);
+  font-family: 'Menlo', monospace;
+}
+
+// ─── 感受与身体 · 合卡 ─────────────────────────────────
+
+.sense-body-card {
+  margin-top: 16px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: 18px 18px 14px;
+}
+
+.card-inner-divider {
+  margin: 14px 0 8px;
+  height: 1px;
+  background: var(--color-card-border);
+  opacity: 0.6;
+}
+
+.body-entry-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.thumb {
+  flex: none;
+  width: 44px;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.label-block {
+  flex: 1;
+  min-width: 0;
+}
+
+.label-title {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.label-sub {
+  display: block;
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  margin-top: 3px;
+  line-height: 1.5;
+}
+
+.caret {
+  font-size: 17px;
+  color: #B3AC90;
+}
+
+// ─── 更多字段 · 平铺 (无 collapse) ─────────────────────
+
+.more-fields-flat {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.more-pair-row {
+  display: flex;
+  gap: 12px;
+}
+
+.more-pair-cell {
+  flex: 1;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.photo-slot {
+  background: var(--color-card-bg);
+  border: 1px dashed var(--color-card-border);
+  border-radius: var(--radius-md);
+  padding: 20px 18px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.photo-slot-hint {
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+}
+
+// ─── Loading (编辑模式等待 entry 数据) ────────────────
+.loading-inline {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.loading-text {
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+}
+
+// ─── Fixed bottom "记下了" ─────────────────────────────
+
+.submit-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  padding: 12px 22px calc(12px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, rgba(245, 241, 231, 0) 0%, var(--color-paper-bg) 30%);
+  pointer-events: none;
+
+  & > .submit-cta {
+    pointer-events: auto;
+  }
+}
+
+.submit-cta {
+  text-align: center;
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  background: var(--color-segment-bg);
+  color: var(--color-text-tertiary);
+  font-size: 16px;
+  font-weight: 600;
+  font-family: var(--font-serif);
+  transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+
+  &.active {
+    background: var(--color-green);
+    color: var(--color-green-text);
+    box-shadow: var(--shadow-card);
+    cursor: pointer;
+  }
+}
+
+.submit-label { display: block; }
+
+// ─── 合上本子 · 提交完成动效 ────────────────────────────
+
+.close-book-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(30, 36, 28, 0.55);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-book-content {
+  text-align: center;
+  color: var(--color-green-text);
+  perspective: 500px;
+}
+
+.close-book-icon-wrap {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  animation: sxBookClose 1.5s ease both;
+}
+
+.close-book-text-wrap {
+  animation: sxBookCloseText 1.5s ease both;
+  margin-top: 14px;
+}
+
+.close-book-title {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 22px;
+  color: var(--color-green-text);
+}
+
+.close-book-subtitle {
+  display: block;
+  font-size: 13px;
+  color: #C6CBB4;
+  margin-top: 6px;
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@body-diary/content",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Body Diary seed content — poses, muscles, sensation words, greeting copy",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist", "src"],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit"
+  }
+}

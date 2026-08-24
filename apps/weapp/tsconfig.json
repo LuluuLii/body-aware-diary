@@ -1,0 +1,27 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "outDir": "lib",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "rootDir": ".",
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "isolatedModules": false,
+    "typeRoots": ["../../node_modules/@types"],
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "baseUrl": "."
+  },
+  "include": ["./src", "./types", "global.d.ts"],
+  "compileOnSave": false
+}

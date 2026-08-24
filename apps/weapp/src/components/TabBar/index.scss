@@ -1,0 +1,76 @@
+// Handoff spec: 悬浮圆角卡片 60px 高 + 中央大 + 60×60 · 阴影 · 顶部渐隐
+
+.tab-bar-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 96px;
+  z-index: 55;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(244, 239, 227, 0) 0%,
+    rgba(244, 239, 227, 0.9) 34%,
+    var(--color-paper-bg) 60%
+  );
+}
+
+.tab-bar {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 26px;
+  height: 62px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-paper-grid);
+  border-radius: 26px;
+  box-shadow: var(--shadow-tab-bar);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  pointer-events: auto;
+}
+
+.tab-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  padding: 0 8px;
+
+  &.tab-cell-spacer {
+    width: 56px;
+    pointer-events: none;
+  }
+}
+
+.tab-label {
+  font-size: 10px;
+  color: var(--color-text-tertiary);
+
+  &.active {
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+}
+
+.tab-plus {
+  position: absolute;
+  left: 50%;
+  bottom: 56px;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--color-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-floating);
+  pointer-events: auto;
+  cursor: pointer;
+}

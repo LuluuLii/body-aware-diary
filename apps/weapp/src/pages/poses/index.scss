@@ -1,0 +1,356 @@
+.poses-page {
+  min-height: 100vh;
+  background: var(--color-paper-bg);
+  padding: 60px 20px 130px;
+}
+
+.page-title {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 27px;
+  color: var(--color-ink);
+}
+
+.page-sub {
+  display: block;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-top: 6px;
+  line-height: 1.7;
+}
+
+// ─── Segment tabs ─────────────────────────────────────────
+
+.segment {
+  display: inline-flex;
+  background: var(--color-segment-bg);
+  border-radius: 14px;
+  padding: 4px;
+  margin-top: 16px;
+}
+
+.seg-tab {
+  font-size: 13px;
+  padding: 6px 18px;
+  border-radius: 11px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+
+  &.active {
+    background: var(--color-card-bg);
+    color: var(--color-ink);
+    font-weight: 500;
+    box-shadow: 0 2px 6px -3px rgba(0, 0, 0, 0.3);
+  }
+}
+
+// ─── Search bar ───────────────────────────────────────────
+
+.search-bar {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: 16px;
+  padding: 11px 15px;
+}
+
+.search-icon {
+  font-size: 14px;
+  color: var(--color-text-tertiary);
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14.5px;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+// ─── Activity 一级 tab（v2.7-A：品类隔离）───────────────
+// 视觉略强于 family-chip：这是一级选择器
+.activity-tab-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-top: 14px;
+  padding: 4px 0 6px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar { display: none; }
+}
+
+.activity-tab-chip {
+  flex: none;
+  padding: 8px 16px;
+  border-radius: 16px;
+  background: var(--color-card-bg);
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  border: 1px solid var(--color-card-border);
+  cursor: pointer;
+  font-family: var(--font-serif);
+  transition: background 0.15s, color 0.15s;
+
+  &.active {
+    background: var(--color-green-deep);
+    color: var(--color-green-text);
+    border-color: var(--color-green-deep);
+    font-weight: 500;
+  }
+}
+
+// ─── Family / muscle horizontal scroll ────────────────────
+
+.family-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-top: 12px;
+  padding-bottom: 4px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.family-chip {
+  flex: none;
+  padding: 6px 14px;
+  border-radius: 14px;
+  background: var(--color-chip-bg);
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  border: 1px solid var(--color-card-border);
+
+  &.active {
+    background: var(--color-green);
+    color: var(--color-green-text);
+    font-weight: 500;
+    border-color: var(--color-green);
+  }
+}
+
+// ─── Empty ────────────────────────────────────────────────
+
+.poses-empty {
+  margin-top: 20px;
+  padding: 24px;
+  text-align: center;
+}
+
+.poses-empty-text {
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+}
+
+// ─── Pose grid ────────────────────────────────────────────
+
+.pose-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.pose-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+
+  &:active {
+    box-shadow: 0 8px 20px -12px rgba(60, 66, 45, 0.4);
+  }
+}
+
+.pose-card-visual {
+  position: relative;
+  width: 100%;
+  height: 112px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-paper-bg);
+}
+
+// v2.7-A 缩略图占位 · Sprint 3 换真图
+.pose-thumb-placeholder {
+  width: 82%;
+  height: 82%;
+  border-radius: var(--radius-sm);
+  background: var(--color-chip-bg);
+  border: 1px dashed var(--color-card-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pose-thumb-family {
+  font-size: 12px;
+  color: var(--color-text-tag);
+  letter-spacing: 1px;
+}
+
+// v2.7-B · 用户自建 pose 角标
+.pose-card-user-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(65, 80, 60, 0.85);
+  color: var(--color-green-text);
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 0.5px;
+}
+
+// v2.7-B · 练习次数角标（个人使用痕迹）
+.pose-card-count-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: var(--color-card-bg);
+  color: var(--color-green);
+  font-size: 10.5px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-family: var(--font-hand);
+  letter-spacing: 0.3px;
+  border: 1px solid var(--color-card-border);
+}
+
+.pose-card-family {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(65, 80, 60, 0.9);
+  color: var(--color-green-text);
+  font-size: 10.5px;
+  padding: 3px 8px;
+  border-radius: 12px;
+}
+
+.pose-card-body {
+  padding: 11px 13px 13px;
+}
+
+.pose-name-zh {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--color-ink);
+}
+
+.pose-name-en {
+  display: block;
+  font-size: 11px;
+  color: var(--color-text-tag);
+  margin-top: 2px;
+}
+
+.pose-muscles {
+  display: block;
+  font-size: 11.5px;
+  color: #7C8A6C;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+.pose-card-cta {
+  display: block;
+  margin-top: 9px;
+  font-size: 11.5px;
+  color: var(--color-handwritten);
+}
+
+.custom-name-cta {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 13.5px;
+  color: #7C7F68;
+  background: #EEE8D8;
+  border: 1px dashed #D6CDB4;
+  border-radius: 16px;
+  padding: 14px;
+  cursor: pointer;
+}
+
+// ─── Muscle info card ─────────────────────────────────────
+
+.muscle-info-card {
+  margin-top: 14px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.muscle-figure-slot {
+  flex: none;
+  width: 78px;
+  height: 118px;
+}
+
+.muscle-info-body {
+  flex: 1;
+}
+
+.muscle-name-zh {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--color-ink);
+}
+
+.muscle-name-en {
+  display: block;
+  font-size: 12px;
+  color: var(--color-text-tag);
+  margin-top: 3px;
+}
+
+.muscle-desc {
+  display: block;
+  font-size: 13px;
+  color: #5E6152;
+  line-height: 1.7;
+  margin-top: 10px;
+}
+
+.muscle-region {
+  display: inline-block;
+  align-items: center;
+  margin-top: 12px;
+  font-size: 11.5px;
+  color: var(--color-green);
+  background: #E4E9D6;
+  border-radius: 14px;
+  padding: 5px 11px;
+}
+
+.muscle-poses-label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: var(--color-text-tag);
+  font-weight: 500;
+  margin: 20px 4px 0;
+}

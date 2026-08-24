@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "Noto Sans SC", system-ui, sans-serif; }
+  a, a:hover { color: #4C5D46; }
+  .sx-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+  .sx-scroll::-webkit-scrollbar { display: none; }
+  @keyframes sxFadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes sxBookClose { 0% { opacity: 0; transform: scale(.94); } 18% { opacity: 1; transform: scale(1); } 78% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(.99); } }
+  @keyframes sxPop { from { opacity: 0; transform: scale(.9) translateY(6px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+  @keyframes sxSheet { from { transform: translateY(102%); } to { transform: translateY(0); } }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="min-height:100vh;width:100%;display:flex;align-items:center;justify-content:center;padding:40px 20px;background:radial-gradient(120% 120% at 50% 0%, #EFE9DB 0%, #E4DCC9 60%, #DBD2BC 100%);font-family:'Noto Sans SC',sans-serif;">
+
+  <div style="width:390px;height:844px;position:relative;border-radius:52px;background:#1E241C;padding:11px;box-shadow:0 2px 3px rgba(0,0,0,.35),0 40px 90px -30px rgba(43,50,35,.7),0 0 0 1px rgba(0,0,0,.4) inset;flex:none;">
+
+    <div style="position:absolute;top:24px;left:50%;transform:translateX(-50%);width:118px;height:33px;background:#000;border-radius:20px;z-index:60;"></div>
+
+    <div class="sx-scroll" style="position:relative;width:100%;height:100%;border-radius:42px;overflow:hidden;background:#F4EFE3;background-image:linear-gradient(#E7DFCB 1px,transparent 1px),linear-gradient(90deg,#E7DFCB 1px,transparent 1px);background-size:26px 26px;background-position:center;">
+
+      <!-- status bar -->
+      <div style="position:absolute;top:0;left:0;right:0;height:54px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 30px 8px;font-family:'Noto Sans SC';font-weight:600;font-size:15px;color:#33382E;z-index:50;pointer-events:none;">
+        <span>9:41</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;">
+          <svg width="17" height="11" viewBox="0 0 17 11" fill="#33382E"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.7" y="5" width="3" height="6" rx="1"/><rect x="9.3" y="2.5" width="3" height="8.5" rx="1"/><rect x="14" y="0" width="3" height="11" rx="1"/></svg>
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="#33382E" stroke-width="1.4"><path d="M2 4.6a9 9 0 0 1 12 0M4.3 7.1a6 6 0 0 1 7.4 0"/><circle cx="8" cy="9.7" r="1" fill="#33382E" stroke="none"/></svg>
+          <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="1" y="1" width="20" height="10" rx="3" stroke="#33382E" stroke-width="1.2" opacity="0.45"/><rect x="3" y="3" width="14" height="6" rx="1.5" fill="#33382E"/><rect x="22.5" y="4" width="1.6" height="4" rx="0.8" fill="#33382E" opacity="0.45"/></svg>
+        </span>
+      </div>
+
+      <!-- ================= HOME ================= -->
+      <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <div class="sx-scroll" style="position:absolute;inset:0;overflow-y:auto;padding:66px 24px 118px;animation:sxFadeUp .5s ease both;">
+        <div style="font-family:'Caveat';font-size:22px;color:#9A8C6A;font-weight:600;">{{ todayLatin }}</div>
+        <div style="font-family:'Noto Serif SC';font-weight:600;font-size:30px;color:#33382E;line-height:1.35;margin-top:4px;letter-spacing:.5px;">{{ greeting }}</div>
+        <div style="font-size:14px;color:#8A8770;margin-top:10px;line-height:1.7;">{{ greetingSub }}</div>
+
+        <!-- last practice -->
+        <div onClick="{{ goRecordFlow }}" style="margin-top:26px;background:#FBF8EF;border:1px solid #E4DBC4;border-radius:22px;padding:18px 20px;box-shadow:0 12px 24px -20px rgba(60,66,45,.5);cursor:pointer;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;letter-spacing:2px;color:#A59A78;font-weight:500;">上一次练习</span>
+            <span style="font-family:'Caveat';font-size:20px;color:#4C5D46;font-weight:700;">Date · 07.09</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:8px;margin-top:12px;">
+            <span style="font-family:'Noto Serif SC';font-weight:600;font-size:20px;color:#33382E;">普拉提 · 核心 + 髋</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap;">
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:#6B6F5B;background:#EFEADB;border-radius:20px;padding:5px 11px;"><i style="width:8px;height:8px;border-radius:50%;background:#B98A5C;display:inline-block;"></i>髋很紧</span>
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:#6B6F5B;background:#EFEADB;border-radius:20px;padding:5px 11px;"><i style="width:8px;height:8px;border-radius:50%;background:#93A57C;display:inline-block;"></i>核心有力</span>
+            <span style="font-size:12px;color:#AAA487;margin-left:auto;">距今 3 天</span>
+          </div>
+        </div>
+
+        <!-- body year card thumbnail -->
+        <div onClick="{{ goReview }}" style="margin-top:16px;background:#41503C;border-radius:22px;padding:20px;cursor:pointer;box-shadow:0 16px 30px -22px rgba(50,60,40,.85);position:relative;overflow:hidden;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'Noto Serif SC';font-weight:600;font-size:17px;color:#F3EEDF;">你的身体，这一年</span>
+            <span style="font-size:19px;color:#CBD3B2;">›</span>
+          </div>
+          <div style="margin-top:16px;">{{ miniYearEl }}</div>
+          <div style="font-size:12px;color:#B9C0A2;margin-top:14px;line-height:1.6;">已记下 <b style="color:#EDE7D6;">37</b> 次 · 这一格一格，是你和身体的对话。</div>
+        </div>
+
+        <!-- body whispers -->
+        <div style="margin-top:16px;background:#FBF8EF;border:1px solid #E4DBC4;border-radius:22px;padding:18px 20px 8px;box-shadow:0 12px 24px -20px rgba(60,66,45,.5);">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'Noto Serif SC';font-weight:600;font-size:16px;color:#33382E;">身体絮语</span>
+            <span onClick="{{ goReview }}" style="font-size:12.5px;color:#9A8C6A;cursor:pointer;">翻旧页 ›</span>
+          </div>
+          <div style="font-size:12px;color:#A59D82;margin-top:3px;">你留给自己的话，随手翻翻</div>
+          <div style="display:flex;flex-direction:column;">
+            <sc-for list="{{ whispers }}" as="w" hint-placeholder-count="3">
+              <div onClick="{{ w.open }}" style="display:flex;gap:13px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #EFE9D8;cursor:pointer;">
+                <div style="flex:none;width:38px;height:52px;margin-top:1px;">{{ w.poseEl }}</div>
+                <div style="flex:1;min-width:0;">
+                  <div style="display:flex;align-items:center;gap:7px;">
+                    <i style="width:7px;height:7px;border-radius:50%;background:{{ w.dot }};flex:none;"></i>
+                    <span style="font-size:12px;color:#9A9578;">{{ w.meta }}</span>
+                  </div>
+                  <div style="font-size:14px;color:#33382E;line-height:1.6;margin-top:5px;font-family:'Noto Serif SC';">{{ w.text }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="text-align:center;font-size:12.5px;color:#A59D82;margin-top:26px;line-height:1.7;">下面这颗 <span style="color:#4C5D46;">＋</span>，是今天想留下的。</div>
+      </div>
+      </sc-if>
+
+      <!-- ================= RECORD ================= -->
+      <sc-if value="{{ isRecord }}" hint-placeholder-val="{{ true }}">
+      <div class="sx-scroll" style="position:absolute;inset:0;overflow-y:auto;padding:60px 22px 130px;animation:sxFadeUp .4s ease both;">
+        <div style="display:flex;align-items:center;justify-content:space-between;height:34px;">
+          <span onClick="{{ goHome }}" style="font-size:20px;color:#6B6F5B;cursor:pointer;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;"><path d="M15 5 8 12l7 7"/></svg></span>
+          <span style="font-family:'Caveat';font-size:19px;color:#9A8C6A;font-weight:600;">2026 · 07 · 12</span>
+        </div>
+        <div style="font-family:'Noto Serif SC';font-weight:600;font-size:26px;color:#33382E;margin-top:14px;">今天想留下什么？</div>
+        <div style="font-size:13px;color:#A59A78;margin-top:6px;letter-spacing:.5px;">第 37 次 · 一个字段，就是完整的一条</div>
+
+        <!-- body map thumbnail -->
+        <div onClick="{{ openBody }}" style="margin-top:22px;background:#FBF8EF;border:1px solid #E4DBC4;border-radius:20px;padding:16px 18px;cursor:pointer;display:flex;align-items:center;gap:16px;">
+          <div style="flex:none;width:52px;height:78px;">{{ bodyThumbEl }}</div>
+          <div style="flex:1;">
+            <div style="font-size:15px;font-weight:500;color:#33382E;">{{ bodyLabel }}</div>
+            <div style="font-size:12.5px;color:#9A9578;margin-top:4px;line-height:1.6;">{{ bodySub }}</div>
+          </div>
+          <span style="font-size:17px;color:#B3AC90;">›</span>
+        </div>
+
+        <!-- sensation picker -->
+        <div style="margin-top:16px;">
+          <div style="font-size:12px;letter-spacing:2px;color:#A59A78;font-weight:500;margin-bottom:10px;">这一节课，整体的感受</div>
+          <div style="background:#FBF8EF;border:1px solid #E4DBC4;border-radius:20px;padding:18px 18px 16px;">
+            {{ quadrantEl }}
+            <sc-if value="{{ hasCoord }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;">
+                <sc-for list="{{ sensationChips }}" as="c" hint-placeholder-count="6">
+                  <span onClick="{{ c.toggle }}" style="{{ c.style }}">{{ c.word }}</span>
+                </sc-for>
+              </div>
+              <div style="margin-top:12px;display:flex;align-items:center;gap:8px;border-top:1px dashed #E4DBC4;padding-top:12px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B3AC90" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>
+                <input placeholder="或者用自己的话…（可选）" style="border:none;background:transparent;outline:none;font-size:14px;color:#33382E;font-family:'Noto Sans SC';width:100%;" />
+              </div>
+            </sc-if>
+          </div>
+        </div>
+
+        <!-- one line -->
+        <div style="margin-top:16px;background:#FBF8EF;border:1px solid #E4DBC4;border-radius:20px;padding:16px 18px;">
+          <textarea onInput="{{ onNote }}" placeholder="{{ notePlaceholder }}" rows="2" style="border:none;background:transparent;outline:none;width:100%;resize:none;font-size:15px;line-height:1.7;color:#33382E;font-family:'Noto Sans SC';"></textarea>
+        </div>
+
+        <!-- more fields -->
+        <div onClick="{{ toggleMore }}" style="margin-top:16px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;color:#7C7F68;cursor:pointer;padding:6px;">
+          <span>{{ moreLabel }}</span>
+          <span style="font-size:12px;">{{ moreCaret }}</span>
+        </div>
+
+        <sc-if value="{{ showMore }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:12px;animation:sxFadeUp .3s ease both;">
+          <div onClick="{{ goPoses }}" style="background:#FBF8EF;border:1px solid #E4DBC4;border-radius:18px;padding:15px 18px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:14.5px;color:#33382E;">体式</span>
+            <span style="font-size:14px;color:{{ poseColor }};">{{ poseLabel }} <span style="color:#B3AC90;">›</span></span>
+          </div>
+          <div style="background:#FBF8EF;border:1px solid #E4DBC4;border-radius:18px;padding:15px 18px;">
+            <div style="display:flex;align-items:center;gap:7px;font-size:14.5px;color:#33382E;"><span style="width:6px;height:6px;border-radius:50%;background:#B98A5C;"></span>发力感 · 老师的重点</div>
+            <textarea placeholder="记下老师说的发力点，或今天最清晰的感受。" rows="2" style="border:none;background:transparent;outline:none;width:100%;resize:none;font-size:14px;line-height:1.6;color:#33382E;margin-top:8px;font-family:'Noto Sans SC';"></textarea>
+          </div>
+          <div style="display:flex;gap:12px;">
+            <div style="flex:1;background:#FBF8EF;border:1px solid #E4DBC4;border-radius:18px;padding:15px 16px;text-align:center;font-size:13.5px;color:#7C7F68;">＋ 时长</div>
+            <div style="flex:1;background:#FBF8EF;border:1px solid #E4DBC4;border-radius:18px;padding:15px 16px;text-align:center;font-size:13.5px;color:#7C7F68;">＋ 语音</div>
+          </div>
+          <div style="background:#FBF8EF;border:1px solid #E4DBC4;border-radius:18px;padding:8px;">
+            <div style="width:100%;height:120px;border-radius:12px;overflow:hidden;">
+              <image-slot id="record-photo" shape="rounded" radius="12" placeholder="拍下你的手账 / 场地 / 镜子自拍"></image-slot>
+            </div>
+          </div>
+        </div>
+        </sc-if>
+
+        <div onClick="{{ submit }}" style="margin-top:22px;text-align:center;padding:16px;border-radius:20px;font-size:16px;font-weight:600;font-family:'Noto Serif SC';cursor:pointer;transition:.25s;background:{{ ctaBg }};color:{{ ctaColor }};box-shadow:{{ ctaShadow }};">记下了</div>
+      </div>
+
+      <!-- body map overlay -->
+      <sc-if value="{{ bodyOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;z-index:70;background:rgba(30,36,28,.4);backdrop-filter:blur(2px);animation:sxFadeUp .25s ease both;">
+        <div class="sx-scroll" style="position:absolute;left:0;right:0;bottom:0;top:52px;background:#F4EFE3;border-radius:28px 28px 0 0;overflow-y:auto;padding:20px 22px 40px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'Noto Serif SC';font-weight:600;font-size:19px;color:#33382E;">身体今天哪里被唤醒了</span>
+            <span onClick="{{ closeBody }}" style="font-size:14px;color:#7C7F68;cursor:pointer;background:#E7E0CD;border-radius:16px;padding:6px 14px;">完成</span>
+          </div>
+          <div style="display:inline-flex;background:#E7E0CD;border-radius:14px;padding:4px;margin-top:14px;">
+            <span onClick="{{ setFront }}" style="{{ frontTabStyle }}">前视</span>
+            <span onClick="{{ setBack }}" style="{{ backTabStyle }}">后视</span>
+          </div>
+          <div style="display:flex;justify-content:center;margin-top:14px;">{{ bodyMapEl }}</div>
+          <div style="font-size:12.5px;color:#9A9578;text-align:center;margin-top:6px;">点一块肌肉，标下此刻的感受 · 可标多块</div>
+        </div>
+
+        <sc-if value="{{ hasPending }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;left:0;right:0;bottom:0;background:#FBF8EF;border-radius:26px 26px 0 0;padding:20px 22px 30px;box-shadow:0 -12px 40px -20px rgba(40,46,30,.6);animation:sxSheet .3s cubic-bezier(.2,.8,.2,1) both;z-index:80;">
+          <div style="width:38px;height:4px;border-radius:4px;background:#DED6C0;margin:0 auto 16px;"></div>
+          <div style="font-family:'Noto Serif SC';font-weight:600;font-size:18px;color:#33382E;text-align:center;">{{ pendingName }}</div>
+          <div style="font-size:12.5px;color:#9A9578;text-align:center;margin-top:4px;">{{ pendingRegion }}</div>
+          <div style="display:flex;gap:9px;margin-top:18px;">
+            <sc-for list="{{ sensationTags }}" as="t" hint-placeholder-count="5">
+              <span onClick="{{ t.pick }}" style="{{ t.style }}">{{ t.label }}</span>
+            </sc-for>
+          </div>
+        </div>
+        </sc-if>
+      </div>
+      </sc-if>
+      </sc-if>
+
+      <!-- ================= POSE PICKER ================= -->
+      <sc-if value="{{ isPoses }}" hint-placeholder-val="{{ false }}">
+      <div class="sx-scroll" style="position:absolute;inset:0;overflow-y:auto;padding:60px 20px 40px;animation:sxFadeUp .4s ease both;background:#F4EFE3;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span onClick="{{ goRecord }}" style="font-size:20px;color:#6B6F5B;cursor:pointer;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;"><path d="M15 5 8 12l7 7"/></svg></span>
+          <span style="font-family:'Noto Serif SC';font-weight:600;font-size:20px;color:#33382E;">体式图鉴</span>
+        </div>
+        <div style="display:inline-flex;background:#E7E0CD;border-radius:14px;padding:4px;margin-top:14px;">
+          <span onClick="{{ setByPose }}" style="{{ byPoseTab }}">按体式</span>
+          <span onClick="{{ setByMuscle }}" style="{{ byMuscleTab }}">按肌肉群</span>
+        </div>
+
+        <sc-if value="{{ isByPose }}" hint-placeholder-val="{{ true }}">
+        <div style="margin-top:14px;display:flex;align-items:center;gap:8px;background:#FBF8EF;border:1px solid #E4DBC4;border-radius:16px;padding:11px 15px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B3AC90" stroke-width="2" style="flex:none;"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.6-4.6"/></svg>
+          <input placeholder="直接搜体式名？" style="border:none;background:transparent;outline:none;width:100%;font-size:14.5px;color:#33382E;font-family:'Noto Sans SC';" />
+        </div>
+        <div style="font-size:12.5px;color:#9A9578;margin-top:12px;">你标了 <b style="color:#4C5D46;">髋</b> · 下面按相关度排</div>
+        <div class="sx-scroll" style="display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px;">
+          <sc-for list="{{ families }}" as="f" hint-placeholder-count="8">
+            <span onClick="{{ f.pick }}" style="{{ f.style }}">{{ f.name }}</span>
+          </sc-for>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;">
+          <sc-for list="{{ poseCards }}" as="p" hint-placeholder-count="6">
+            <div style="background:#FBF8EF;border:1px solid #E4DBC4;border-radius:18px;overflow:hidden;">
+              <div onClick="{{ p.choose }}" style="position:relative;width:100%;height:112px;cursor:pointer;">
+                <image-slot id="{{ p.slotId }}" shape="rect" placeholder="{{ p.en }}"></image-slot>
+                <span style="position:absolute;top:8px;left:8px;background:rgba(65,80,60,.9);color:#EEF0E4;font-size:10.5px;padding:3px 8px;border-radius:12px;">{{ p.family }}</span>
+              </div>
+              <div style="padding:11px 13px 13px;">
+                <div onClick="{{ p.choose }}" style="cursor:pointer;font-family:'Noto Serif SC';font-weight:600;font-size:15px;color:#33382E;">{{ p.name }}</div>
+                <div style="font-size:11px;color:#A59A78;margin-top:2px;">{{ p.en }}</div>
+                <div style="font-size:11.5px;color:#7C8A6C;margin-top:8px;line-height:1.4;">{{ p.muscles }}</div>
+                <div onClick="{{ p.detail }}" style="margin-top:9px;font-size:11.5px;color:#9A8C6A;cursor:pointer;">看它练哪里 ›</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="margin-top:16px;text-align:center;font-size:13.5px;color:#7C7F68;background:#EEE8D8;border:1px dashed #D6CDB4;border-radius:16px;padding:14px;cursor:pointer;">说不出名字？用自己的话记下来 →</div>
+        </sc-if>
+
+        <sc-if value="{{ isByMuscle }}" hint-placeholder-val="{{ false }}">
+        <div class="sx-scroll" style="display:flex;gap:8px;overflow-x:auto;margin-top:14px;padding-bottom:4px;">
+          <sc-for list="{{ muscleGroups }}" as="m" hint-placeholder-count="6">
+            <span onClick="{{ m.pick }}" style="{{ m.style }}">{{ m.name }}</span>
+          </sc-for>
+        </div>
+        <div style="margin-top:14px;background:#FBF8EF;border:1px solid #E4DBC4;border-radius:20px;padding:18px;display:flex;gap:18px;align-items:center;">
+          <div style="flex:none;width:78px;height:118px;">{{ muscleBodyEl }}</div>
+          <div style="flex:1;">
+            <div style="font-family:'Noto Serif SC';font-weight:700;font-size:19px;color:#33382E;">{{ muscleName }}</div>
+            <div style="font-size:12px;color:#A59A78;margin-top:3px;">{{ muscleEn }}</div>
+            <div style="font-size:13px;color:#5E6152;line-height:1.7;margin-top:10px;">{{ muscleDesc }}</div>
+            <div style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:11.5px;color:#4C5D46;background:#E4E9D6;border-radius:14px;padding:5px 11px;"><span style="width:7px;height:7px;border-radius:50%;background:#4C5D46;"></span>{{ muscleRegion }}</div>
+          </div>
+        </div>
+        <div style="font-size:12px;letter-spacing:1.5px;color:#A59A78;font-weight:500;margin:20px 4px 0;">练到它的体式</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;">
+          <sc-for list="{{ musclePoses }}" as="p" hint-placeholder-count="4">
+            <div style="background:#FBF8EF;border:1px solid #E4DBC4;border-radius:18px;overflow:hidden;">
+              <div onClick="{{ p.detail }}" style="position:relative;width:100%;height:100px;cursor:pointer;">
+                <image-slot id="{{ p.mSlotId }}" shape="rect" placeholder="{{ p.en }}"></image-slot>
+                <span style="position:absolute;top:8px;left:8px;background:rgba(65,80,60,.9);color:#EEF0E4;font-size:10.5px;padding:3px 8px;border-radius:12px;">{{ p.role }}</span>
+              </div>
+              <div style="padding:11px 13px 13px;">
+                <div onClick="{{ p.detail }}" style="cursor:pointer;font-family:'Noto Serif SC';font-weight:600;font-size:15px;color:#33382E;">{{ p.name }}</div>
+                <div style="font-size:11.5px;color:#7C8A6C;margin-top:6px;line-height:1.4;">{{ p.muscles }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        </sc-if>
+      </div>
+      </sc-if>
+
+      <!-- ================= POSE DETAIL ================= -->
+      <sc-if value="{{ isPoseDetail }}" hint-placeholder-val="{{ false }}">
+      <div class="sx-scroll" style="position:absolute;inset:0;overflow-y:auto;padding-bottom:40px;animation:sxFadeUp .4s ease both;background:#F4EFE3;">
+        <div style="position:relative;width:100%;height:270px;">
+          <image-slot id="detail-hero" shape="rect" placeholder="Downward Dog · GIF"></image-slot>
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,36,28,.3) 0%,transparent 30%,transparent 55%,rgba(244,239,227,1) 100%);pointer-events:none;"></div>
+          <span onClick="{{ goPoses }}" style="position:absolute;top:56px;left:20px;font-size:16px;color:#F3EEDF;background:rgba(40,46,32,.4);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;"><path d="M15 5 8 12l7 7"/></svg></span>
+          <span style="position:absolute;top:58px;right:20px;background:rgba(65,80,60,.9);color:#EEF0E4;font-size:12px;padding:5px 12px;border-radius:14px;">扭转 · 前屈</span>
+        </div>
+        <div style="padding:4px 24px 0;margin-top:-6px;">
+          <div style="font-family:'Noto Serif SC';font-weight:700;font-size:27px;color:#33382E;">下犬式</div>
+          <div style="font-size:13px;color:#A59A78;margin-top:3px;">Downward-Facing Dog · Adho Mukha Svanasana</div>
+
+          <div style="display:flex;gap:16px;margin-top:20px;align-items:center;background:#FBF8EF;border:1px solid #E4DBC4;border-radius:20px;padding:16px 18px;">
+            <div style="flex:none;width:66px;height:100px;">{{ poseBodyEl }}</div>
+            <div style="flex:1;">
+              <div style="font-size:12px;letter-spacing:1.5px;color:#A59A78;font-weight:500;">主要激活肌群</div>
+              <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;">
+                <span style="font-size:12.5px;background:#E4E9D6;color:#4C5D46;border-radius:14px;padding:5px 11px;">腘绳肌</span>
+                <span style="font-size:12.5px;background:#E4E9D6;color:#4C5D46;border-radius:14px;padding:5px 11px;">腓肠肌</span>
+                <span style="font-size:12.5px;background:#E4E9D6;color:#4C5D46;border-radius:14px;padding:5px 11px;">背阔肌</span>
+                <span style="font-size:12.5px;background:#E4E9D6;color:#4C5D46;border-radius:14px;padding:5px 11px;">三角肌</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;background:#FBF8EF;border:1px solid #E4DBC4;border-radius:20px;padding:16px 18px;">
+            <div style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#33382E;"><span style="width:7px;height:7px;border-radius:50%;background:#93A57C;"></span>发力感线索</div>
+            <div style="font-size:14px;color:#5E6152;line-height:1.75;margin-top:9px;">想象坐骨往天花板顶，让脊柱被拉长；把身体的重量从手腕匀到整个手掌，指根压实。</div>
+          </div>
+
+          <div style="margin-top:14px;background:#FBF8EF;border:1px solid #E4DBC4;border-radius:20px;padding:16px 18px;">
+            <div style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#33382E;"><span style="width:7px;height:7px;border-radius:50%;background:#CE8F82;"></span>常见代偿点</div>
+            <div style="font-size:14px;color:#5E6152;line-height:1.75;margin-top:9px;">腘绳肌紧的人容易弓背、耸肩；下背部代偿发力。膝盖可以微弯，先把背拉直。</div>
+          </div>
+
+          <div style="margin-top:14px;background:#FBF8EF;border:1px solid #E4DBC4;border-radius:20px;padding:16px 18px;">
+            <div style="font-size:12px;letter-spacing:1.5px;color:#A59A78;font-weight:500;">常见感受词 · 点一个直接开始记录</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;">
+              <span onClick="{{ goRecordFlow }}" style="font-size:13px;color:#5E6152;background:#EFEADB;border:1px solid #E4DBC4;border-radius:16px;padding:6px 13px;cursor:pointer;">大腿后侧被拉开</span>
+              <span onClick="{{ goRecordFlow }}" style="font-size:13px;color:#5E6152;background:#EFEADB;border:1px solid #E4DBC4;border-radius:16px;padding:6px 13px;cursor:pointer;">肩很紧</span>
+              <span onClick="{{ goRecordFlow }}" style="font-size:13px;color:#5E6152;background:#EFEADB;border:1px solid #E4DBC4;border-radius:16px;padding:6px 13px;cursor:pointer;">通透</span>
+            </div>
+          </div>
+
+          <div style="margin-top:14px;background:#41503C;border-radius:20px;padding:16px 18px;">
+            <div style="font-size:12px;letter-spacing:1.5px;color:#B9C0A2;font-weight:500;">我的发力感笔记</div>
+            <div style="font-size:14px;color:#EDE7D6;line-height:1.75;margin-top:9px;font-family:'Noto Serif SC';">“07.02 · 老师说别塌腰，先屈膝把尾骨送高，果然背一下就长了。”</div>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ================= REVIEW ================= -->
+      <sc-if value="{{ isReview }}" hint-placeholder-val="{{ false }}">
+      <div class="sx-scroll" style="position:absolute;inset:0;overflow-y:auto;padding:60px 22px 118px;animation:sxFadeUp .4s ease both;">
+        <div style="display:flex;align-items:center;justify-content:space-between;height:34px;">
+          <span onClick="{{ goHome }}" style="font-size:20px;color:#6B6F5B;cursor:pointer;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;"><path d="M15 5 8 12l7 7"/></svg></span>
+          <span style="font-family:'Caveat';font-size:19px;color:#9A8C6A;font-weight:600;">2026</span>
+        </div>
+        <div style="font-family:'Noto Serif SC';font-weight:700;font-size:27px;color:#33382E;margin-top:12px;">这一年，你的身体</div>
+        <div style="font-size:13.5px;color:#8A8770;margin-top:8px;line-height:1.7;">不催你、不评你。只是把你留下的，铺开给你看。</div>
+
+        <!-- year color card -->
+        <div style="margin-top:22px;background:#FBF8EF;border:1px solid #E4DBC4;border-radius:22px;padding:18px 16px 16px;">
+          <div style="font-size:12px;letter-spacing:1.5px;color:#A59A78;font-weight:500;margin-bottom:14px;padding:0 4px;">身体色卡 · 每一格是一天</div>
+          {{ yearGridEl }}
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding:0 4px;">
+            <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#9A9578;">滋养 <span style="width:52px;height:9px;border-radius:6px;display:inline-block;background:linear-gradient(90deg,#E7E0CF,#CBD4B0,#859B63,#4C5D44);"></span> 充分</div>
+            <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#9A9578;"><span style="width:9px;height:9px;border-radius:3px;background:#C9A090;display:inline-block;"></span> 过载 / 消耗</div>
+          </div>
+          <sc-if value="{{ hasSelectedDay }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:14px;border-top:1px dashed #E4DBC4;padding-top:14px;animation:sxPop .25s ease both;">
+            <div style="font-family:'Caveat';font-size:18px;color:#4C5D46;font-weight:700;">{{ dayDate }}</div>
+            <div style="font-size:14px;color:#33382E;margin-top:4px;font-family:'Noto Serif SC';">{{ dayText }}</div>
+          </div>
+          </sc-if>
+        </div>
+
+        <div style="margin-top:16px;background:#41503C;border-radius:22px;padding:20px;">
+          <div style="font-family:'Noto Serif SC';font-weight:600;font-size:17px;color:#F3EEDF;line-height:1.6;">过去一周，你的身体最像什么？</div>
+          <div style="font-size:13px;color:#B9C0A2;margin-top:10px;line-height:1.7;">“髋” 出现了 5 次，多数标着“紧”。也许下周，你想给它一点松开的时间。</div>
+        </div>
+
+        <!-- trend -->
+        <div style="margin-top:16px;background:#FBF8EF;border:1px solid #E4DBC4;border-radius:22px;padding:18px 20px;">
+          <div style="font-size:12px;letter-spacing:1.5px;color:#A59A78;font-weight:500;margin-bottom:6px;">身体在慢慢变化</div>
+          {{ trendEl }}
+        </div>
+
+        <!-- part pattern -->
+        <div style="margin-top:16px;background:#FBF8EF;border:1px solid #E4DBC4;border-radius:22px;padding:18px 20px;">
+          <div style="font-size:12px;letter-spacing:1.5px;color:#A59A78;font-weight:500;margin-bottom:4px;">哪个部位在反复提醒你</div>
+          {{ partBarsEl }}
+        </div>
+
+        <!-- practice stats -->
+        <div style="margin-top:16px;background:#FBF8EF;border:1px solid #E4DBC4;border-radius:22px;padding:18px 20px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="font-size:12px;letter-spacing:1.5px;color:#A59A78;font-weight:500;">这一年，你陪自己练了多少</div>
+            <div style="display:inline-flex;background:#EEE8D8;border-radius:12px;padding:3px;">
+              <span onClick="{{ setStatKind }}" style="{{ statKindTab }}">运动类型</span>
+              <span onClick="{{ setStatPart }}" style="{{ statPartTab }}">部位</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:14px;margin-top:14px;">
+            <div style="flex:1;background:#F4EFE3;border-radius:14px;padding:12px 14px;">
+              <div style="font-family:'Noto Serif SC';font-weight:700;font-size:24px;color:#33382E;">{{ statTotalCount }}</div>
+              <div style="font-size:11.5px;color:#9A9578;margin-top:2px;">次练习</div>
+            </div>
+            <div style="flex:1;background:#F4EFE3;border-radius:14px;padding:12px 14px;">
+              <div style="font-family:'Noto Serif SC';font-weight:700;font-size:24px;color:#33382E;">{{ statTotalHours }}<span style="font-size:13px;font-weight:400;color:#9A9578;"> 小时</span></div>
+              <div style="font-size:11.5px;color:#9A9578;margin-top:2px;">累计时长</div>
+            </div>
+          </div>
+          {{ statBarsEl }}
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ================= DIARY ================= -->
+      <sc-if value="{{ isDiary }}" hint-placeholder-val="{{ false }}">
+      <div class="sx-scroll" style="position:absolute;inset:0;overflow-y:auto;padding:60px 22px 118px;animation:sxFadeUp .4s ease both;">
+        <div style="display:flex;align-items:center;justify-content:space-between;height:34px;">
+          <span style="font-family:'Caveat';font-size:19px;color:#9A8C6A;font-weight:600;">My Journal</span>
+          <span style="font-size:13px;color:#7C7F68;background:#EFEADB;border:1px solid #E4DBC4;border-radius:16px;padding:5px 13px;">全部 · 37 篇</span>
+        </div>
+        <div style="font-family:'Noto Serif SC';font-weight:700;font-size:27px;color:#33382E;margin-top:12px;">日记本</div>
+        <div style="font-size:13.5px;color:#8A8770;margin-top:8px;line-height:1.7;">每一条都还在。想它的时候，就回来翻翻。</div>
+
+        <div style="display:inline-flex;background:#E7E0CD;border-radius:14px;padding:4px;margin-top:16px;">
+          <span onClick="{{ setDiaryAll }}" style="{{ diaryAllTab }}">时间线</span>
+          <span onClick="{{ setDiaryMonth }}" style="{{ diaryMonthTab }}">按训练类型</span>
+        </div>
+
+        <sc-for list="{{ diaryGroups }}" as="g" hint-placeholder-count="2">
+          <div style="margin-top:22px;">
+            <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:2px;">
+              <span style="font-family:'Noto Serif SC';font-weight:600;font-size:16px;color:#33382E;">{{ g.month }}</span>
+              <span style="font-size:12px;color:#A59D82;">{{ g.count }}</span>
+            </div>
+            <sc-for list="{{ g.entries }}" as="e" hint-placeholder-count="3">
+              <div onClick="{{ e.toggle }}" style="margin-top:12px;background:#FBF8EF;border:1px solid #E4DBC4;border-radius:20px;padding:15px 17px;cursor:pointer;box-shadow:0 10px 22px -20px rgba(60,66,45,.5);">
+                <div style="display:flex;gap:13px;align-items:flex-start;">
+                  <div style="flex:none;width:40px;height:56px;margin-top:2px;">{{ e.poseEl }}</div>
+                  <div style="flex:1;min-width:0;">
+                    <div style="display:flex;align-items:center;gap:8px;">
+                      <span style="font-family:'Caveat';font-size:17px;color:#4C5D46;font-weight:700;">{{ e.date }}</span>
+                      <span style="font-size:12px;color:#9A9578;">{{ e.type }}</span>
+                      <span style="margin-left:auto;font-size:11px;color:#B3AC90;">{{ e.caret }}</span>
+                    </div>
+                    <div style="font-size:14px;color:#33382E;line-height:1.6;margin-top:6px;font-family:'Noto Serif SC';">{{ e.text }}</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:9px;">
+                      <sc-for list="{{ e.tags }}" as="t" hint-placeholder-count="2">
+                        <span style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:#6B6F5B;background:#EFEADB;border-radius:14px;padding:4px 10px;"><i style="width:6px;height:6px;border-radius:50%;background:{{ t.dot }};"></i>{{ t.label }}</span>
+                      </sc-for>
+                    </div>
+                  </div>
+                </div>
+                <sc-if value="{{ e.open }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:14px;border-top:1px dashed #E4DBC4;padding-top:14px;animation:sxFadeUp .25s ease both;">
+                  <div style="font-size:12px;letter-spacing:1.5px;color:#A59A78;font-weight:500;">发力感 · 老师的重点</div>
+                  <div style="font-size:14px;color:#5E6152;line-height:1.75;margin-top:7px;">{{ e.cue }}</div>
+                  <div style="display:flex;gap:16px;margin-top:14px;font-size:12.5px;color:#9A9578;">
+                    <span>⏱ {{ e.duration }}</span>
+                    <span>身体标注 {{ e.marks }} 处</span>
+                  </div>
+                </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </sc-for>
+        <div style="text-align:center;font-size:12.5px;color:#A59D82;margin-top:26px;line-height:1.7;">再往前，是你刚开始的那些日子。</div>
+      </div>
+      </sc-if>
+
+      <!-- ================= TAB BAR ================= -->
+      <sc-if value="{{ showTabs }}" hint-placeholder-val="{{ true }}">
+      <div style="position:absolute;left:0;right:0;bottom:0;height:96px;background:linear-gradient(180deg,rgba(244,239,227,0) 0%,rgba(244,239,227,.9) 34%,#F4EFE3 60%);z-index:55;pointer-events:none;">
+        <div style="position:absolute;left:16px;right:16px;bottom:26px;height:62px;background:#FBF8EF;border:1px solid #E7DFCB;border-radius:26px;box-shadow:0 14px 30px -18px rgba(50,56,40,.5);display:flex;align-items:center;justify-content:space-around;pointer-events:auto;">
+          <div onClick="{{ goHome }}" style="{{ tabHomeStyle }}"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7"/><path d="M6 9.5V20h12V9.5"/></svg><span style="font-size:10px;">首页</span></div>
+          <div onClick="{{ goReview }}" style="{{ tabReviewStyle }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="5" height="5" rx="1.4"/><rect x="10" y="3" width="5" height="5" rx="1.4"/><rect x="17" y="3" width="4" height="5" rx="1.4"/><rect x="3" y="10" width="5" height="5" rx="1.4"/><rect x="10" y="10" width="5" height="5" rx="1.4"/><rect x="3" y="17" width="5" height="4" rx="1.4"/></svg><span style="font-size:10px;">回顾</span></div>
+          <div style="width:56px;"></div>
+          <div onClick="{{ goPoses }}" style="{{ tabLibStyle }}"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3.2"/><path d="M5.5 20c0-3.6 2.9-6.3 6.5-6.3S18.5 16.4 18.5 20"/></svg><span style="font-size:10px;">图鉴</span></div>
+          <div onClick="{{ goDiary }}" style="{{ tabDiaryStyle }}"><svg width="18" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M6 3h11a2 2 0 0 1 2 2v16H8a2 2 0 0 1-2-2z"/><path d="M6 17h13"/></svg><span style="font-size:10px;">日记本</span></div>
+        </div>
+        <div onClick="{{ goRecordFlow }}" style="position:absolute;left:50%;bottom:56px;transform:translateX(-50%);width:60px;height:60px;border-radius:50%;background:#4C5D46;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px -8px rgba(50,70,40,.7);cursor:pointer;pointer-events:auto;">
+          <span style="font-size:28px;color:#F3EEDF;font-weight:300;line-height:1;">＋</span>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- close-book feedback -->
+      <sc-if value="{{ closing }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;z-index:100;background:rgba(30,36,28,.55);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;">
+        <div style="text-align:center;animation:sxBookClose 1.5s ease both;">
+          <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#EDE7D6" stroke-width="1.3" stroke-linejoin="round" style="margin:0 auto;"><path d="M5 4h11a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2z"/><path d="M5 4v14"/><path d="M9.5 8h5M9.5 11h5"/></svg>
+          <div style="font-family:'Noto Serif SC';font-weight:600;font-size:22px;color:#F3EEDF;margin-top:14px;">记下了。</div>
+          <div style="font-size:13px;color:#C6CBB4;margin-top:6px;">合上本子，明天见。</div>
+        </div>
+      </div>
+      </sc-if>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const C = {
+  ink:'#33382E', green:'#4C5D46', greenDeep:'#41503C', cream:'#F4EFE3', card:'#FBF8EF',
+  q: { fill:'#DCE4CE', full:'#C7D3AE', over:'#E1C6B4', un:'#D9D3C3' },
+  tag: { '酸':'#CE8F82', '紧':'#B98A5C', '温':'#D3B072', '涨':'#93A57C', '无感':'#B4B0A2' },
+};
+const WORDS = {
+  full: ['充实','饱满','清晰','激活','突破','有力'],
+  ease: ['放松','舒展','通透','宁静','轻盈','恢复'],
+  over: ['累','酸','紧','颤','闷','勉强'],
+  un:   ['无感','空','麻木','走神','浮','隔'],
+};
+const FRONT_MUSCLES = [
+  {id:'delt_l',name:'三角肌',region:'左肩',x:20,y:20,w:15,h:9},
+  {id:'delt_r',name:'三角肌',region:'右肩',x:65,y:20,w:15,h:9},
+  {id:'pec',name:'胸大肌',region:'胸',x:35,y:23,w:30,h:11},
+  {id:'bi_l',name:'肱二头肌',region:'左臂',x:14,y:33,w:11,h:12},
+  {id:'bi_r',name:'肱二头肌',region:'右臂',x:75,y:33,w:11,h:12},
+  {id:'rectus',name:'腹直肌',region:'核心',x:38,y:37,w:24,h:15},
+  {id:'obl_l',name:'腹外斜肌',region:'左腰',x:30,y:39,w:8,h:12},
+  {id:'obl_r',name:'腹外斜肌',region:'右腰',x:62,y:39,w:8,h:12},
+  {id:'hip_l',name:'髂腰肌',region:'左髋',x:34,y:53,w:12,h:9},
+  {id:'hip_r',name:'髂腰肌',region:'右髋',x:54,y:53,w:12,h:9},
+  {id:'quad_l',name:'股四头肌',region:'左大腿',x:33,y:63,w:14,h:17},
+  {id:'quad_r',name:'股四头肌',region:'右大腿',x:53,y:63,w:14,h:17},
+  {id:'shin_l',name:'胫骨前肌',region:'左小腿',x:35,y:83,w:11,h:13},
+  {id:'shin_r',name:'胫骨前肌',region:'右小腿',x:54,y:83,w:11,h:13},
+];
+const BACK_MUSCLES = [
+  {id:'trap',name:'斜方肌',region:'上背',x:36,y:19,w:28,h:11},
+  {id:'delt_bl',name:'三角肌后束',region:'左肩',x:20,y:21,w:14,h:9},
+  {id:'delt_br',name:'三角肌后束',region:'右肩',x:66,y:21,w:14,h:9},
+  {id:'lat_l',name:'背阔肌',region:'左背',x:30,y:32,w:14,h:14},
+  {id:'lat_r',name:'背阔肌',region:'右背',x:56,y:32,w:14,h:14},
+  {id:'erector',name:'竖脊肌',region:'下背',x:44,y:33,w:12,h:16},
+  {id:'glute_l',name:'臀大肌',region:'左臀',x:33,y:52,w:16,h:12},
+  {id:'glute_r',name:'臀大肌',region:'右臀',x:51,y:52,w:16,h:12},
+  {id:'ham_l',name:'腘绳肌',region:'左大腿后',x:34,y:65,w:13,h:16},
+  {id:'ham_r',name:'腘绳肌',region:'右大腿后',x:53,y:65,w:13,h:16},
+  {id:'calf_l',name:'腓肠肌',region:'左小腿',x:35,y:83,w:11,h:13},
+  {id:'calf_r',name:'腓肠肌',region:'右小腿',x:54,y:83,w:11,h:13},
+];
+const FAMILIES = ['全部','前屈','后弯','扭转','侧弯','平衡','倒立','中正'];
+const POSES = [
+  {id:'p1',name:'鸽子式',en:'Pigeon Pose',family:'扭转',muscles:'臀中肌 · 髂腰肌'},
+  {id:'p2',name:'战士二',en:'Warrior II',family:'平衡',muscles:'股四头肌 · 臀大肌'},
+  {id:'p3',name:'束角式',en:'Bound Angle',family:'前屈',muscles:'内收肌群 · 髋'},
+  {id:'p4',name:'桥式',en:'Bridge Pose',family:'后弯',muscles:'臀大肌 · 腘绳肌'},
+  {id:'p5',name:'蜥蜴式',en:'Lizard Pose',family:'前屈',muscles:'髂腰肌 · 内收肌'},
+  {id:'p6',name:'低弓步扭转',en:'Twisted Lunge',family:'扭转',muscles:'髋屈肌 · 腹斜肌'},
+];
+const MUSCLE_GROUPS = [
+  {id:'core',name:'核心',en:'Core · 腹直肌 / 腹斜肌',view:'front',region:'躯干中段',hi:['rectus','obl_l','obl_r'],
+   desc:'支撑脊柱、稳定骨盆的中枢。几乎每个体式的“稳”都从这里来。',
+   poses:[['p6','稳定','低弓步扭转','髋屈肌 · 腹斜肌'],['p4','协同','桥式','臀大肌 · 腘绳肌'],['p2','稳定','战士二','股四头肌 · 臀大肌']]},
+  {id:'glute',name:'臀',en:'Glutes · 臀大肌 / 臀中肌',view:'back',region:'骨盆后侧',hi:['glute_l','glute_r'],
+   desc:'身体最强的发力引擎。臀会用力，腰就不用替它代偿。',
+   poses:[['p1','拉伸','鸽子式','臀中肌 · 髂腰肌'],['p4','主动','桥式','臀大肌 · 腘绳肌'],['p2','主动','战士二','股四头肌 · 臀大肌']]},
+  {id:'hip',name:'髋',en:'Hip Flexors · 髂腰肌',view:'front',region:'大腿根前侧',hi:['hip_l','hip_r'],
+   desc:'久坐最容易紧的一块。松开它，下背和骨盆都会轻。',
+   poses:[['p5','拉伸','蜥蜴式','髂腰肌 · 内收肌'],['p1','拉伸','鸽子式','臀中肌 · 髂腰肌'],['p3','拉伸','束角式','内收肌群 · 髋']]},
+  {id:'ham',name:'腿后侧',en:'Hamstrings · 腘绳肌',view:'back',region:'大腿后侧',hi:['ham_l','ham_r'],
+   desc:'紧的时候会拉着骨盆后倾、逼你弓背。给它时间慢慢开。',
+   poses:[['p4','主动','桥式','臀大肌 · 腘绳肌'],['p3','拉伸','束角式','内收肌群 · 髋']]},
+  {id:'quad',name:'大腿前侧',en:'Quadriceps · 股四头肌',view:'front',region:'大腿前侧',hi:['quad_l','quad_r'],
+   desc:'站姿与平衡的支柱。站得稳，靠的是它稳稳地撑。',
+   poses:[['p2','主动','战士二','股四头肌 · 臀大肌'],['p6','稳定','低弓步扭转','髋屈肌 · 腹斜肌']]},
+  {id:'back',name:'肩背',en:'Back · 背阔肌 / 斜方肌',view:'back',region:'上背与肩',hi:['lat_l','lat_r','trap','delt_bl','delt_br'],
+   desc:'含胸久了容易僵。打开它，呼吸和体态都会跟着舒展。',
+   poses:[['p1','协同','鸽子式','臀中肌 · 髂腰肌'],['p4','协同','桥式','臀大肌 · 腘绳肌']]},
+];
+
+class Component extends DCLogic {
+  state = {
+    screen:'home', coord:null, words:[], note:'',
+    bodyOpen:false, view:'front', annotations:{}, pending:null,
+    showMore:false, pose:null, family:'全部', selectedDay:null, closing:false,
+    diaryView:'all', diaryOpen:null, statMode:'kind',
+    poseMode:'pose', muscle:'core',
+  };
+
+  go(screen){ this.setState({screen, bodyOpen:false, pending:null}); }
+
+  nearest(coord){
+    if(!coord) return 'ease';
+    const {x,y}=coord;
+    if(x>=0&&y>=0) return 'full';
+    if(x>=0&&y<0) return 'ease';
+    if(x<0&&y>=0) return 'over';
+    return 'un';
+  }
+
+  // ---------- interactive widgets ----------
+  quadrant(){
+    const h=React.createElement, S=180, coord=this.state.coord;
+    const labels=[['过载',12,14,'left'],['饱满',S-12,14,'right'],['未启',12,S-8,'left'],['舒展',S-12,S-8,'right']];
+    const kids=[
+      h('div',{key:'bg',style:{position:'absolute',inset:0,display:'grid',gridTemplateColumns:'1fr 1fr',gridTemplateRows:'1fr 1fr',borderRadius:14,overflow:'hidden'}},
+        h('div',{style:{background:C.q.over}}),h('div',{style:{background:C.q.full}}),
+        h('div',{style:{background:C.q.un}}),h('div',{style:{background:C.q.fill}})),
+      h('div',{key:'vx',style:{position:'absolute',left:'50%',top:0,bottom:0,width:1,background:'rgba(51,56,46,.14)'}}),
+      h('div',{key:'hx',style:{position:'absolute',top:'50%',left:0,right:0,height:1,background:'rgba(51,56,46,.14)'}}),
+    ];
+    labels.forEach(([t,lx,ly,al],i)=>kids.push(h('div',{key:'l'+i,style:{position:'absolute',left:al==='left'?lx:'auto',right:al==='right'?S-lx:'auto',top:ly,fontFamily:'Noto Serif SC',fontWeight:600,fontSize:14,color:'rgba(51,56,46,.42)'}},t)));
+    kids.push(h('div',{key:'ax1',style:{position:'absolute',left:'50%',top:-2,transform:'translateX(-50%)',fontSize:9.5,color:'#9A9578'}},'训练感深'));
+    kids.push(h('div',{key:'ax2',style:{position:'absolute',left:'50%',bottom:-2,transform:'translateX(-50%)',fontSize:9.5,color:'#9A9578'}},'训练感浅'));
+    kids.push(h('div',{key:'ax3',style:{position:'absolute',left:2,top:'50%',transform:'translateY(-50%) rotate(-90deg)',transformOrigin:'left',fontSize:9.5,color:'#9A9578'}},'消耗'));
+    kids.push(h('div',{key:'ax4',style:{position:'absolute',right:-2,top:'50%',transform:'translateY(-50%) rotate(90deg)',transformOrigin:'right',fontSize:9.5,color:'#9A9578'}},'滋养'));
+    if(coord){
+      const px=(coord.x+1)/2*S, py=(1-(coord.y+1)/2)*S;
+      kids.push(h('div',{key:'pt',style:{position:'absolute',left:px,top:py,width:26,height:26,marginLeft:-13,marginTop:-13,borderRadius:'50%',background:C.green,border:'3px solid #F4EFE3',boxShadow:'0 4px 10px -2px rgba(40,56,32,.6)',cursor:'grab',transition:'none'}}));
+    } else {
+      kids.push(h('div',{key:'hint',style:{position:'absolute',inset:0,display:'flex',alignItems:'center',justifyContent:'center',fontSize:12.5,color:'rgba(51,56,46,.5)',pointerEvents:'none'}},'在这里放一个点'));
+    }
+    const setFromEvent=(e,el)=>{
+      const r=el.getBoundingClientRect();
+      let x=((e.clientX-r.left)/r.width)*2-1;
+      let y=(1-((e.clientY-r.top)/r.height))*2-1;
+      x=Math.max(-1,Math.min(1,x)); y=Math.max(-1,Math.min(1,y));
+      this.setState({coord:{x,y}});
+    };
+    return h('div',{style:{position:'relative',width:S,height:S,margin:'0 auto',touchAction:'none'},
+      onPointerDown:(e)=>{ const el=e.currentTarget; el.setPointerCapture(e.pointerId); setFromEvent(e,el);
+        const move=(ev)=>setFromEvent(ev,el);
+        const up=()=>{el.removeEventListener('pointermove',move);el.removeEventListener('pointerup',up);};
+        el.addEventListener('pointermove',move); el.addEventListener('pointerup',up);
+      }}, kids);
+  }
+
+  bodyFigure(size, muscles, opts={}){
+    const h=React.createElement, W=size, H=size*1.5;
+    const outline='2px solid #B7B090', fill='#EFE9D7';
+    const part=(st)=>h('div',{style:Object.assign({position:'absolute',background:fill,border:outline,boxSizing:'border-box'},st)});
+    const kids=[
+      part({left:'40%',width:'20%',top:'0%',height:'10%',borderRadius:'50%'}),
+      part({left:'30%',width:'40%',top:'11%',height:'34%',borderRadius:'40% 40% 26% 26%'}),
+      part({left:'12%',width:'16%',top:'15%',height:'30%',borderRadius:'20px',transform:'rotate(6deg)'}),
+      part({left:'72%',width:'16%',top:'15%',height:'30%',borderRadius:'20px',transform:'rotate(-6deg)'}),
+      part({left:'31%',width:'18%',top:'46%',height:'52%',borderRadius:'16px 16px 20px 20px'}),
+      part({left:'51%',width:'18%',top:'46%',height:'52%',borderRadius:'16px 16px 20px 20px'}),
+    ];
+    muscles.forEach(m=>{
+      const tag=this.state.annotations[m.id];
+      const active=!!tag;
+      const hi=opts.highlight && opts.highlight.includes(m.id);
+      const bg = active ? C.tag[tag] : (hi ? 'rgba(76,93,70,.55)' : 'rgba(76,93,70,0)');
+      const bd = active ? C.tag[tag] : (hi ? '#4C5D46' : 'rgba(76,93,70,.35)');
+      kids.push(h('div',{key:m.id,
+        onClick: opts.readonly ? undefined : (e)=>{e.stopPropagation(); this.setState({pending:m});},
+        style:{position:'absolute',left:m.x+'%',top:m.y+'%',width:m.w+'%',height:m.h+'%',borderRadius:8,background:bg,border:'1.5px solid '+bd,cursor:opts.readonly?'default':'pointer',transition:'.2s',boxShadow:active?'0 2px 6px -2px rgba(0,0,0,.3)':'none'}}));
+    });
+    return h('div',{style:{position:'relative',width:W,height:H}},kids);
+  }
+
+  yearData(){
+    if(this._yd) return this._yd;
+    const cells=[]; let seed=7;
+    const rnd=()=>{seed=(seed*9301+49297)%233280; return seed/233280;};
+    for(let i=0;i<371;i++){
+      const past = i < 300;
+      let v=0, neg=false;
+      if(past && rnd()<0.34){ v=1+Math.floor(rnd()*4); if(rnd()<0.13) neg=true; }
+      cells.push({i,v,neg});
+    }
+    this._yd=cells; return cells;
+  }
+  cellColor(c){
+    if(c.v===0) return '#EAE3D2';
+    if(c.neg) return ['#EAE3D2','#E4C6B4','#D6AC97','#C9987F','#BE8A70'][c.v];
+    return ['#EAE3D2','#CBD4B0','#A9BA88','#7C935E','#4C5D44'][c.v];
+  }
+  yearGrid(mini){
+    const h=React.createElement, cells=this.yearData();
+    const cols=mini?24:53, rows=7, cell=mini?7:5, gap=mini?2:1.6;
+    const sub = mini ? cells.slice(cells.length-cols*rows) : cells;
+    const kids = sub.map((c,idx)=>{
+      const sel = !mini && this.state.selectedDay===c.i;
+      return h('div',{key:idx,
+        onClick: mini?undefined:()=>this.setState({selectedDay:c.i}),
+        style:{width:cell,height:cell,borderRadius:mini?2:1.6,background:this.cellColor(c),cursor:mini?'default':'pointer',outline:sel?'1.6px solid #33382E':'none',outlineOffset:1}});
+    });
+    return h('div',{style:{display:'grid',gridTemplateColumns:`repeat(${cols},${cell}px)`,gridAutoRows:cell+'px',gap:gap,justifyContent:mini?'start':'center'}},kids);
+  }
+
+  trend(){
+    const h=React.createElement;
+    const rows=[
+      {label:'力量',data:[3,3,4,4,5,6,6,7],delta:'+ 稳步',col:'#4C5D46'},
+      {label:'柔韧度',data:[2,3,3,4,5,5,6,7],delta:'+ 明显',col:'#7C935E'},
+      {label:'体能',data:[4,4,3,5,4,6,6,6],delta:'+ 波动',col:'#B98A5C'},
+      {label:'觉察',data:[1,2,3,3,4,5,6,8],delta:'+ 越来越清晰',col:'#9A8C6A'},
+    ];
+    return h('div',{style:{display:'flex',flexDirection:'column',gap:14,marginTop:10}},rows.map((r,i)=>{
+      const w=150,ht=26,max=8;
+      const pts=r.data.map((d,j)=>`${(j/(r.data.length-1))*w},${ht-(d/max)*ht}`).join(' ');
+      return h('div',{key:i,style:{display:'flex',alignItems:'center',gap:12}},
+        h('span',{style:{width:44,fontSize:13,color:C.ink,flex:'none'}},r.label),
+        h('svg',{width:w,height:ht,style:{overflow:'visible',flex:'none'}},
+          h('polyline',{points:pts,fill:'none',stroke:r.col,strokeWidth:2,strokeLinecap:'round',strokeLinejoin:'round'}),
+          h('circle',{cx:w,cy:ht-(r.data[r.data.length-1]/max)*ht,r:2.6,fill:r.col})),
+        h('span',{style:{fontSize:11,color:'#9A9578',marginLeft:'auto'}},r.delta));
+    }));
+  }
+
+  partBars(){
+    const h=React.createElement;
+    const data=[{n:'髋',v:5,c:'#B98A5C'},{n:'核心',v:4,c:'#93A57C'},{n:'肩',v:3,c:'#9A8C6A'},{n:'大腿后侧',v:2,c:'#8FA07B'}];
+    return h('div',{style:{display:'flex',flexDirection:'column',gap:11,marginTop:10}},data.map((d,i)=>
+      h('div',{key:i,style:{display:'flex',alignItems:'center',gap:10}},
+        h('span',{style:{width:56,fontSize:13,color:C.ink,flex:'none'}},d.n),
+        h('div',{style:{flex:1,height:10,background:'#EDE6D4',borderRadius:6,overflow:'hidden'}},
+          h('div',{style:{width:(d.v/5*100)+'%',height:'100%',background:d.c,borderRadius:6}})),
+        h('span',{style:{fontSize:12,color:'#9A9578',width:34,textAlign:'right'}},d.v+' 次'))));
+  }
+
+  poseSketch(kind, size){
+    const h=React.createElement, W=size, H=size*1.4;
+    const st={fill:'none',stroke:'#6B6F5B',strokeWidth:2,strokeLinecap:'round',strokeLinejoin:'round'};
+    // hand-drawn-ish stick-figure poses, viewBox 100x140
+    const paths = {
+      // 前屈 forward fold
+      fold:['M50 18a7 7 0 1 0 .1 0','M50 30c-3 12-4 22-2 30','M48 60c-8 6-16 10-22 22','M48 60c8 6 16 10 22 22','M48 60c-1 18 0 34 2 52','M48 60c-1 18 0 34 2 52','M50 112l-8 18','M52 112l8 18'],
+      // 战士 warrior
+      warrior:['M46 16a7 7 0 1 0 .1 0','M46 28l4 30','M20 40l26 -4l30 6','M50 58l-16 34','M50 58l18 30','M34 92l-4 22','M68 88l6 24'],
+      // 桥式 bridge
+      bridge:['M18 78a7 7 0 1 0 .1 0','M25 74c18 -18 44 -18 60 4','M20 90c16 -6 40 -6 58 2','M84 86l0 24','M58 92l4 22'],
+      // 束角 seated
+      seated:['M50 20a7 7 0 1 0 .1 0','M50 32l0 34','M50 66c-16 4 -22 16 -18 22','M50 66c16 4 22 16 18 22','M32 88c-4 6 -2 12 6 12','M68 88c4 6 2 12 -6 12'],
+    };
+    const kids=(paths[kind]||paths.fold).map((d,i)=>h('path',{key:i,d,...st}));
+    kids.push(h('path',{key:'ground',d:'M14 128 Q50 132 86 128',fill:'none',stroke:'#CDBF9E',strokeWidth:2,strokeLinecap:'round'}));
+    return h('svg',{width:W,height:H,viewBox:'0 0 100 140'},kids);
+  }
+
+  segTab(active){
+    return `font-size:13px;padding:6px 18px;border-radius:11px;cursor:pointer;`+
+      (active?`background:#FBF8EF;color:#33382E;font-weight:500;box-shadow:0 2px 6px -3px rgba(0,0,0,.3);`:`color:#8A8770;`);
+  }
+  segMini(active){
+    return `font-size:11.5px;padding:5px 12px;border-radius:9px;cursor:pointer;`+
+      (active?`background:#FBF8EF;color:#33382E;font-weight:500;box-shadow:0 2px 5px -3px rgba(0,0,0,.3);`:`color:#8A8770;`);
+  }
+  statData(){
+    return {
+      kind:[
+        {n:'普拉提',count:16,hours:13,c:'#4C5D46'},
+        {n:'瑜伽',count:11,hours:11,c:'#7C935E'},
+        {n:'芭蕾',count:6,hours:5.5,c:'#B98A5C'},
+        {n:'游泳',count:4,hours:3,c:'#8FA0A8'},
+      ],
+      part:[
+        {n:'核心',count:21,hours:14,c:'#4C5D46'},
+        {n:'髋',count:15,hours:9,c:'#93A57C'},
+        {n:'肩背',count:12,hours:8,c:'#9A8C6A'},
+        {n:'腿',count:9,hours:6,c:'#B98A5C'},
+      ],
+    };
+  }
+  statBars(){
+    const h=React.createElement;
+    const kind=this.state.statMode!=='part';
+    const rows=kind?this.statData().kind:this.statData().part;
+    const max=Math.max(...rows.map(r=>r.count));
+    return h('div',{style:{display:'flex',flexDirection:'column',gap:12,marginTop:16}},rows.map((r,i)=>
+      h('div',{key:i,style:{display:'flex',alignItems:'center',gap:11}},
+        h('span',{style:{width:44,fontSize:13,color:'#33382E',flex:'none'}},r.n),
+        h('div',{style:{flex:1,height:12,background:'#EDE6D4',borderRadius:7,overflow:'hidden'}},
+          h('div',{style:{width:(r.count/max*100)+'%',height:'100%',background:r.c,borderRadius:7,transition:'.3s'}})),
+        h('span',{style:{fontSize:12,color:'#6B6F5B',width:74,textAlign:'right',flex:'none'}},r.count+' 次 · '+r.hours+'h'))));
+  }
+
+  diaryEntries(){
+    if(this._de) return this._de;
+    const T={酸:'#CE8F82',紧:'#B98A5C',温:'#D3B072',涨:'#93A57C',松:'#8FA07B',力:'#93A57C'};
+    this._de=[
+      {id:'d1',date:'07.09',month:'七月',cat:'普拉提',type:'普拉提 · 核心+髋',pose:'seated',text:'“髋一直很紧，但今天最后放松时，它自己松开了一点。”',cue:'呼气时把肋骨往骨盆方向收，别让下背拱起来。',duration:'50 分钟',marks:3,tags:[{label:'髋很紧',dot:T.紧},{label:'核心有力',dot:T.力}]},
+      {id:'d2',date:'07.05',month:'七月',cat:'瑜伽',type:'流瑜伽',pose:'fold',text:'“下犬式屈膝后，背第一次被拉长——原来一直是我在硬撑。”',cue:'坐骨顶向天花板，膝盖可以先弯，优先把脊柱拉直。',duration:'60 分钟',marks:4,tags:[{label:'大腿后侧被拉开',dot:T.涨},{label:'通透',dot:T.温}]},
+      {id:'d3',date:'07.02',month:'七月',cat:'普拉提',type:'普拉提',pose:'bridge',text:'“桥式收尾，臀终于会发力了，不再是腰在替它干活。”',cue:'脚跟压实，先卷尾骨再一节节抬起，臀主动夹。',duration:'45 分钟',marks:2,tags:[{label:'臀有感',dot:T.力},{label:'腰放松',dot:T.松}]},
+      {id:'d4',date:'06.30',month:'六月',cat:'芭蕾',type:'芭蕾基训',pose:'warrior',text:'“站姿有点累，但收尾那一下，整个人像被熨平了。”',cue:'延展向上，肩下沉，想象头顶被一根线轻轻提着。',duration:'55 分钟',marks:3,tags:[{label:'肩紧',dot:T.紧},{label:'轻盈',dot:T.温}]},
+      {id:'d5',date:'06.26',month:'六月',cat:'游泳',type:'游泳 · 自由泳',pose:'fold',text:'“换气终于不慌了，能感觉到水从身侧滑过去。”',cue:'转头不抬头，用身体的滚动带出呼吸。',duration:'40 分钟',marks:1,tags:[{label:'呼吸顺',dot:T.温},{label:'肩酸',dot:T.酸}]},
+    ];
+    return this._de;
+  }
+  diaryGroups(){
+    const view=this.state.diaryView;
+    const es=this.diaryEntries().map(e=>({
+      id:e.id,date:e.date,type:e.type,cat:e.cat,text:e.text,cue:e.cue,duration:e.duration,marks:e.marks,
+      month:e.month,tags:e.tags,poseEl:this.poseSketch(e.pose,40),
+      open:this.state.diaryOpen===e.id, caret:this.state.diaryOpen===e.id?'▴':'▾',
+      toggle:()=>this.setState({diaryOpen:this.state.diaryOpen===e.id?null:e.id}),
+    }));
+    const key = view==='type' ? 'cat' : 'month';
+    const order=[]; const map={};
+    es.forEach(e=>{ const k=e[key]; if(!map[k]){map[k]=[];order.push(k);} map[k].push(e); });
+    return order.map(k=>({month:k,count:map[k].length+' 篇',entries:map[k]}));
+  }
+
+  renderVals(){
+    const s=this.state;
+    const q=this.nearest(s.coord);
+    const pool = WORDS[q]||[];
+    const chips = pool.map(w=>({ word:w, toggle:()=>{
+        const set=new Set(s.words);
+        if(set.has(w)) set.delete(w); else if(set.size<3) set.add(w);
+        this.setState({words:[...set]});
+      },
+      style:`font-size:13.5px;cursor:pointer;border-radius:16px;padding:6px 13px;transition:.2s;`+
+        (s.words.includes(w)
+          ? `background:#4C5D46;color:#F3EEDF;border:1px solid #4C5D46;`
+          : `background:#EFEADB;color:#5E6152;border:1px solid #E4DBC4;`)
+    }));
+    const tags = Object.keys(C.tag).map(t=>({ label:t, pick:()=>{
+        this.setState({annotations:Object.assign({},s.annotations,{[s.pending.id]:t}), pending:null});
+      },
+      style:`flex:1;text-align:center;font-size:14px;padding:12px 0;border-radius:14px;cursor:pointer;color:#463f30;background:${C.tag[t]}33;border:1.5px solid ${C.tag[t]};`
+    }));
+    const mg = MUSCLE_GROUPS.find(m=>m.id===s.muscle) || MUSCLE_GROUPS[0];
+    const families = FAMILIES.map(f=>({ name:f, pick:()=>this.setState({family:f}),
+      style:`flex:none;font-size:13px;padding:7px 14px;border-radius:16px;cursor:pointer;`+
+        (s.family===f?`background:#4C5D46;color:#F3EEDF;`:`background:#EFEADB;color:#7C7F68;border:1px solid #E4DBC4;`)
+    }));
+    const poseCards = POSES.filter(p=>s.family==='全部'||p.family===s.family).map(p=>({
+      name:p.name,en:p.en,family:p.family,muscles:p.muscles,slotId:'slot-'+p.id,
+      choose:()=>this.setState({pose:p.name,screen:'record'}),
+      detail:()=>this.go('poseDetail'),
+    }));
+    const annCount=Object.keys(s.annotations).length;
+    const active = !!(s.coord || s.note || s.pose || annCount);
+    const day = s.selectedDay!=null ? this.yearData()[s.selectedDay] : null;
+
+    const dayTexts = ['一节滋养的恢复课，肩终于松开。','状态没进入，走神多。','突破的一节，核心第一次那么清晰。','有点过载，下背代偿了。','轻盈通透，像被熨平。'];
+
+    return {
+      isHome:s.screen==='home', isRecord:s.screen==='record', isPoses:s.screen==='poses',
+      isPoseDetail:s.screen==='poseDetail', isReview:s.screen==='review',
+      showTabs: ['home','record','poses','review','diary'].includes(s.screen) && !s.bodyOpen && !s.closing,
+      closing:s.closing,
+
+      todayLatin:'Sunday · July 12',
+      greeting:'午后好，慢下来一点。',
+      greetingSub:'今天不必练得多好。只要愿意听一听身体，就够了。',
+
+      goHome:()=>this.go('home'), goReview:()=>this.go('review'),
+      goRecord:()=>this.go('record'), goPoses:()=>this.go('poses'),
+      goRecordFlow:()=>this.setState({screen:'record',coord:null,words:[],note:'',annotations:{},pose:null,showMore:false,selectedDay:null}),
+
+      whispers:this.diaryEntries().slice(0,3).map(e=>({
+        meta:e.date+' · '+e.type, dot:e.tags[0].dot,
+        text:e.text, poseEl:this.poseSketch(e.pose,38),
+        open:()=>this.setState({screen:'diary',diaryOpen:e.id}),
+      })),
+
+      isDiary:s.screen==='diary',
+      goDiary:()=>this.setState({screen:'diary',diaryOpen:null}),
+      setDiaryAll:()=>this.setState({diaryView:'all'}), setDiaryMonth:()=>this.setState({diaryView:'type'}),
+      diaryAllTab:this.segTab(s.diaryView==='all'), diaryMonthTab:this.segTab(s.diaryView==='type'),
+      diaryGroups:this.diaryGroups(),
+      tabDiaryStyle:this.tab(s.screen==='diary'),
+      miniYearEl:this.yearGrid(true),
+      yearGridEl:this.yearGrid(false),
+      hasSelectedDay: day!=null,
+      dayDate: day? ('Day '+(day.i+1)) : '',
+      dayText: day? (day.v===0?'这一天，没有记录。空着也没关系。':dayTexts[(day.neg?3:day.v)%dayTexts.length]) : '',
+
+      // record
+      openBody:()=>this.setState({bodyOpen:true}), closeBody:()=>this.setState({bodyOpen:false,pending:null}),
+      bodyOpen:s.bodyOpen, hasPending:!!s.pending,
+      pendingName:s.pending?s.pending.name:'', pendingRegion:s.pending?s.pending.region:'',
+      bodyLabel: annCount?`标了 ${annCount} 块肌肉`:'身体今天哪里被唤醒了',
+      bodySub: annCount?'点开继续补充，或换个视图':'点开人体图，标下酸 / 紧 / 温 / 涨',
+      bodyThumbEl:this.bodyFigure(52, s.view==='front'?FRONT_MUSCLES:BACK_MUSCLES, {readonly:true}),
+      bodyMapEl:this.bodyFigure(150, s.view==='front'?FRONT_MUSCLES:BACK_MUSCLES, {}),
+      setFront:()=>this.setState({view:'front'}), setBack:()=>this.setState({view:'back'}),
+      frontTabStyle:`font-size:13px;padding:6px 18px;border-radius:11px;cursor:pointer;`+(s.view==='front'?`background:#FBF8EF;color:#33382E;font-weight:500;box-shadow:0 2px 6px -3px rgba(0,0,0,.3);`:`color:#8A8770;`),
+      backTabStyle:`font-size:13px;padding:6px 18px;border-radius:11px;cursor:pointer;`+(s.view==='back'?`background:#FBF8EF;color:#33382E;font-weight:500;box-shadow:0 2px 6px -3px rgba(0,0,0,.3);`:`color:#8A8770;`),
+
+      hasCoord:!!s.coord,
+      quadrantEl:this.quadrant(),
+      sensationChips:chips,
+      sensationTags:tags,
+
+      notePlaceholder:'记下老师说的发力点，或今天最清晰的感受。',
+      onNote:(e)=>this.setState({note:e.target.value}),
+
+      showMore:s.showMore, toggleMore:()=>this.setState({showMore:!s.showMore}),
+      moreLabel:s.showMore?'收起':'＋ 更多字段',
+      moreCaret:s.showMore?'▴':'▾',
+      poseLabel:s.pose||'去找一个', poseColor:s.pose?'#4C5D46':'#B3AC90',
+
+      ctaBg: active?'#4C5D46':'#E7E0CD',
+      ctaColor: active?'#F3EEDF':'#B0AA90',
+      ctaShadow: active?'0 14px 26px -14px rgba(50,70,40,.8)':'none',
+      submit:()=>{ if(!active) return; this.setState({closing:true});
+        setTimeout(()=>this.setState({closing:false,screen:'home',coord:null,words:[],note:'',annotations:{},pose:null,showMore:false}),1550); },
+
+      // poses
+      families, poseCards,
+
+      isByPose:s.poseMode==='pose', isByMuscle:s.poseMode==='muscle',
+      setByPose:()=>this.setState({poseMode:'pose'}), setByMuscle:()=>this.setState({poseMode:'muscle'}),
+      byPoseTab:this.segTab(s.poseMode==='pose'), byMuscleTab:this.segTab(s.poseMode==='muscle'),
+      muscleGroups:MUSCLE_GROUPS.map(m=>({ name:m.name, pick:()=>this.setState({muscle:m.id}),
+        style:`flex:none;font-size:13px;padding:7px 14px;border-radius:16px;cursor:pointer;`+
+          (s.muscle===m.id?`background:#4C5D46;color:#F3EEDF;`:`background:#EFEADB;color:#7C7F68;border:1px solid #E4DBC4;`)
+      })),
+      muscleName:mg.name, muscleEn:mg.en, muscleDesc:mg.desc, muscleRegion:mg.region,
+      muscleBodyEl:this.bodyFigure(78, mg.view==='front'?FRONT_MUSCLES:BACK_MUSCLES, {readonly:true, highlight:mg.hi}),
+      musclePoses:mg.poses.map(([pid,role,name,muscles])=>({
+        mSlotId:'mslot-'+mg.id+'-'+pid, role, name, muscles, en:(POSES.find(p=>p.id===pid)||{}).en||'',
+        detail:()=>this.go('poseDetail'),
+      })),
+
+      // pose detail
+      poseBodyEl:this.bodyFigure(66, BACK_MUSCLES, {readonly:true, highlight:['ham_l','ham_r','calf_l','calf_r','lat_l','lat_r']}),
+
+      // review widgets
+      trendEl:this.trend(), partBarsEl:this.partBars(),
+      statBarsEl:this.statBars(),
+      setStatKind:()=>this.setState({statMode:'kind'}), setStatPart:()=>this.setState({statMode:'part'}),
+      statKindTab:this.segMini(s.statMode!=='part'), statPartTab:this.segMini(s.statMode==='part'),
+      statTotalCount: s.statMode==='part' ? '57' : '37',
+      statTotalHours: s.statMode==='part' ? '37' : '32.5',
+
+      // tabs
+      tabHomeStyle:this.tab(s.screen==='home'),
+      tabReviewStyle:this.tab(s.screen==='review'),
+      tabLibStyle:this.tab(s.screen==='poses'||s.screen==='poseDetail'),
+    };
+  }
+  tab(active){
+    return `display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;`+
+      (active?`color:#4C5D46;font-weight:600;`:`color:#B0AA90;font-weight:400;`);
+  }
+}
+</script>
+</body>
+</html>

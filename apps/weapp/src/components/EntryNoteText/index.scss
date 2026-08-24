@@ -1,0 +1,20 @@
+.entry-note {
+  display: block;
+  color: var(--color-ink);
+  font-family: var(--font-serif);
+  // 保留原文换行（\n 分隔的多条要点各自成行）
+  white-space: pre-line;
+  word-break: break-word;
+}
+
+// 列表卡片场景（home whisper · diary card）: 紧凑
+.entry-note-card {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+// 详情页场景（practice-detail primary card）: 舒展
+.entry-note-detail {
+  font-size: 15px;
+  line-height: 1.85;
+}

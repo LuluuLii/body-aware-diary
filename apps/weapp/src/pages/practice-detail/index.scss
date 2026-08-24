@@ -1,0 +1,332 @@
+.practice-detail-page {
+  min-height: 100vh;
+  background: var(--color-paper-bg);
+  padding: 0 24px 120px;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 0 8px;
+}
+
+.back-btn {
+  padding: 4px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.top-date {
+  font-family: var(--font-hand);
+  font-size: 13px;
+  color: var(--color-text-tag);
+  letter-spacing: 0.5px;
+}
+
+// ─── Practice meta ─────────────────────────────
+
+.practice-label {
+  display: block;
+  font-size: 12px;
+  color: var(--color-text-tag);
+  letter-spacing: 1px;
+  margin-top: 12px;
+}
+
+.practice-title {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 26px;
+  color: var(--color-ink);
+  margin-top: 6px;
+  line-height: 1.3;
+}
+
+.practice-summary {
+  display: block;
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  margin-top: 8px;
+}
+
+// ─── Primary card ──────────────────────────────
+
+.primary-card {
+  margin-top: 20px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: 18px 18px 16px;
+}
+
+.primary-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.primary-label {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: var(--color-text-tag);
+  font-weight: 500;
+}
+
+.primary-time {
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  font-family: 'Menlo', monospace;
+}
+
+// v2.7-A · 头部右侧一组：time + 编辑按钮
+.primary-head-actions {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.primary-edit-btn {
+  font-size: 12px;
+  color: var(--color-green);
+  cursor: pointer;
+  padding: 2px 0;
+}
+
+.primary-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.primary-word {
+  font-size: 12.5px;
+  color: var(--color-green);
+  background: #E4E9D6;
+  border-radius: 12px;
+  padding: 4px 10px;
+}
+
+// Wrap around EntryNoteText variant='detail' —— 用于详情页保留换行的完整正文
+.primary-note-wrap {
+  margin-top: 12px;
+}
+
+.primary-body {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--color-card-border);
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.primary-body-fig {
+  flex: none;
+  width: 66px;
+  height: 100px;
+}
+
+.primary-body-info {
+  flex: 1;
+}
+
+.primary-body-count {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.primary-body-list {
+  display: block;
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  margin-top: 6px;
+  line-height: 1.5;
+  font-family: 'Menlo', monospace;
+}
+
+// ─── Follow-up section ──────────────────────────
+
+.followup-section {
+  margin-top: 24px;
+}
+
+.followup-section-label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: var(--color-text-tag);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.followup-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin-bottom: 10px;
+
+  &:last-child { margin-bottom: 0; }
+}
+
+.followup-head {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.followup-time {
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  font-family: 'Menlo', monospace;
+}
+
+.followup-note {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-serif);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-ink);
+}
+
+.followup-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.followup-word {
+  font-size: 11.5px;
+  color: var(--color-green);
+  background: #E4E9D6;
+  border-radius: 10px;
+  padding: 3px 8px;
+}
+
+// ─── Follow-up add zone ────────────────────────
+
+.follow-add {
+  margin-top: 28px;
+  padding: 18px 18px 16px;
+  background: var(--color-chip-bg);
+  border: 1px dashed var(--color-card-border);
+  border-radius: var(--radius-lg);
+}
+
+// v2.7-A · 顶部一行：追加感受标题 + 右侧"记录更多 ›" 跳去新建 record
+.follow-add-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.follow-add-label {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--color-ink);
+}
+
+.follow-add-more-link {
+  font-size: 12px;
+  color: var(--color-green);
+  cursor: pointer;
+  letter-spacing: 0.5px;
+}
+
+.follow-add-hint {
+  display: block;
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  margin-top: 4px;
+}
+
+.follow-add-textarea {
+  width: 100%;
+  min-height: 72px;
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-ink);
+  box-sizing: border-box;
+}
+
+.follow-add-submit {
+  margin-top: 12px;
+  height: 44px;
+  border-radius: 22px;
+  background: var(--color-card-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+
+  &.active {
+    background: var(--color-green-deep);
+  }
+}
+
+.follow-add-submit-label {
+  font-size: 14px;
+  color: var(--color-text-tertiary);
+  letter-spacing: 1px;
+
+  .follow-add-submit.active & {
+    color: var(--color-green-text);
+  }
+}
+
+// ─── Loading / empty ───────────────────────────
+
+.loading-state,
+.not-found {
+  padding: 60px 24px;
+  text-align: center;
+}
+
+.loading-text {
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+}
+
+.not-found-title {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: var(--color-ink);
+}
+
+.not-found-sub {
+  display: block;
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+.not-found-cta {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 10px 24px;
+  background: var(--color-green);
+  border-radius: var(--radius-chip);
+}
+
+.not-found-cta-label {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  color: var(--color-green-text);
+}

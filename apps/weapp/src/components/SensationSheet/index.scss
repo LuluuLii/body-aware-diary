@@ -1,0 +1,116 @@
+.sensation-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-card-bg);
+  border-radius: 26px 26px 0 0;
+  padding: 20px 22px 30px;
+  box-shadow: 0 -12px 40px -20px rgba(40, 46, 30, 0.6);
+  z-index: 80;
+  animation: sxSheet 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.grabber {
+  width: 38px;
+  height: 4px;
+  border-radius: 4px;
+  background: #DED6C0;
+  margin: 0 auto 16px;
+}
+
+.muscle-name {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--color-ink);
+  text-align: center;
+}
+
+.muscle-region {
+  font-size: 12.5px;
+  color: var(--color-text-tertiary);
+  text-align: center;
+  margin-top: 4px;
+}
+
+.tag-row {
+  display: flex;
+  gap: 9px;
+  margin-top: 18px;
+  justify-content: space-between;
+}
+
+.tag-chip {
+  flex: 1;
+  font-size: 14px;
+  padding: 10px 0;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+
+  &.active {
+    font-weight: 500;
+    box-shadow: 0 2px 8px -3px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// v2.7-A · 关联 pose block
+.pose-link-block {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--color-card-border);
+}
+
+.pose-link-label {
+  display: block;
+  font-size: 12.5px;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+}
+
+.pose-link-optional {
+  color: var(--color-text-tertiary);
+  font-size: 11px;
+}
+
+.pose-link-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pose-link-chip {
+  padding: 5px 11px;
+  border-radius: 12px;
+  font-size: 12.5px;
+  background: var(--color-chip-bg);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-card-border);
+  cursor: pointer;
+
+  &.active {
+    background: var(--color-green);
+    color: var(--color-green-text);
+    border-color: var(--color-green);
+  }
+}
+
+.remove-row {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--color-card-border);
+  display: flex;
+  justify-content: center;
+}
+
+.remove-btn {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  padding: 6px 16px;
+  border-radius: 14px;
+  background: var(--color-segment-bg);
+  cursor: pointer;
+}

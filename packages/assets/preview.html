@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>@body-diary/assets · Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-ink: #33382E;
+    --color-green: #4C5D46;
+    --color-green-deep: #41503C;
+    --color-green-text: #F3EEDF;
+    --color-paper-bg: #F4EFE3;
+    --color-paper-grid: #E7DFCB;
+    --color-card-bg: #FBF8EF;
+    --color-card-border: #E4DBC4;
+    --color-text-secondary: #8A8770;
+    --color-text-tertiary: #9A9578;
+    --color-text-tag: #A59A78;
+    --color-chip-bg: #EFEADB;
+    --color-handwritten: #9A8C6A;
+
+    --sensation-sour:  #CE8F82;
+    --sensation-tight: #B98A5C;
+    --sensation-warm:  #D3B072;
+    --sensation-swell: #93A57C;
+    --sensation-loose: #8FA07B;
+    --sensation-none:  #B4B0A2;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Noto Sans SC", -apple-system, "PingFang SC", sans-serif;
+    background: var(--color-paper-bg);
+    background-image:
+      linear-gradient(var(--color-paper-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-paper-grid) 1px, transparent 1px);
+    background-size: 26px 26px;
+    background-position: center;
+    color: var(--color-ink);
+    min-height: 100vh;
+    padding: 40px 24px 80px;
+  }
+
+  h1 {
+    font-family: "Noto Serif SC", serif;
+    font-weight: 700;
+    font-size: 28px;
+    margin: 0 0 4px;
+    letter-spacing: 0.5px;
+  }
+  h1 .sub {
+    font-family: "Caveat", cursive;
+    font-size: 20px;
+    color: var(--color-handwritten);
+    font-weight: 600;
+    margin-left: 12px;
+  }
+  .intro {
+    color: var(--color-text-secondary);
+    font-size: 13px;
+    margin-bottom: 32px;
+    line-height: 1.7;
+  }
+
+  section {
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-card-border);
+    border-radius: 22px;
+    padding: 22px 24px 26px;
+    margin-bottom: 20px;
+    box-shadow: 0 12px 24px -20px rgba(60,66,45,.5);
+    max-width: 960px;
+  }
+  h2 {
+    font-family: "Noto Serif SC", serif;
+    font-weight: 600;
+    font-size: 18px;
+    margin: 0 0 4px;
+  }
+  h2 .count {
+    font-family: "Caveat", cursive;
+    color: var(--color-handwritten);
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 8px;
+  }
+  .section-hint {
+    color: var(--color-text-tertiary);
+    font-size: 12px;
+    margin-bottom: 18px;
+  }
+
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 18px;
+  }
+  .icon-cell {
+    background: var(--color-paper-bg);
+    border-radius: 14px;
+    padding: 18px 12px 12px;
+    text-align: center;
+    color: var(--color-ink);
+  }
+  .icon-cell .swatch {
+    display: flex; align-items: center; justify-content: center;
+    height: 44px;
+    margin-bottom: 10px;
+  }
+  .icon-cell .name {
+    font-size: 11.5px;
+    font-family: "Noto Sans SC", monospace;
+    color: var(--color-text-secondary);
+  }
+
+  .icon-color-row {
+    display: flex; gap: 20px; align-items: center; margin-top: 22px;
+    flex-wrap: wrap;
+  }
+  .icon-color-row .item {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    font-size: 11px; color: var(--color-text-tertiary);
+  }
+  .icon-color-row .item.green    { color: var(--color-green); }
+  .icon-color-row .item.ink      { color: var(--color-ink); }
+  .icon-color-row .item.tertiary { color: var(--color-text-tertiary); }
+  .icon-color-row .item.hand     { color: var(--color-handwritten); }
+  .icon-color-row label { color: var(--color-text-secondary); }
+
+  .pose-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .pose-cell {
+    background: var(--color-paper-bg);
+    border-radius: 16px;
+    padding: 20px 12px 14px;
+    text-align: center;
+  }
+  .pose-cell .canvas {
+    display: flex; align-items: flex-end; justify-content: center;
+    min-height: 170px;
+    margin-bottom: 8px;
+  }
+  .pose-cell .kind {
+    font-family: "Noto Serif SC", serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--color-ink);
+  }
+  .pose-cell .en {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    margin-top: 2px;
+  }
+
+  .pose-scale-row {
+    display: flex; align-items: flex-end; gap: 24px;
+    margin-top: 22px; padding: 20px 4px 10px;
+    background: var(--color-paper-bg);
+    border-radius: 16px;
+    overflow-x: auto;
+  }
+  .pose-scale-row .item {
+    text-align: center; flex: none;
+    font-size: 11px; color: var(--color-text-tertiary);
+  }
+
+  .body-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .body-cell {
+    background: var(--color-paper-bg);
+    border-radius: 18px;
+    padding: 24px 20px 20px;
+    text-align: center;
+  }
+  .body-cell .head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .body-cell .head .label {
+    font-family: "Noto Serif SC", serif; font-weight: 600; font-size: 15px;
+  }
+  .body-cell .head .count {
+    font-family: "Caveat", cursive; font-weight: 700;
+    color: var(--color-handwritten);
+  }
+  .body-figure {
+    position: relative;
+    margin: 12px auto;
+    width: 180px;
+    height: 270px;
+  }
+  .body-part {
+    position: absolute;
+    background: #EFE9D7;
+    border: 2px solid #B7B090;
+    box-sizing: border-box;
+  }
+  .muscle-hotzone {
+    position: absolute;
+    background: rgba(76, 93, 70, 0.14);
+    border: 1.5px solid rgba(76, 93, 70, 0.55);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background .2s;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; color: var(--color-green-deep);
+  }
+  .muscle-hotzone:hover {
+    background: rgba(76, 93, 70, 0.32);
+  }
+  .muscle-hotzone.sample-annotated {
+    background: var(--sensation-tight);
+    border-color: var(--sensation-tight);
+    color: white;
+  }
+
+  .body-legend {
+    margin-top: 16px;
+    text-align: left;
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+  .body-legend .swatch {
+    display: inline-block; width: 10px; height: 10px;
+    border-radius: 3px; margin-right: 6px; vertical-align: middle;
+  }
+
+  .divider { height: 1px; background: var(--color-card-border); margin: 20px 0; }
+
+  code {
+    background: var(--color-chip-bg);
+    padding: 1px 6px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--color-green-deep);
+    font-family: "JetBrains Mono", "Menlo", monospace;
+  }
+</style>
+</head>
+<body>
+
+<h1>@body-diary/assets <span class="sub">Preview</span></h1>
+<div class="intro">
+  预览 T3 产出的所有素材（图标、火柴人、BodyFigure）。视觉主题 = 森林晨光。<br>
+  本文件用纯 HTML 内联 SVG 渲染，与 packages/assets 的组件产出等价，只是省去了 React。
+</div>
+
+<!-- ================= ICONS ================= -->
+<section>
+  <h2>UI 图标 <span class="count">11 个</span></h2>
+  <div class="section-hint">默认色 = 父容器 color（此处为墨色 <code>#33382E</code>）。size 是 svg 边长。</div>
+
+  <div class="icon-grid" style="color: var(--color-ink);">
+    <div class="icon-cell">
+      <div class="swatch">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7"/><path d="M6 9.5V20h12V9.5"/></svg>
+      </div>
+      <div class="name">IconHome</div>
+    </div>
+    <div class="icon-cell">
+      <div class="swatch">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="5" height="5" rx="1.4"/><rect x="10" y="3" width="5" height="5" rx="1.4"/><rect x="17" y="3" width="4" height="5" rx="1.4"/><rect x="3" y="10" width="5" height="5" rx="1.4"/><rect x="10" y="10" width="5" height="5" rx="1.4"/><rect x="3" y="17" width="5" height="4" rx="1.4"/></svg>
+      </div>
+      <div class="name">IconReview</div>
+    </div>
+    <div class="icon-cell">
+      <div class="swatch">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3.2"/><path d="M5.5 20c0-3.6 2.9-6.3 6.5-6.3S18.5 16.4 18.5 20"/></svg>
+      </div>
+      <div class="name">IconPoses</div>
+    </div>
+    <div class="icon-cell">
+      <div class="swatch">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M6 3h11a2 2 0 0 1 2 2v16H8a2 2 0 0 1-2-2z"/><path d="M6 17h13"/></svg>
+      </div>
+      <div class="name">IconDiary</div>
+    </div>
+    <div class="icon-cell">
+      <div class="swatch" style="background: var(--color-green); border-radius: 50%; width: 44px; height: 44px; margin: 0 auto 10px; color: var(--color-green-text);">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+      </div>
+      <div class="name">IconPlus <span style="color: var(--color-text-tertiary);">(28px)</span></div>
+    </div>
+    <div class="icon-cell">
+      <div class="swatch">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>
+      </div>
+      <div class="name">IconArrowLeft</div>
+    </div>
+    <div class="icon-cell">
+      <div class="swatch">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+      </div>
+      <div class="name">IconChevronRight</div>
+    </div>
+    <div class="icon-cell">
+      <div class="swatch">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg>
+      </div>
+      <div class="name">IconChevronDown</div>
+    </div>
+    <div class="icon-cell">
+      <div class="swatch">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.6-4.6"/></svg>
+      </div>
+      <div class="name">IconSearch</div>
+    </div>
+    <div class="icon-cell">
+      <div class="swatch">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>
+      </div>
+      <div class="name">IconEdit</div>
+    </div>
+    <div class="icon-cell">
+      <div class="swatch">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M5 4h11a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2z"/><path d="M5 4v14"/><path d="M9.5 8h5M9.5 11h5"/></svg>
+      </div>
+      <div class="name">IconCloseBook</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-hint">同一个 IconHome，不同 <code>color</code>：</div>
+  <div class="icon-color-row">
+    <div class="item green">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7"/><path d="M6 9.5V20h12V9.5"/></svg>
+      <label>森林绿</label>
+    </div>
+    <div class="item ink">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7"/><path d="M6 9.5V20h12V9.5"/></svg>
+      <label>墨色</label>
+    </div>
+    <div class="item tertiary">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7"/><path d="M6 9.5V20h12V9.5"/></svg>
+      <label>三级灰</label>
+    </div>
+    <div class="item hand">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7"/><path d="M6 9.5V20h12V9.5"/></svg>
+      <label>手写点缀</label>
+    </div>
+  </div>
+</section>
+
+<!-- ================= POSE SKETCHES ================= -->
+<section>
+  <h2>手绘火柴人 <span class="count">4 姿态 · v2</span></h2>
+  <div class="section-hint">
+    viewBox 100×140，stroke <code>#6B6F5B</code> 2px 圆角。底部地面线 <code>#CDBF9E</code>。<br>
+    <b>v2 改动</b>：加入关节结构（肩、髋、肘、膝），每个姿态走最识别的视角——
+    前屈/桥式是侧视，战士/束角是正视。相比 handoff 原版的抽象站立火柴人，姿态特征更明显。
+  </div>
+
+  <div class="pose-row">
+    <div class="pose-cell">
+      <div class="canvas" id="pose-fold-lg"></div>
+      <div class="kind">前屈</div>
+      <div class="en">fold · forward fold</div>
+    </div>
+    <div class="pose-cell">
+      <div class="canvas" id="pose-warrior-lg"></div>
+      <div class="kind">战士</div>
+      <div class="en">warrior · warrior II</div>
+    </div>
+    <div class="pose-cell">
+      <div class="canvas" id="pose-bridge-lg"></div>
+      <div class="kind">桥式</div>
+      <div class="en">bridge · bridge pose</div>
+    </div>
+    <div class="pose-cell">
+      <div class="canvas" id="pose-seated-lg"></div>
+      <div class="kind">束角</div>
+      <div class="en">seated · bound angle</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-hint">4 姿态在 <code>size=40</code>（日记卡默认尺寸）下的识别度对比：</div>
+  <div class="pose-scale-row">
+    <div class="item"><div id="pose-fold-40"></div><div>前屈</div></div>
+    <div class="item"><div id="pose-warrior-40"></div><div>战士</div></div>
+    <div class="item"><div id="pose-bridge-40"></div><div>桥式</div></div>
+    <div class="item"><div id="pose-seated-40"></div><div>束角</div></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-hint">同一姿态（战士），不同 size：</div>
+  <div class="pose-scale-row">
+    <div class="item"><div id="pose-warrior-28"></div><div>28px<br>日记卡缩略</div></div>
+    <div class="item"><div id="pose-warrior-40b"></div><div>40px<br>默认</div></div>
+    <div class="item"><div id="pose-warrior-72"></div><div>72px</div></div>
+    <div class="item"><div id="pose-warrior-120"></div><div>120px<br>体式详情</div></div>
+  </div>
+</section>
+
+<!-- ================= POSE SKETCHES · V3 (CHUNKY) ================= -->
+<section style="border: 2px dashed #B98A5C; background: #FCF7EA;">
+  <h2>手绘火柴人 · v3-chunky（实验版） <span class="count">stroke 加粗到 6 · 头填色 · 关节 round-join</span></h2>
+  <div class="section-hint">
+    v2 太瘦看不出身体感 → v3 加粗线条 + 填色头 + 合并膝/肘关节为一条路径（round-join 得到圆滑关节）。
+    <b>这是手写 SVG 能到的最好水平之一</b>——离你贴的 Dimensions 参考仍有距离（那是每张单独绘制的矢量插画）。
+    如果 v3 识别度还不够，我们就要走 <b>AI 生成 + 人工清理</b> 的独立生产流水线（60 个体式的独立 sprint）。
+  </div>
+
+  <div class="pose-row">
+    <div class="pose-cell">
+      <div class="canvas" id="pose-fold-v3"></div>
+      <div class="kind">前屈</div>
+      <div class="en">fold</div>
+    </div>
+    <div class="pose-cell">
+      <div class="canvas" id="pose-warrior-v3"></div>
+      <div class="kind">战士</div>
+      <div class="en">warrior</div>
+    </div>
+    <div class="pose-cell">
+      <div class="canvas" id="pose-bridge-v3"></div>
+      <div class="kind">桥式</div>
+      <div class="en">bridge</div>
+    </div>
+    <div class="pose-cell">
+      <div class="canvas" id="pose-seated-v3"></div>
+      <div class="kind">束角</div>
+      <div class="en">seated</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-hint">v3-chunky 在 <code>size=40</code>（日记卡实际尺寸）的识别度：</div>
+  <div class="pose-scale-row">
+    <div class="item"><div id="pose-fold-v3-40"></div><div>前屈</div></div>
+    <div class="item"><div id="pose-warrior-v3-40"></div><div>战士</div></div>
+    <div class="item"><div id="pose-bridge-v3-40"></div><div>桥式</div></div>
+    <div class="item"><div id="pose-seated-v3-40"></div><div>束角</div></div>
+  </div>
+</section>
+
+<!-- ================= T4 CONTENT · POSE FAMILIES ================= -->
+<section>
+  <h2>Pose Families <span class="count">7 家族</span></h2>
+  <div class="section-hint">来自 XHS 社区分类学（<code>docs/research/xhs-insights.md § 主题五</code>）。用于反向找体式的家族过滤。</div>
+  <div id="families-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;"></div>
+</section>
+
+<!-- ================= T4 CONTENT · POSES ================= -->
+<section>
+  <h2>Poses <span class="count">10 个 · 覆盖 7 家族</span></h2>
+  <div class="section-hint">每个体式含中英梵名、家族、发力感线索、代偿点、感受词。v1 复用 4 个火柴人 sketch；未来生产 sprint 后每个体式独立 sketch。</div>
+  <div id="poses-list" style="display: grid; grid-template-columns: 1fr; gap: 14px;"></div>
+</section>
+
+<!-- ================= T4 CONTENT · MUSCLES ================= -->
+<section>
+  <h2>Muscles <span class="count">20 个肌群</span></h2>
+  <div class="section-hint">15 个有 assets 布局 · 5 个深层肌群暂无布局（灰色标签），未来加布局时零改动。</div>
+  <div id="muscles-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;"></div>
+</section>
+
+<!-- ================= T4 CONTENT · SENSATION PICKER ================= -->
+<section>
+  <h2>SensationPicker · 象限 + 精确词库</h2>
+  <div class="section-hint">
+    2×2 象限（消耗↔滋养 × 训练感浅↔训练感深）+ 每象限 8 个精确词。<br>
+    实际交互：用户在坐标系任意位置放点 → 下方胶囊根据最近象限动态切换。这里只展示词库全貌。
+  </div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 720px; margin: 0 auto;">
+    <div id="quadrant-over" class="quadrant-card"></div>
+    <div id="quadrant-full" class="quadrant-card"></div>
+    <div id="quadrant-un" class="quadrant-card"></div>
+    <div id="quadrant-ease" class="quadrant-card"></div>
+  </div>
+</section>
+
+<!-- ================= T4 CONTENT · MUSCLE SENSATION TAGS ================= -->
+<section>
+  <h2>Muscle sensation tags <span class="count">5 个</span></h2>
+  <div class="section-hint">BodyMap 里点某块肌肉 → 底部弹层展示这 5 个 tag。每个 tag 有独立颜色（<code>design-tokens/sensationColors</code>）。</div>
+  <div id="muscle-tags" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
+</section>
+
+<!-- ================= T4 CONTENT · COPY ================= -->
+<section>
+  <h2>Copy library · 文案与提示</h2>
+  <div class="section-hint">首页招呼语（分时段）、record 页 placeholder 池、onboarding tips。所有文案遵循原则 6（观察式，非评判式）。</div>
+
+  <h3 style="font-family: 'Noto Serif SC', serif; font-size: 15px; margin: 18px 0 6px; color: var(--color-ink);">首页招呼语 · GREETINGS</h3>
+  <div id="greetings-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
+
+  <h3 style="font-family: 'Noto Serif SC', serif; font-size: 15px; margin: 22px 0 6px; color: var(--color-ink);">Record 页 · 一句话 placeholder</h3>
+  <div style="background: var(--color-chip-bg); padding: 12px 16px; border-radius: 12px; margin-bottom: 10px;">
+    <div style="font-size: 11.5px; color: var(--color-text-tertiary); margin-bottom: 4px;">前 3 次记录（固定）：</div>
+    <div id="placeholder-new-user" style="font-family: 'Noto Serif SC', serif; color: var(--color-ink);"></div>
+  </div>
+  <div style="background: var(--color-paper-bg); padding: 12px 16px; border-radius: 12px;">
+    <div style="font-size: 11.5px; color: var(--color-text-tertiary); margin-bottom: 6px;">第 4 次起（随机轮换池）：</div>
+    <div id="placeholder-pool" style="display: flex; flex-direction: column; gap: 4px;"></div>
+  </div>
+
+  <h3 style="font-family: 'Noto Serif SC', serif; font-size: 15px; margin: 22px 0 6px; color: var(--color-ink);">Onboarding tips · 3 个触发点</h3>
+  <div id="onboarding-tips" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px;"></div>
+</section>
+
+<style>
+  .quadrant-card { border-radius: 14px; padding: 14px 16px; }
+  .quadrant-card .name { font-family: "Noto Serif SC", serif; font-weight: 600; font-size: 16px; color: var(--color-ink); }
+  .quadrant-card .axis { font-size: 11px; color: var(--color-text-tertiary); margin-top: 2px; }
+  .quadrant-card .words { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+  .quadrant-card .word { font-size: 12.5px; padding: 3px 10px; background: rgba(255, 255, 255, 0.55); border-radius: 12px; color: var(--color-ink); }
+
+  .pose-detail-card {
+    background: var(--color-paper-bg);
+    border-radius: 14px;
+    padding: 16px 18px;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .pose-detail-card .sketch-slot { display: flex; align-items: center; justify-content: center; }
+  .pose-detail-card .name-row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+  .pose-detail-card .name-zh { font-family: "Noto Serif SC", serif; font-weight: 700; font-size: 18px; color: var(--color-ink); }
+  .pose-detail-card .name-en { font-size: 11.5px; color: var(--color-text-tertiary); }
+  .pose-detail-card .name-sanskrit { font-family: "Caveat", cursive; font-size: 15px; color: var(--color-handwritten); font-weight: 700; }
+  .pose-detail-card .family-badge { font-size: 11px; padding: 3px 10px; background: var(--color-green-deep); color: var(--color-green-text); border-radius: 12px; }
+  .pose-detail-card .row { display: flex; align-items: baseline; gap: 8px; margin-top: 6px; font-size: 12.5px; }
+  .pose-detail-card .row .label { color: var(--color-text-tertiary); font-size: 11.5px; letter-spacing: 1px; min-width: 62px; }
+  .pose-detail-card .row .value { color: var(--color-ink); flex: 1; line-height: 1.65; }
+  .pose-detail-card .cue-line { margin-top: 8px; font-size: 12.5px; color: #5E6152; line-height: 1.65; padding: 6px 10px; background: rgba(147, 165, 124, 0.14); border-left: 3px solid var(--sensation-swell); border-radius: 4px; }
+  .pose-detail-card .compensation-line { margin-top: 6px; font-size: 12.5px; color: #5E6152; line-height: 1.65; padding: 6px 10px; background: rgba(206, 143, 130, 0.12); border-left: 3px solid var(--sensation-sour); border-radius: 4px; }
+  .pose-detail-card .sensation-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .pose-detail-card .sensation-chip { font-size: 12px; padding: 3px 10px; background: var(--color-chip-bg); border-radius: 12px; color: var(--color-ink); }
+  .pose-detail-card .muscle-chips { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 3px; }
+  .pose-detail-card .muscle-chip { font-size: 11.5px; padding: 3px 9px; background: #E4E9D6; color: var(--color-green); border-radius: 11px; }
+
+  .muscle-card {
+    background: var(--color-paper-bg);
+    border-radius: 14px;
+    padding: 14px 16px;
+  }
+  .muscle-card .name-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .muscle-card .name-zh { font-family: "Noto Serif SC", serif; font-weight: 700; font-size: 15px; color: var(--color-ink); }
+  .muscle-card .name-en { font-size: 11px; color: var(--color-text-tertiary); }
+  .muscle-card .region-badge { font-size: 10.5px; padding: 2px 8px; background: var(--color-green); color: var(--color-green-text); border-radius: 10px; }
+  .muscle-card .no-layout-badge { font-size: 10.5px; padding: 2px 8px; background: var(--color-text-tag); color: var(--color-paper-bg); border-radius: 10px; }
+  .muscle-card .function { font-size: 12px; color: var(--color-text-secondary); margin-top: 8px; line-height: 1.6; }
+  .muscle-card .feelings { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
+  .muscle-card .feeling { font-size: 11.5px; padding: 3px 8px; background: rgba(147, 165, 124, 0.16); color: #5E6152; border-radius: 10px; }
+  .muscle-card .compensation { font-size: 11.5px; color: #7C7F68; margin-top: 6px; line-height: 1.55; padding-top: 6px; border-top: 1px dashed var(--color-card-border); }
+
+  .family-card {
+    background: var(--color-paper-bg);
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+  .family-card .family-name { font-family: "Noto Serif SC", serif; font-weight: 600; font-size: 15px; color: var(--color-ink); }
+  .family-card .family-en { font-size: 11px; color: var(--color-handwritten); font-family: "Caveat", cursive; font-weight: 700; margin-left: 6px; }
+  .family-card .family-desc { font-size: 11.5px; color: var(--color-text-secondary); margin-top: 6px; line-height: 1.5; }
+
+  .greeting-card {
+    background: var(--color-paper-bg);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .greeting-card .time-tag { font-size: 10.5px; padding: 2px 8px; background: var(--color-segment-bg); color: var(--color-text-secondary); border-radius: 8px; font-family: 'Menlo', monospace; flex: none; }
+  .greeting-card .title-part { font-family: "Noto Serif SC", serif; font-weight: 600; font-size: 15px; color: var(--color-ink); }
+  .greeting-card .subtitle-part { font-size: 12.5px; color: var(--color-text-secondary); margin-top: 3px; }
+
+  .tip-modal {
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-card-border);
+    border-radius: 18px;
+    padding: 18px 20px;
+  }
+  .tip-modal .tip-trigger { font-family: 'Menlo', monospace; font-size: 10.5px; color: var(--color-handwritten); margin-bottom: 6px; }
+  .tip-modal .tip-title { font-family: "Noto Serif SC", serif; font-weight: 600; font-size: 16px; color: var(--color-ink); margin-bottom: 10px; }
+  .tip-modal .tip-line { font-size: 13px; color: var(--color-ink); line-height: 1.65; }
+  .tip-modal .tip-buttons { display: flex; gap: 8px; margin-top: 14px; }
+  .tip-modal .btn { padding: 6px 14px; border-radius: 10px; font-size: 13px; }
+  .tip-modal .btn-skip { background: var(--color-segment-bg); color: var(--color-text-secondary); }
+  .tip-modal .btn-ok { background: var(--color-green); color: var(--color-green-text); }
+</style>
+
+<!-- ================= BODY FIGURE ================= -->
+<section>
+  <h2>BodyFigure（抽象人体 + 肌肉热区） <span class="count">前视 14 · 后视 12</span></h2>
+  <div class="section-hint">CSS 方块拼成的人体 + 百分比定位的肌肉热区。<b>这是 v2 MVP 的抽象版</b>，之后走 AI + 人工清理换成专业解剖 SVG。悬浮某块看颜色反馈；已"标注"示意用<span style="color:var(--sensation-tight);">紧</span>色。</div>
+
+  <div class="body-row">
+    <div class="body-cell">
+      <div class="head">
+        <span class="label">前视 · Front</span>
+        <span class="count">14 muscles</span>
+      </div>
+      <div class="body-figure" id="body-front"></div>
+      <div class="body-legend">
+        <span class="swatch" style="background: rgba(76,93,70,.14); border: 1.5px solid rgba(76,93,70,.55);"></span>可点选状态
+        &nbsp;·&nbsp;
+        <span class="swatch" style="background: var(--sensation-tight);"></span>已标注 · 紧
+      </div>
+    </div>
+
+    <div class="body-cell">
+      <div class="head">
+        <span class="label">后视 · Back</span>
+        <span class="count">12 muscles</span>
+      </div>
+      <div class="body-figure" id="body-back"></div>
+      <div class="body-legend">
+        肌肉 id 在源码 <code>packages/assets/src/body/muscleLayout.ts</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // ─── Pose sketch rendering ───
+  // v2 = current (thin skeleton, 2px stroke)
+  // v3 = chunky (merged joint paths, 6px stroke, filled head)
+  const POSE_PATHS_V2 = {
+    fold: [
+      'M27 86 a5.5 5.5 0 1 0 0.1 0',
+      'M31 88 Q40 72 56 62',
+      'M56 62 L56 128',
+      'M62 62 L62 128',
+      'M50 128 L68 128',
+      'M31 89 L26 105 L28 122',
+      'M34 91 L32 107 L37 124',
+    ],
+    warrior: [
+      'M50 12 a6 6 0 1 0 0.1 0',
+      'M50 22 L50 60',
+      'M36 30 L64 30',
+      'M36 30 L18 32 L10 33',
+      'M64 30 L82 32 L90 33',
+      'M42 60 L58 60',
+      'M45 60 L18 128',
+      'M55 60 L74 92',
+      'M74 92 L74 128',
+      'M12 128 L26 128',
+      'M67 128 L82 128',
+    ],
+    bridge: [
+      'M14 100 a5.5 5.5 0 1 0 0.1 0',
+      'M20 101 L28 99',
+      'M28 99 Q46 72 62 61',
+      'M62 61 L80 92',
+      'M80 92 L80 128',
+      'M72 128 L88 128',
+      'M28 100 Q40 108 55 112',
+      'M22 105 L34 108',
+    ],
+    seated: [
+      'M50 12 a6 6 0 1 0 0.1 0',
+      'M50 22 L50 66',
+      'M38 30 L62 30',
+      'M38 30 L28 60 L30 88',
+      'M62 30 L72 60 L70 88',
+      'M45 66 L22 96',
+      'M55 66 L78 96',
+      'M22 96 L46 116',
+      'M78 96 L54 116',
+      'M46 116 L54 116',
+    ],
+  };
+  // v3: merged joint paths → smooth round-join corners at knee/elbow
+  const POSE_PATHS_V3 = {
+    fold: [
+      'M27 86 a5.5 5.5 0 1 0 0.1 0',                    // head (filled)
+      'M31 88 Q40 72 56 62',                            // spine curve
+      'M56 62 L56 128',                                 // leg 1
+      'M62 62 L62 128',                                 // leg 2
+      'M31 89 L26 105 L28 122',                         // arm 1 (elbow)
+      'M34 91 L32 107 L37 124',                         // arm 2 (elbow)
+    ],
+    warrior: [
+      'M50 12 a6 6 0 1 0 0.1 0',                        // head
+      'M50 22 L50 60',                                  // torso
+      'M36 30 L64 30',                                  // shoulders
+      'M36 30 L18 32 L10 33',                           // left arm
+      'M64 30 L82 32 L90 33',                           // right arm
+      'M45 60 L18 128',                                 // back leg
+      'M55 60 L74 92 L74 128',                          // front leg (merged thigh+shin)
+    ],
+    bridge: [
+      'M14 100 a5.5 5.5 0 1 0 0.1 0',                   // head
+      'M20 101 L28 99',                                 // neck-shoulder
+      'M28 99 Q46 72 62 61',                            // torso arch
+      'M62 61 L80 92 L80 128',                          // thigh+shin merged
+      'M28 100 Q40 108 55 112',                         // arm on ground
+    ],
+    seated: [
+      'M50 12 a6 6 0 1 0 0.1 0',                        // head
+      'M50 22 L50 66',                                  // torso
+      'M38 30 L62 30',                                  // shoulders
+      'M38 30 L28 60 L30 88',                           // left arm (elbow)
+      'M62 30 L72 60 L70 88',                           // right arm
+      'M45 66 L22 96 L46 116',                          // left leg merged (thigh+shin)
+      'M55 66 L78 96 L54 116',                          // right leg merged
+      'M46 116 L54 116',                                // feet touching
+    ],
+  };
+  const POSE_GROUND_PATH = 'M14 128 Q50 132 86 128';
+
+  function renderPose(containerId, kind, size, opts) {
+    const options = opts || {};
+    const version = options.version || 'v2';
+    const strokeWidth = options.strokeWidth || 2;
+    const filledHead = options.filledHead || false;
+    const paths = version === 'v3' ? POSE_PATHS_V3[kind] : POSE_PATHS_V2[kind];
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('width', size);
+    svg.setAttribute('height', size * 1.4);
+    svg.setAttribute('viewBox', '0 0 100 140');
+    paths.forEach((d, i) => {
+      const p = document.createElementNS(svgNS, 'path');
+      p.setAttribute('d', d);
+      p.setAttribute('stroke', '#6B6F5B');
+      p.setAttribute('stroke-width', strokeWidth);
+      p.setAttribute('stroke-linecap', 'round');
+      p.setAttribute('stroke-linejoin', 'round');
+      if (i === 0 && filledHead) {
+        p.setAttribute('fill', '#EAE2CE');
+      } else {
+        p.setAttribute('fill', 'none');
+      }
+      svg.appendChild(p);
+    });
+    const ground = document.createElementNS(svgNS, 'path');
+    ground.setAttribute('d', POSE_GROUND_PATH);
+    ground.setAttribute('fill', 'none');
+    ground.setAttribute('stroke', '#CDBF9E');
+    ground.setAttribute('stroke-width', 2);
+    ground.setAttribute('stroke-linecap', 'round');
+    svg.appendChild(ground);
+    document.getElementById(containerId).appendChild(svg);
+  }
+
+  // ─── v2 large previews (current)
+  renderPose('pose-fold-lg', 'fold', 100);
+  renderPose('pose-warrior-lg', 'warrior', 100);
+  renderPose('pose-bridge-lg', 'bridge', 100);
+  renderPose('pose-seated-lg', 'seated', 100);
+
+  // 40px v2 comparison
+  renderPose('pose-fold-40', 'fold', 40);
+  renderPose('pose-warrior-40', 'warrior', 40);
+  renderPose('pose-bridge-40', 'bridge', 40);
+  renderPose('pose-seated-40', 'seated', 40);
+
+  // Warrior scale (v2)
+  renderPose('pose-warrior-28', 'warrior', 28);
+  renderPose('pose-warrior-40b', 'warrior', 40);
+  renderPose('pose-warrior-72', 'warrior', 72);
+  renderPose('pose-warrior-120', 'warrior', 120);
+
+  // ─── v3-chunky renders
+  const v3Opts = { version: 'v3', strokeWidth: 6, filledHead: true };
+  renderPose('pose-fold-v3', 'fold', 100, v3Opts);
+  renderPose('pose-warrior-v3', 'warrior', 100, v3Opts);
+  renderPose('pose-bridge-v3', 'bridge', 100, v3Opts);
+  renderPose('pose-seated-v3', 'seated', 100, v3Opts);
+
+  // 40px v3 comparison
+  renderPose('pose-fold-v3-40', 'fold', 40, v3Opts);
+  renderPose('pose-warrior-v3-40', 'warrior', 40, v3Opts);
+  renderPose('pose-bridge-v3-40', 'bridge', 40, v3Opts);
+  renderPose('pose-seated-v3-40', 'seated', 40, v3Opts);
+
+  // ─── Body figure rendering ────────────────────────────────
+  const BODY_PARTS = [
+    { left: '40%', top:  '0%', width: '20%', height: '10%', borderRadius: '50%' },
+    { left: '30%', top: '11%', width: '40%', height: '34%', borderRadius: '40% 40% 26% 26%' },
+    { left: '12%', top: '15%', width: '16%', height: '30%', borderRadius: '20px', transform: 'rotate(6deg)' },
+    { left: '72%', top: '15%', width: '16%', height: '30%', borderRadius: '20px', transform: 'rotate(-6deg)' },
+    { left: '31%', top: '46%', width: '18%', height: '52%', borderRadius: '16px 16px 20px 20px' },
+    { left: '51%', top: '46%', width: '18%', height: '52%', borderRadius: '16px 16px 20px 20px' },
+  ];
+  const FRONT_MUSCLES = [
+    { id: 'delt_l',  name: '三角肌',   region: '左肩',   x: 20, y: 20, w: 15, h: 9 },
+    { id: 'delt_r',  name: '三角肌',   region: '右肩',   x: 65, y: 20, w: 15, h: 9 },
+    { id: 'pec',     name: '胸大肌',   region: '胸',     x: 35, y: 23, w: 30, h: 11 },
+    { id: 'bi_l',    name: '肱二头肌', region: '左臂',   x: 14, y: 33, w: 11, h: 12 },
+    { id: 'bi_r',    name: '肱二头肌', region: '右臂',   x: 75, y: 33, w: 11, h: 12 },
+    { id: 'rectus',  name: '腹直肌',   region: '核心',   x: 38, y: 37, w: 24, h: 15 },
+    { id: 'obl_l',   name: '腹外斜肌', region: '左腰',   x: 30, y: 39, w: 8,  h: 12 },
+    { id: 'obl_r',   name: '腹外斜肌', region: '右腰',   x: 62, y: 39, w: 8,  h: 12 },
+    { id: 'hip_l',   name: '髂腰肌',   region: '左髋',   x: 34, y: 53, w: 12, h: 9 },
+    { id: 'hip_r',   name: '髂腰肌',   region: '右髋',   x: 54, y: 53, w: 12, h: 9 },
+    { id: 'quad_l',  name: '股四头肌', region: '左大腿', x: 33, y: 63, w: 14, h: 17 },
+    { id: 'quad_r',  name: '股四头肌', region: '右大腿', x: 53, y: 63, w: 14, h: 17 },
+    { id: 'shin_l',  name: '胫骨前肌', region: '左小腿', x: 35, y: 83, w: 11, h: 13 },
+    { id: 'shin_r',  name: '胫骨前肌', region: '右小腿', x: 54, y: 83, w: 11, h: 13 },
+  ];
+  const BACK_MUSCLES = [
+    { id: 'trap',    name: '斜方肌',     region: '上背',     x: 36, y: 19, w: 28, h: 11 },
+    { id: 'delt_bl', name: '三角肌后束', region: '左肩',     x: 20, y: 21, w: 14, h: 9 },
+    { id: 'delt_br', name: '三角肌后束', region: '右肩',     x: 66, y: 21, w: 14, h: 9 },
+    { id: 'lat_l',   name: '背阔肌',     region: '左背',     x: 30, y: 32, w: 14, h: 14 },
+    { id: 'lat_r',   name: '背阔肌',     region: '右背',     x: 56, y: 32, w: 14, h: 14 },
+    { id: 'erector', name: '竖脊肌',     region: '下背',     x: 44, y: 33, w: 12, h: 16 },
+    { id: 'glute_l', name: '臀大肌',     region: '左臀',     x: 33, y: 52, w: 16, h: 12 },
+    { id: 'glute_r', name: '臀大肌',     region: '右臀',     x: 51, y: 52, w: 16, h: 12 },
+    { id: 'ham_l',   name: '腘绳肌',     region: '左大腿后', x: 34, y: 65, w: 13, h: 16 },
+    { id: 'ham_r',   name: '腘绳肌',     region: '右大腿后', x: 53, y: 65, w: 13, h: 16 },
+    { id: 'calf_l',  name: '腓肠肌',     region: '左小腿',   x: 35, y: 83, w: 11, h: 13 },
+    { id: 'calf_r',  name: '腓肠肌',     region: '右小腿',   x: 54, y: 83, w: 11, h: 13 },
+  ];
+
+  function renderBody(containerId, muscles, sampleAnnotated = []) {
+    const container = document.getElementById(containerId);
+    // Body parts (head/torso/arms/legs)
+    BODY_PARTS.forEach((p) => {
+      const el = document.createElement('div');
+      el.className = 'body-part';
+      Object.assign(el.style, {
+        left: p.left, top: p.top, width: p.width, height: p.height,
+        borderRadius: p.borderRadius,
+        transform: p.transform || '',
+      });
+      container.appendChild(el);
+    });
+    // Muscle hotzones
+    muscles.forEach((m) => {
+      const el = document.createElement('div');
+      el.className = 'muscle-hotzone' + (sampleAnnotated.includes(m.id) ? ' sample-annotated' : '');
+      Object.assign(el.style, {
+        left: m.x + '%', top: m.y + '%',
+        width: m.w + '%', height: m.h + '%',
+      });
+      el.title = m.name + ' · ' + m.region + ' (' + m.id + ')';
+      container.appendChild(el);
+    });
+  }
+
+  renderBody('body-front', FRONT_MUSCLES, ['hip_l', 'hip_r']);       // sample: hip flexors marked as 紧
+  renderBody('body-back',  BACK_MUSCLES,  ['ham_l']);                 // sample: left hamstring marked as 紧
+
+  // ─── T4 · Content preview data (mirrors packages/content/src) ───
+
+  const FAMILY_INFO = {
+    '前屈': { en: 'Forward Bend',  description: '身体向前折叠，脊柱向前弯曲。舒缓神经，拉伸后侧链。' },
+    '后弯': { en: 'Backbend',      description: '脊柱向后伸展，胸腔打开。改善体态，提升能量。' },
+    '扭转': { en: 'Twist',         description: '脊柱水平旋转，躯干向左右扭转。按摩内脏，缓解僵硬。' },
+    '侧弯': { en: 'Lateral Bend',  description: '身体向左右两侧弯曲。拉伸腰侧肌肉，改善呼吸。' },
+    '平衡': { en: 'Balancing',     description: '单腿或单手支撑，身体保持稳定。提升专注力和核心。' },
+    '倒立': { en: 'Inversion',     description: '头部低于心脏，身体倒置。促进循环，缓解疲劳。' },
+    '中正': { en: 'Neutral',       description: '脊柱保持自然直立，身体居中。调整呼吸，稳定身心。' },
+  };
+
+  const POSES_DATA = [
+    { id:'p_bridge',       nameZh:'桥式',        nameEn:'Bridge Pose',           nameSanskrit:'Setu Bandhasana',         family:'后弯', sketchKind:'bridge',  mainMuscles:['glute','ham','erector'],                     cue:'脚跟压实地面，先卷尾骨再一节一节抬起。臀主动夹，别让腰塌下去。',                        comp:'下背部代偿；用腰去发力而不是臀。膝盖太开或太合。',                    sensations:['臀有感','腰放松','通透'] },
+    { id:'p_warrior2',     nameZh:'战士二式',    nameEn:'Warrior II',            nameSanskrit:'Virabhadrasana II',       family:'平衡', sketchKind:'warrior', mainMuscles:['quad','glute','delt_front','obl'],           cue:'前腿膝盖对齐脚踝，后腿脚外侧压地。前后手臂延展向两端，胸腔打开。',                     comp:'前膝内扣或超过脚尖；肩耸起；后腿松塌。',                                sensations:['大腿有力','肩紧','稳'] },
+    { id:'p_pigeon',       nameZh:'鸽子式',      nameEn:'Pigeon Pose',           nameSanskrit:'Eka Pada Rajakapotasana', family:'扭转', sketchKind:'seated',  mainMuscles:['glute','glute_med','hip','pec'],             cue:'前腿髋部沉向地面，后腿脚背压实。骨盆保持中正，别向前腿倾斜。',                          comp:'骨盆向前倾；后腿髋没沉下去；前腿膝盖受挤压。',                          sensations:['臀外侧被拉开','髋前侧涨','深'] },
+    { id:'p_bound_angle',  nameZh:'束角式',      nameEn:'Bound Angle Pose',      nameSanskrit:'Baddha Konasana',         family:'前屈', sketchKind:'seated',  mainMuscles:['hip','adductor'],                            cue:'坐骨压地，脊柱延展向上。膝盖朝地面沉，不用手按压。',                                    comp:'弓背前趴；坐骨没坐实；肩膀耸起。',                                      sensations:['内侧腿被拉开','髋沉下去','骨盆稳'] },
+    { id:'p_lizard',       nameZh:'蜥蜴式',      nameEn:'Lizard Pose',           nameSanskrit:'Utthan Pristhasana',      family:'前屈', sketchKind:'seated',  mainMuscles:['hip','adductor','quad'],                     cue:'前脚外侧踩实，后腿脚背绷直向后延展。骨盆下沉但不撇。',                                  comp:'后腿松塌；前膝内扣；肩耸起。',                                          sensations:['髋前侧深','大腿内侧凉','拉开'] },
+    { id:'p_twist_lunge',  nameZh:'低弓步扭转',  nameEn:'Twisted Low Lunge',     nameSanskrit:'Parivrtta Anjaneyasana',  family:'扭转', sketchKind:'warrior', mainMuscles:['obl','erector','hip'],                       cue:'骨盆先中正，从胸椎往上开始旋转，肩打开。呼气时旋转更深。',                              comp:'用腰去转（腰椎受压）；骨盆随之扭；后腿松。',                            sensations:['侧腰扭开','核心稳','深呼吸'] },
+    { id:'p_triangle',     nameZh:'三角式',      nameEn:'Triangle Pose',         nameSanskrit:'Trikonasana',             family:'侧弯', sketchKind:'warrior', mainMuscles:['adductor','obl','delt_front','ham'],         cue:'双腿伸直，前脚外侧压地。躯干延展向侧方而不是折向下，胸腔转向上。',                       comp:'弯曲下腰；胸腔塌下去；后腿松。',                                        sensations:['侧腰拉开','腿后紧','延展'] },
+    { id:'p_downdog',      nameZh:'下犬式',      nameEn:'Downward-Facing Dog',   nameSanskrit:'Adho Mukha Svanasana',    family:'倒立', sketchKind:'fold',    mainMuscles:['ham','calf','lat','delt_front'],             cue:'想象坐骨往天花板顶，脊柱被拉长。重量从手腕匀到整个手掌，指根压实。',                    comp:'腘绳肌紧的人容易弓背、耸肩；下背代偿发力。膝盖可以微弯，先把背拉直。',   sensations:['大腿后侧被拉开','肩紧','通透'] },
+    { id:'p_mountain',     nameZh:'山式',        nameEn:'Mountain Pose',         nameSanskrit:'Tadasana',                family:'中正', sketchKind:'warrior', mainMuscles:['quad','glute','erector'],                    cue:'双脚平行分开与髋同宽。四个脚角均匀压地，膝盖微软，尾骨微收。头顶向上延展。',           comp:'锁死膝盖；骨盆前倾；肩耸起。',                                          sensations:['扎根','稳','中正'] },
+    { id:'p_tree',         nameZh:'树式',        nameEn:'Tree Pose',             nameSanskrit:'Vrksasana',               family:'平衡', sketchKind:'warrior', mainMuscles:['quad','glute','hip','obl'],                  cue:'支撑腿压地扎根，脚趾放松。抬起的膝盖朝外打开，脚放在小腿或大腿内侧（避免膝盖关节）。', comp:'支撑腿膝盖锁死；骨盆歪；抬腿的脚放在膝盖上。',                          sensations:['扎根','髋开','稳'] },
+  ];
+
+  const MUSCLES_DATA = [
+    { groupId:'delt_front',   nameZh:'三角肌前束',   nameEn:'Anterior Deltoid',    region:'肩前',   fn:'手臂向前抬起、肩内旋。伏地类支撑体式常用。',                   feelings:['肩前酸','推手时紧','发力'],       comp:'容易替代肩胛肌群代偿——用手臂力量而不是背/核心稳定。', hasLayout:true },
+    { groupId:'pec',          nameZh:'胸大肌',       nameEn:'Pectoralis Major',    region:'胸前',   fn:'手臂向内、向前推。含胸姿势下容易变短紧。',                       feelings:['胸前紧','推手用力','拉开'],       comp:'含胸圆肩让胸肌短缩；打开胸腔时才能感受到延展。',       hasLayout:true },
+    { groupId:'bi',           nameZh:'肱二头肌',     nameEn:'Biceps Brachii',      region:'上臂前', fn:'肘关节屈曲、前臂旋后。牵拉、拉起类动作参与。',                 feelings:['上臂酸','拉起时热'],              hasLayout:true },
+    { groupId:'rectus',       nameZh:'腹直肌',       nameEn:'Rectus Abdominis',    region:'腹部前侧', fn:'脊柱前屈、稳定骨盆。船式、卷腹类的主力。',                    feelings:['腹部酸','收紧','发抖'],           comp:'容易憋气；用颈部拉动而不是腹肌卷。',                    hasLayout:true },
+    { groupId:'obl',          nameZh:'腹外斜肌',     nameEn:'External Obliques',   region:'腰侧',   fn:'躯干扭转与侧屈。所有扭转体式的核心发力点。',                   feelings:['侧腰扭开','深处发力','收紧'],     comp:'用腰椎去扭而不是从胸椎发起；核心不参与。',              hasLayout:true },
+    { groupId:'hip',          nameZh:'髂腰肌',       nameEn:'Iliopsoas',           region:'髋前',   fn:'髋关节屈曲、脊柱侧屈。久坐族最容易紧的一块。',                 feelings:['髋前深','涨','拉开'],             comp:'过短会导致骨盆前倾、下背疼痛。',                        hasLayout:true },
+    { groupId:'quad',         nameZh:'股四头肌',     nameEn:'Quadriceps',          region:'大腿前', fn:'膝关节伸直、髋关节屈曲。站姿、平衡类的支撑力量。',             feelings:['大腿前酸','有力','稳'],           comp:'髂腰肌无力时代偿屈髋；容易过度紧张。',                  hasLayout:true },
+    { groupId:'shin',         nameZh:'胫骨前肌',     nameEn:'Tibialis Anterior',   region:'小腿前', fn:'脚踝背屈、稳定足弓。站立平衡的隐藏发力点。',                   feelings:['小腿前酸','足底稳'],              hasLayout:true },
+    { groupId:'trap',         nameZh:'斜方肌',       nameEn:'Trapezius',           region:'上背',   fn:'肩胛骨的上提、下沉、收拢。含胸姿势下上束容易紧。',             feelings:['肩颈紧','肩胛下沉'],              comp:'手臂上举时容易耸肩——上束代偿而下束没参与。',           hasLayout:true },
+    { groupId:'delt_back',    nameZh:'三角肌后束',   nameEn:'Posterior Deltoid',   region:'肩后',   fn:'手臂向后打开、肩外旋。开肩类体式的关键。',                     feelings:['肩后紧','开肩发力'],              hasLayout:true },
+    { groupId:'lat',          nameZh:'背阔肌',       nameEn:'Latissimus Dorsi',    region:'中背',   fn:'手臂下拉、内收、内旋。下犬类支撑体式的重要肌群。',             feelings:['腋下拉开','背有感'],              comp:'容易被斜方肌上束代偿——耸肩而不是背发力。',             hasLayout:true },
+    { groupId:'erector',      nameZh:'竖脊肌',       nameEn:'Erector Spinae',      region:'腰背',   fn:'脊柱伸直与后弯。后弯体式的主要参与者。',                       feelings:['腰有力','背延展'],                comp:'腹肌无力时会代偿性紧张；导致腰部酸痛。',                hasLayout:true },
+    { groupId:'glute',        nameZh:'臀大肌',       nameEn:'Gluteus Maximus',     region:'臀部',   fn:'髋关节伸直、外旋。桥式、战士式的发力引擎。',                   feelings:['臀有力','收紧','热'],             comp:'腘绳肌代偿伸髋；腰椎代偿发力（腰酸而不是臀酸）。',      hasLayout:true },
+    { groupId:'ham',          nameZh:'腘绳肌',       nameEn:'Hamstrings',          region:'大腿后', fn:'膝关节屈曲、髋关节伸直。前屈体式的主要牵拉点。',               feelings:['大腿后侧被拉开','涨','紧'],       comp:'紧的时候会拉着骨盆后倾、逼你弓背。',                    hasLayout:true },
+    { groupId:'calf',         nameZh:'腓肠肌',       nameEn:'Gastrocnemius',       region:'小腿后', fn:'脚踝跖屈、膝关节屈曲。下犬式、山式常牵拉。',                   feelings:['小腿后紧','跟腱拉开'],            hasLayout:true },
+    { groupId:'adductor',     nameZh:'内收肌群',     nameEn:'Adductors',           region:'大腿内侧', fn:'大腿内收、髋关节稳定。束角式、三角式的关键。',                 feelings:['大腿内侧拉开','凉','深'],         hasLayout:false },
+    { groupId:'glute_med',    nameZh:'臀中肌',       nameEn:'Gluteus Medius',      region:'髋外侧', fn:'髋外展、稳定骨盆。单腿平衡与走路时的隐藏英雄。',               feelings:['髋外侧酸','单腿稳'],              comp:'弱时走路会歪髋、跑步会摇摆。',                          hasLayout:false },
+    { groupId:'diaphragm',    nameZh:'横膈膜',       nameEn:'Diaphragm',           region:'胸腔底', fn:'呼吸的主动肌。深呼吸训练它下降更多。',                         feelings:['吸气深','腹部起伏'],              hasLayout:false },
+    { groupId:'pelvic_floor', nameZh:'盆底肌群',     nameEn:'Pelvic Floor',        region:'骨盆底', fn:'支撑内脏、控制骨盆稳定、参与深层核心。',                       feelings:['骨盆稳','深处收紧'],              hasLayout:false },
+    { groupId:'transverse',   nameZh:'腹横肌',       nameEn:'Transverse Abdominis',region:'腹深层', fn:'深层核心。像腰带包裹腹腔，稳定脊柱。',                         feelings:['深处稳','腰带收紧'],              hasLayout:false },
+  ];
+
+  const QUADRANTS_META = {
+    over: { label:'过载', axis:'消耗 + 训练感深', color:'#E1C6B4', words:['累','酸','紧','抽','颤','闷','代偿','勉强'] },
+    full: { label:'饱满', axis:'滋养 + 训练感深', color:'#C7D3AE', words:['充实','饱满','清晰','激活','突破','通电','酸爽','有力'] },
+    un:   { label:'未启', axis:'消耗 + 训练感浅', color:'#D9D3C3', words:['无感','空','麻木','拖沓','走神','浮','隔','干'] },
+    ease: { label:'舒展', axis:'滋养 + 训练感浅', color:'#DCE4CE', words:['放松','舒展','通透','宁静','轻盈','微','恢复','松开'] },
+  };
+
+  const MUSCLE_TAGS = [
+    { key:'sour',  label:'酸',   color:'#CE8F82' },
+    { key:'tight', label:'紧',   color:'#B98A5C' },
+    { key:'warm',  label:'温',   color:'#D3B072' },
+    { key:'swell', label:'涨',   color:'#93A57C' },
+    { key:'none',  label:'无感', color:'#B4B0A2' },
+  ];
+
+  const GREETINGS_DATA = [
+    { title:'早上好，慢慢开始。',       subtitle:'身体还在苏醒，别急。',           timeContext:'morning' },
+    { title:'中午好，喘口气。',         subtitle:'身体想说什么？',                 timeContext:'noon' },
+    { title:'午后好，慢下来一点。',     subtitle:'这一天走到一半了，问问自己。',   timeContext:'afternoon' },
+    { title:'傍晚了，落地一下。',       subtitle:'一整天累积的紧，留个位置放它。', timeContext:'evening' },
+    { title:'夜深了，收拾一下自己。',   subtitle:'不用急着睡，先听听身体。',       timeContext:'night' },
+    { title:'嘿，回来了。',             subtitle:'好久不见。上次你留下的还在。',   timeContext:'any' },
+    { title:'今天想留下什么？',         subtitle:'任何一小点都可以。',             timeContext:'any' },
+  ];
+
+  const PLACEHOLDER_NEW_USER = '记下老师说的发力点，或今天最清晰的感受。';
+  const PLACEHOLDER_POOL = [
+    '哪里的发力最清晰？',
+    '哪里最模糊？',
+    '今天想留下什么？',
+    '老师说的哪句话让你有感？',
+    '身体在提醒你什么？',
+    '今天你和身体的对话是什么？',
+  ];
+
+  const ONBOARDING_TIPS = [
+    {
+      trigger: 'record · 首次进入记录页',
+      title: '你的第一次记录',
+      lines: [
+        '在这里，你可以留下：',
+        '· 身体今天哪里被唤醒了',
+        '· 老师说的发力点',
+        '· 一句只属于你自己的感受',
+        '最少一个字段，就是完整的一条。',
+      ],
+      buttons: [{ key:'skip', label:'跳过' }, { key:'ok', label:'知道了' }],
+    },
+    {
+      trigger: 'bodymap_annotate · 首次点选肌肉',
+      title: '点选肌肉',
+      lines: [
+        '你可以标注这里的感受：',
+        '酸 / 紧 / 温 / 涨 / 无感',
+        '同一次记录可以标多块。',
+      ],
+      buttons: [{ key:'ok', label:'知道了' }],
+    },
+    {
+      trigger: 'pose_detail · 首次进体式详情',
+      title: '这是一份识别参考',
+      lines: [
+        '· 上方的人体图 = 主要激活肌群',
+        '· 发力感线索 = 帮你找到觉察',
+        '· 常见代偿点 = 提醒你留意',
+        '这不是教程。想学怎么做，去线下课。',
+      ],
+      buttons: [{ key:'ok', label:'知道了' }],
+    },
+  ];
+
+  const MUSCLE_ZH_BY_ID = Object.fromEntries(MUSCLES_DATA.map(m => [m.groupId, m.nameZh]));
+
+  // ─── Rendering ───
+
+  // Families
+  (function renderFamilies() {
+    const grid = document.getElementById('families-grid');
+    for (const zh in FAMILY_INFO) {
+      const info = FAMILY_INFO[zh];
+      const el = document.createElement('div');
+      el.className = 'family-card';
+      el.innerHTML = `
+        <span class="family-name">${zh}</span><span class="family-en">${info.en}</span>
+        <div class="family-desc">${info.description}</div>
+      `;
+      grid.appendChild(el);
+    }
+  })();
+
+  // Poses
+  (function renderPoses() {
+    const container = document.getElementById('poses-list');
+    POSES_DATA.forEach((pose, i) => {
+      const card = document.createElement('div');
+      card.className = 'pose-detail-card';
+      const sketchSlotId = `pose-preview-${pose.id}`;
+      const muscleChips = pose.mainMuscles.map(id => `<span class="muscle-chip">${MUSCLE_ZH_BY_ID[id] || id}</span>`).join('');
+      const sensationChips = pose.sensations.map(w => `<span class="sensation-chip">${w}</span>`).join('');
+      card.innerHTML = `
+        <div class="sketch-slot" id="${sketchSlotId}"></div>
+        <div>
+          <div class="name-row">
+            <span class="name-zh">${pose.nameZh}</span>
+            <span class="name-en">${pose.nameEn}</span>
+            <span class="name-sanskrit">${pose.nameSanskrit}</span>
+            <span class="family-badge">${pose.family}</span>
+          </div>
+          <div class="row">
+            <span class="label">主要肌群</span>
+            <span class="value"><div class="muscle-chips">${muscleChips}</div></span>
+          </div>
+          <div class="cue-line"><b>发力感</b> · ${pose.cue}</div>
+          <div class="compensation-line"><b>常见代偿</b> · ${pose.comp}</div>
+          <div class="row">
+            <span class="label">常见感受</span>
+            <span class="value"><div class="sensation-chips">${sensationChips}</div></span>
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+      // Render sketch after DOM is inserted
+      renderPose(sketchSlotId, pose.sketchKind, 80);
+    });
+  })();
+
+  // Muscles
+  (function renderMuscles() {
+    const container = document.getElementById('muscles-list');
+    MUSCLES_DATA.forEach(m => {
+      const card = document.createElement('div');
+      card.className = 'muscle-card';
+      const feelings = m.feelings.map(f => `<span class="feeling">${f}</span>`).join('');
+      const badge = m.hasLayout
+        ? `<span class="region-badge">${m.region}</span>`
+        : `<span class="region-badge">${m.region}</span> <span class="no-layout-badge">暂无布局</span>`;
+      const comp = m.comp ? `<div class="compensation"><b>代偿</b> · ${m.comp}</div>` : '';
+      card.innerHTML = `
+        <div class="name-row">
+          <span class="name-zh">${m.nameZh}</span>
+          <span class="name-en">${m.nameEn}</span>
+          ${badge}
+        </div>
+        <div class="function">${m.fn}</div>
+        <div class="feelings">${feelings}</div>
+        ${comp}
+      `;
+      container.appendChild(card);
+    });
+  })();
+
+  // Quadrants + words
+  (function renderQuadrants() {
+    Object.entries(QUADRANTS_META).forEach(([key, q]) => {
+      const el = document.getElementById(`quadrant-${key}`);
+      el.style.background = q.color;
+      el.innerHTML = `
+        <div class="name">${q.label}</div>
+        <div class="axis">${q.axis}</div>
+        <div class="words">${q.words.map(w => `<span class="word">${w}</span>`).join('')}</div>
+      `;
+    });
+  })();
+
+  // Muscle tags
+  (function renderMuscleTags() {
+    const container = document.getElementById('muscle-tags');
+    MUSCLE_TAGS.forEach(t => {
+      const el = document.createElement('span');
+      el.style.cssText = `background: ${t.color}; color: white; padding: 6px 16px; border-radius: 14px; font-size: 14px; font-weight: 500;`;
+      el.textContent = t.label;
+      container.appendChild(el);
+    });
+  })();
+
+  // Greetings
+  (function renderGreetings() {
+    const container = document.getElementById('greetings-list');
+    GREETINGS_DATA.forEach(g => {
+      const el = document.createElement('div');
+      el.className = 'greeting-card';
+      el.innerHTML = `
+        <span class="time-tag">${g.timeContext.padEnd(9, ' ')}</span>
+        <div>
+          <div class="title-part">${g.title}</div>
+          <div class="subtitle-part">${g.subtitle}</div>
+        </div>
+      `;
+      container.appendChild(el);
+    });
+  })();
+
+  // Placeholders
+  document.getElementById('placeholder-new-user').textContent = PLACEHOLDER_NEW_USER;
+  (function renderPlaceholderPool() {
+    const container = document.getElementById('placeholder-pool');
+    PLACEHOLDER_POOL.forEach(p => {
+      const el = document.createElement('div');
+      el.style.cssText = 'font-family: "Noto Serif SC", serif; color: var(--color-ink); font-size: 13.5px;';
+      el.textContent = '· ' + p;
+      container.appendChild(el);
+    });
+  })();
+
+  // Onboarding tips
+  (function renderTips() {
+    const container = document.getElementById('onboarding-tips');
+    ONBOARDING_TIPS.forEach(tip => {
+      const el = document.createElement('div');
+      el.className = 'tip-modal';
+      const lines = tip.lines.map(l => `<div class="tip-line">${l}</div>`).join('');
+      const buttons = tip.buttons.map(b => {
+        const cls = b.key === 'skip' ? 'btn-skip' : 'btn-ok';
+        return `<span class="btn ${cls}">${b.label}</span>`;
+      }).join('');
+      el.innerHTML = `
+        <div class="tip-trigger">${tip.trigger}</div>
+        <div class="tip-title">${tip.title}</div>
+        ${lines}
+        <div class="tip-buttons">${buttons}</div>
+      `;
+      container.appendChild(el);
+    });
+  })();
+</script>
+
+</body>
+</html>

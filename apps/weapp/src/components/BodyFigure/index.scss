@@ -1,0 +1,20 @@
+.body-figure {
+  position: relative;
+  margin: 0 auto;
+}
+
+.body-part {
+  position: absolute;
+  background: #EFE9D7;
+  border: 2px solid #B7B090;
+  box-sizing: border-box;
+}
+
+.muscle-hotzone {
+  position: absolute;
+  border-radius: 8px;
+  border-width: 1.5px;
+  border-style: solid;
+  box-sizing: border-box;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
