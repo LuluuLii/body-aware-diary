@@ -1,0 +1,41 @@
+diff --git a/dist/bom/URL.js b/dist/bom/URL.js
+index e4bc79fb9af6a220304e3d43fae25e0684746e9f..d254745d27ca853fb1796da9abc77798f5349acd 100644
+--- a/dist/bom/URL.js
++++ b/dist/bom/URL.js
+@@ -186,7 +186,9 @@ function parseUrl(url = '') {
+     return result;
+ }
+ function parseUrlBase(url, base) {
+-    const VALID_URL = /^(https?:)\/\//i;
++    // body-aware-diary patch: 原始只认 https?, 导致 wss:/ws: URL 全挂
++    // (supabase-js RealtimeClient 会 new URL(wsHref) 抛). 放宽到常见协议.
++    const VALID_URL = /^(https?|wss?|ftp):\/\//i;
+     let fullUrl = '';
+     let parsedBase = null;
+     if (!isUndefined(base)) {
+diff --git a/dist/index.cjs.js b/dist/index.cjs.js
+index c658f7c8949e9e8b6d980e1d864eebfc6d13fb14..f68486e11ca6fe94aedeb07d3312a910c0c93ef3 100644
+--- a/dist/index.cjs.js
++++ b/dist/index.cjs.js
+@@ -693,7 +693,7 @@ function parseUrl(url = '') {
+     return result;
+ }
+ function parseUrlBase(url, base) {
+-    const VALID_URL = /^(https?:)\/\//i;
++    const VALID_URL = /^(https?|wss?|ftp):\/\//i;
+     let fullUrl = '';
+     let parsedBase = null;
+     if (!shared.isUndefined(base)) {
+diff --git a/dist/runtime.esm.js b/dist/runtime.esm.js
+index 62276f66c3ee93fc1c016c8a516459ce0ad3406c..53d3ce452621b5f9f321d61a113077120daa6b85 100644
+--- a/dist/runtime.esm.js
++++ b/dist/runtime.esm.js
+@@ -692,7 +692,7 @@ function parseUrl(url = '') {
+     return result;
+ }
+ function parseUrlBase(url, base) {
+-    const VALID_URL = /^(https?:)\/\//i;
++    const VALID_URL = /^(https?|wss?|ftp):\/\//i;
+     let fullUrl = '';
+     let parsedBase = null;
+     if (!isUndefined(base)) {
